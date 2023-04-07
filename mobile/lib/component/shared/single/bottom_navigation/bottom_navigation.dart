@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../token/color/color.dart';
 
@@ -16,8 +17,10 @@ class BottomNavigation extends StatelessWidget {
         selectedItemColor: primary,
         unselectedItemColor: lowEmphasis.withOpacity(0.5),
         items: [
-          // BottomNavigationBarItem(
-          //     icon: Icon(Icons.home, size: 21.sp), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home, size: 21.sp), label: ''),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home, size: 21.sp), label: ''),
         ],
       ),
     );
