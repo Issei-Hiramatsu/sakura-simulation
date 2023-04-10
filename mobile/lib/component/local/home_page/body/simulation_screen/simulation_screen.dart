@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'hooks/container_list.dart';
+import 'hooks/use_change_animated_object.dart';
 import 'hooks/use_fade_animation.dart';
 
 class SimulationScreen extends HookWidget {
@@ -10,16 +11,17 @@ class SimulationScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     startFadeAnimation();
+
     return Stack(
       children: [
         FadeTransition(
-            opacity: animation,
+            opacity: fadeInAnimation,
             //TODO: 写真予定場所
-            child: containerList[0]),
+            child: containerList[beginIndex.value]),
         FadeTransition(
-            opacity: animation,
+            opacity: fadeOutAnimation,
             //TODO:  写真予定場所
-            child: containerList[1]),
+            child: containerList[endIndex.value]),
       ],
     );
   }
