@@ -8,6 +8,7 @@ class SimulationScreen extends HookWidget {
   Widget build(BuildContext context) {
     final controller =
         useAnimationController(duration: const Duration(seconds: 10));
+    controller.repeat();
     return Column(
       children: [
         FadeTransition(
@@ -24,9 +25,6 @@ class SimulationScreen extends HookWidget {
           child: const Placeholder(
               fallbackHeight: 300, fallbackWidth: double.infinity),
         ),
-        FloatingActionButton(onPressed: () {
-          controller.repeat();
-        })
       ],
     );
   }
