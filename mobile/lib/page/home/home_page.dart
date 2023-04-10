@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../component/local/home_page/body/simulation_screen/simulation_screen.dart';
 import '../../component/shared/single/bottom_navigation/bottom_navigation.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,12 +11,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        children: [
-          Expanded(
-              child: Image.asset(
-            'assets/images/sakura_road.jpg',
-            fit: BoxFit.fill,
-          )),
+        children: const [
+          Expanded(child: SimulationScreen()),
           BottomNavigation(),
         ],
       ),

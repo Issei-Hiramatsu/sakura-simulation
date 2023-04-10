@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sakura_simulation/page/home/home_page.dart';
 
-import 'page/todo_and_timer_page/todo_and_timer_page.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: HomePage(),
+            home: const HomePage(),
           );
         });
   }
