@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'hooks/container_list.dart';
 import 'hooks/use_change_animated_object.dart';
@@ -12,17 +13,27 @@ class SimulationScreen extends HookWidget {
   Widget build(BuildContext context) {
     startFadeAnimation();
 
-    return Stack(
-      children: [
-        FadeTransition(
-            opacity: fadeInAnimation,
-            //TODO: 写真予定場所
-            child: containerList[beginIndex.value]),
-        FadeTransition(
-            opacity: fadeOutAnimation,
-            //TODO:  写真予定場所
-            child: containerList[endIndex.value]),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 12.sp, horizontal: 8.sp),
+      child: Stack(
+        children: [
+          FadeTransition(
+              opacity: fadeInAnimation,
+              //TODO: 写真予定場所 下記の形式で行う。
+              // Image.asset(
+              //   'assets/images/sakura_road.jpg',
+              //   fit: BoxFit.fill,
+              //   height: double.infinity,
+              // ),
+              child: containerList[beginIndex.value]),
+          FadeTransition(
+              opacity: fadeOutAnimation,
+              //TODO:  写真予定場所
+              child: containerList[endIndex.value]),
+        ],
+      ),
     );
   }
 }
+
+//複数のアニメーションを動かせるようにしてそれぞれに変更する関数を設定し直す
