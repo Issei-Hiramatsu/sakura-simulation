@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'use_change_animated_object.dart';
 
@@ -16,12 +17,12 @@ Animation<double> fadeOutAnimation = Tween(begin: 0.0, end: 1.0).animate(
   fadeOutController.drive(CurveTween(curve: Curves.linear)),
 );
 
-void startFadeAnimation() {
+void startFadeAnimation(WidgetRef ref) {
   fadeInController.forward();
   fadeOutController.forward();
   fadeInAnimation.addListener(() {
     if (fadeInController.status == AnimationStatus.completed) {
-      changeFadeInAnimatedObject();
+      ref.read(beginIndexProvider.notifier).changeFadeInAnimatedObject();
       fadeInController.reset();
       fadeInController.forward();
     }
@@ -29,7 +30,7 @@ void startFadeAnimation() {
 
   fadeOutAnimation.addListener(() {
     if (fadeOutController.status == AnimationStatus.completed) {
-      changeFadeOutAnimatedObject();
+      ref.read(endIndexProvider.notifier).changeFadeOutAnimatedObject();
       fadeOutController.reset();
       fadeOutController.forward();
     }

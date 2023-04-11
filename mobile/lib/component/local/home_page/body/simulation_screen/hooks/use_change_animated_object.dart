@@ -1,20 +1,30 @@
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'container_list.dart';
 
-final beginIndex = useState(0);
-final endIndex = useState(1);
-
-void changeFadeInAnimatedObject() {
-  beginIndex.value++;
-  if (beginIndex.value == containerList.length) {
-    beginIndex.value = 0;
+//アニメーションを行う対象を変更する
+class BeginIndexNotifier extends StateNotifier<int> {
+  BeginIndexNotifier(int initialState) : super(initialState);
+  void changeFadeInAnimatedObject() {
+    state++;
+    if (state == containerList.length) {
+      state = 0;
+    }
   }
 }
 
-void changeFadeOutAnimatedObject() {
-  endIndex.value++;
-  if (endIndex.value == containerList.length) {
-    endIndex.value = 0;
+final beginIndexProvider = StateNotifierProvider<BeginIndexNotifier, int>(
+    (ref) => BeginIndexNotifier(0));
+
+class EndIndexNotifier extends StateNotifier<int> {
+  EndIndexNotifier(int initialState) : super(initialState);
+  void changeFadeOutAnimatedObject() {
+    state++;
+    if (state == containerList.length) {
+      state = 0;
+    }
   }
 }
+
+final endIndexProvider =
+    StateNotifierProvider<EndIndexNotifier, int>((ref) => EndIndexNotifier(0));
