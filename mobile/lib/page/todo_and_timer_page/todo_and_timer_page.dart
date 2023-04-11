@@ -17,8 +17,8 @@ class TodoAndTimerPage extends StatelessWidget {
           children: [
             const CustomTabBar(
               tab: [
-                Tab(text: 'すべて', height: 32),
-                Tab(text: 'その他', height: 32),
+                Tab(text: 'タスク', height: 32),
+                Tab(text: 'タイマー', height: 32),
               ],
             ),
             Expanded(

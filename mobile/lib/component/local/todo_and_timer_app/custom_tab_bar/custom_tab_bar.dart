@@ -9,20 +9,20 @@ class CustomTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundLightBlack,
+      color: backgroundBlack,
       padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 32),
       child: Container(
         padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: backgroundGray,
+          borderRadius: BorderRadius.circular(2),
+          color: backgroundLightBlack,
         ),
         child: TabBar(
           labelColor: white,
-          unselectedLabelColor: midEmphasis,
+          unselectedLabelColor: white,
           indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
-            color: gray,
+            color: backgroundGray,
           ),
           tabs: tab,
         ),
