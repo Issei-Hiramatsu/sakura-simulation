@@ -35,5 +35,3 @@ class SimulationScreen extends HookWidget {
     );
   }
 }
-
-//複数のアニメーションを動かせるようにしてそれぞれに変更する関数を設定し直す

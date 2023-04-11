@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-//アニメーションを定義する
-final controller = useAnimationController(
-  duration: const Duration(seconds: 4),
-);
+import 'use_change_animated_object.dart';
 
-Animation<double> fadeInAnimation = Tween(begin: 0.0, end: 1.0).animate(
-  controller.drive(CurveTween(curve: Curves.linear)),
+//アニメーションを定義する
+final fadeInController =
+    useAnimationController(duration: const Duration(seconds: 4));
+final fadeOutController =
+    useAnimationController(duration: const Duration(seconds: 4));
+
+Animation<double> fadeInAnimation = Tween(begin: 1.0, end: 0.0).animate(
+  fadeInController.drive(CurveTween(curve: Curves.linear)),
 );
-Animation<double> fadeOutAnimation = Tween(begin: 1.0, end: 0.0).animate(
-  controller.drive(CurveTween(curve: Curves.linear)),
+Animation<double> fadeOutAnimation = Tween(begin: 0.0, end: 1.0).animate(
+  fadeOutController.drive(CurveTween(curve: Curves.linear)),
 );
 
 void startFadeAnimation() {
-  controller.forward();
+  fadeInController.forward();
+  fadeOutController.forward();
   fadeInAnimation.addListener(() {
-    if (controller.status == AnimationStatus.completed) {
-      controller.reset();
-      controller.forward();
+    if (fadeInController.status == AnimationStatus.completed) {
+      changeFadeInAnimatedObject();
+      fadeInController.reset();
+      fadeInController.forward();
     }
   });
-  //FIXME: fadeoutアニメーションが反応していないことを確認。
+
   fadeOutAnimation.addListener(() {
-    if (controller.status == AnimationStatus.completed) {
-      controller.reset();
-      controller.forward();
+    if (fadeOutController.status == AnimationStatus.completed) {
+      changeFadeOutAnimatedObject();
+      fadeOutController.reset();
+      fadeOutController.forward();
     }
   });
 }
