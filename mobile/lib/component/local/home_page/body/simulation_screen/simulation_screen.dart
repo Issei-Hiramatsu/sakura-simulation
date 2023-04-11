@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'hooks/container_list.dart';
+import 'hooks/full_bloom_sakura_lis.dart';
 
 class SimulationScreen extends HookConsumerWidget {
   const SimulationScreen({super.key});
@@ -16,22 +16,22 @@ class SimulationScreen extends HookConsumerWidget {
     final endIndex = useState(1);
     void changeFadeInAnimatedObject() {
       beginIndex.value = 1;
-      if (beginIndex.value == containerList.length) {
+      if (beginIndex.value == fullBloomSakuraList.length) {
         beginIndex.value = 0;
       }
     }
 
     void changeFadeOutAnimatedObject() {
       endIndex.value++;
-      if (endIndex.value == containerList.length) {
+      if (endIndex.value == fullBloomSakuraList.length) {
         endIndex.value = 0;
       }
     }
 
     final fadeInController =
-        useAnimationController(duration: const Duration(seconds: 10));
+        useAnimationController(duration: const Duration(seconds: 20));
     final fadeOutController =
-        useAnimationController(duration: const Duration(seconds: 10));
+        useAnimationController(duration: const Duration(seconds: 20));
 
     Animation<double> fadeInAnimation = Tween(begin: 1.0, end: 0.0).animate(
       fadeInController.drive(CurveTween(curve: Curves.linear)),
@@ -67,18 +67,23 @@ class SimulationScreen extends HookConsumerWidget {
       child: Stack(
         children: [
           FadeTransition(
-              opacity: fadeInAnimation,
-              //TODO: 写真予定場所 下記の形式で行う。
-              // Image.asset(
-              //   'assets/images/sakura_road.jpg',
-              //   fit: BoxFit.fill,
-              //   height: double.infinity,
-              // ),
-              child: containerList[beginIndex.value]),
+            opacity: fadeInAnimation,
+            //TODO: 写真予定場所 下記の形式で行う。
+            child: Image.asset(
+              fullBloomSakuraList[beginIndex.value],
+              fit: BoxFit.fill,
+              height: double.infinity,
+            ),
+          ),
           FadeTransition(
-              opacity: fadeOutAnimation,
-              //TODO:  写真予定場所
-              child: containerList[endIndex.value]),
+            opacity: fadeOutAnimation,
+            //TODO:  写真予定場所
+            child: Image.asset(
+              fullBloomSakuraList[endIndex.value],
+              fit: BoxFit.fill,
+              height: double.infinity,
+            ),
+          ),
         ],
       ),
     );
