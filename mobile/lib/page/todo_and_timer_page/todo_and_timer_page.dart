@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
 import 'package:sakura_simulation/component/shared/single/bottom_navigation/bottom_navigation.dart';
 
-import '../../component/shared/token/color/color.dart';
 import 'elements/todo_app_page.dart';
 
 class TodoAndTimerPage extends StatelessWidget {
@@ -24,11 +23,11 @@ class TodoAndTimerPage extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(children: [
-                TodoPage(),
+                const TodoPage(),
                 Container(),
               ]),
             ),
-            BottomNavigation()
+            const BottomNavigation()
           ],
         ),
       ),
