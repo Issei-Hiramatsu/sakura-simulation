@@ -18,7 +18,7 @@ class TimerAppPage extends StatelessWidget {
               return HorizontalBorderBox(
                 borderColor: backgroundGray,
                 borderWidth: 1,
-                child: const TimerCard(text: ''),
+                child: const TimerCard(text: 'ポモドーロタイマーを起動する'),
               );
             },
           ),
