@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo_card/todo_card.dart';
 
-import '../../../component/local/todo_and_timer_app/todo_add_button.dart/todo_add_button.dart';
+import '../../../../component/local/todo_and_timer_app/todo/todo_add_button.dart/todo_add_button.dart';
+import '../../../../component/local/todo_and_timer_app/todo/todo_card/todo_card.dart';
 
-class TodoPage extends StatelessWidget {
-  const TodoPage({super.key});
+class TodoAppPage extends StatelessWidget {
+  const TodoAppPage({super.key});
 
   @override
   Widget build(BuildContext context) {
