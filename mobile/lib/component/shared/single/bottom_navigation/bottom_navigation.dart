@@ -4,8 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../token/color/color.dart';
 
 class BottomNavigation extends StatelessWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
 
+  final int currentIndex;
+  final Function(int) onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,6 +22,8 @@ class BottomNavigation extends StatelessWidget {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: primary,
         unselectedItemColor: lowEmphasis.withOpacity(0.5),
+        currentIndex: currentIndex,
+        onTap: onTap,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 21.sp),

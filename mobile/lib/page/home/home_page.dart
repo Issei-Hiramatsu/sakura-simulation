@@ -13,7 +13,6 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: const [
           Expanded(child: SimulationScreen()),
-          BottomNavigation(),
         ],
       ),
     );

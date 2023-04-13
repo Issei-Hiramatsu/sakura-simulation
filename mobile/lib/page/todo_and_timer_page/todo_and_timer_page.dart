@@ -28,7 +28,6 @@ class TodoAndTimerPage extends StatelessWidget {
                 TimerAppPage(),
               ]),
             ),
-            BottomNavigation()
           ],
         ),
       ),
