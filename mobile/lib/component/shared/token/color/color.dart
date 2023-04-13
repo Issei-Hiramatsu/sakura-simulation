@@ -20,6 +20,8 @@ Color gray = const Color(0xffa9a9a9);
 
 const Color black = Color(0xff000000);
 
+Color transparent = const Color(0xffFFFFFF).withOpacity(0);
+
 // Background
 
 const Color backgroundWhite = Color(0x0ffff4f4);

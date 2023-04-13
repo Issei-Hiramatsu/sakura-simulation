@@ -21,6 +21,7 @@ TextStyle bodyRegular(Color color) => TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: 16,
     );
+
 TextStyle bodySemiBold(Color color) => TextStyle(
       color: color,
       fontWeight: FontWeight.w600,
@@ -163,4 +164,38 @@ TextStyle caption2Regular(Color color) => TextStyle(
       color: color,
       fontWeight: FontWeight.w300,
       fontSize: 11,
+    );
+
+//取り消し線つき
+TextStyle title1RegularLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 26,
+      decoration: TextDecoration.lineThrough,
+    );
+
+TextStyle title2RegularLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 20,
+      decoration: TextDecoration.lineThrough,
+    );
+
+TextStyle title3RegularLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 18,
+      decoration: TextDecoration.lineThrough,
+    );
+TextStyle titleMediumLineThrough(FontWeight weight, Color color) => TextStyle(
+      color: color,
+      fontWeight: weight,
+      fontSize: 16,
+      decoration: TextDecoration.lineThrough,
+    );
+TextStyle titleSmallLineThrough(FontWeight weight, Color color) => TextStyle(
+      color: color,
+      fontWeight: weight,
+      fontSize: 14,
+      decoration: TextDecoration.lineThrough,
     );
