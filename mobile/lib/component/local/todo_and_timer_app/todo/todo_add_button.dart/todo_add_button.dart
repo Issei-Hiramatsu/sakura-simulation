@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
-class TodoAddButton extends StatelessWidget {
+import '../../../../../page/todo_and_timer_page/elements/todo_app/hooks/temp_todo_list.dart';
+
+class TodoAddButton extends ConsumerWidget {
   const TodoAddButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: 400.sp,
       padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 12.sp),
@@ -24,7 +27,9 @@ class TodoAddButton extends StatelessWidget {
               Text('タスクの追加', style: bodyRegular(white)),
             ],
           ),
-          onPressed: () {}),
+          onPressed: () {
+            ref.read(tempTodoListProvider.notifier).addTodoList();
+          }),
     );
   }
 }
