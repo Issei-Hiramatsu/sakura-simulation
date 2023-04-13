@@ -16,7 +16,10 @@ class TodoAppPage extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return const Padding(
                 padding: EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-                child: TodoCard(text: 'aaa'),
+                child: TodoCard(
+                  text: 'aaa',
+                  isSelected: true,
+                ),
               );
             },
           ),
