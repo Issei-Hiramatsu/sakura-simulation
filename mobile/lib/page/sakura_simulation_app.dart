@@ -10,9 +10,11 @@ class SakuraSimulationApp extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    List pageList = const [
-      HomePage(),
-      TodoAndTimerPage(),
+    List pageList = [
+      const HomePage(),
+      const TodoAndTimerPage(),
+      Container(),
+      Container(),
     ];
     final selectedIndex = useState(0);
     return Scaffold(
