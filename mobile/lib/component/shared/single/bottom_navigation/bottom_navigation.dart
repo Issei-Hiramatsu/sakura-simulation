@@ -18,9 +18,21 @@ class BottomNavigation extends StatelessWidget {
         unselectedItemColor: lowEmphasis.withOpacity(0.5),
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 21.sp), label: ''),
+            icon: Icon(Icons.home, size: 21.sp),
+            label: '',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 21.sp), label: ''),
+            icon: Icon(Icons.timer, size: 21.sp),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.leaderboard, size: 21.sp),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz, size: 21.sp),
+            label: '',
+          ),
         ],
       ),
     );
