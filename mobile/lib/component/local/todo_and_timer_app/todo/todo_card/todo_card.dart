@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
-import '../../../../shared/single/custom_radio_button/custom_radio_button.dart';
 import '../../../../shared/token/color/color.dart';
+import '../todo_radio_button/todo_radio_button.dart';
 
 class TodoCard extends StatelessWidget {
   const TodoCard({super.key, required this.text, required this.isSelected});
@@ -21,14 +21,7 @@ class TodoCard extends StatelessWidget {
       child: Center(
         child: ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-          leading: CustomRadioButton(
-            size: 26,
-            isSelected: false,
-            borderColor: gray,
-            selectedFillColor: gray,
-            onPressed: () {},
-            icon: const Icon(Icons.check),
-          ),
+          leading: TodoRadioButton(isSelected: false),
           //TODO: お気に入りボタン
           trailing: IconButton(
             onPressed: () {},

@@ -15,6 +15,7 @@ class TodoAddButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8), //角の丸み
           ),
+          backgroundColor: backgroundLightBlack,
           child: Row(
             children: [
               SizedBox(width: 12.sp),
