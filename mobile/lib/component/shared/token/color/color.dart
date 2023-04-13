@@ -16,11 +16,19 @@ const Color tertiaryPale = Color(0xffFAAAAF);
 
 const Color white = Color(0xffFFFFFF);
 
+Color gray = const Color(0xffa9a9a9);
+
 const Color black = Color(0xff000000);
+
+Color transparent = const Color(0xffFFFFFF).withOpacity(0);
 
 // Background
 
-const Color backgroundWhite = Color(0xffFF4F4);
+const Color backgroundWhite = Color(0x0ffff4f4);
+
+Color backgroundGray = const Color(0xff696969);
+
+Color backgroundLightBlack = const Color(0xff2A2A2A);
 
 const Color backgroundBlack = Color(0xff111414);
 
@@ -40,9 +48,9 @@ const Color onSurface = Color(0xff201A19);
 
 const Color highEmphasis = Color(0xff111414);
 
-Color midEmphasis = Color(0xff12181A).withOpacity(0.7);
+Color midEmphasis = const Color(0xff12181A).withOpacity(0.7);
 
-Color lowEmphasis = Color(0xff12181A).withOpacity(0.5);
+Color lowEmphasis = const Color(0xff12181A).withOpacity(0.5);
 
 const Color disabledOnlyText = Color(0xff12181A4D);
 

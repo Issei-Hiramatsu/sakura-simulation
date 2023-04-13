@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sakura_simulation/page/home/home_page.dart';
+
+import 'page/todo_and_timer_page/todo_and_timer_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const HomePage(),
+            home: const TodoAndTimerPage(),
           );
         });
   }
