@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../component/local/home_page/body/simulation_screen/simulation_screen.dart';
-import '../../component/shared/single/bottom_navigation/bottom_navigation.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
