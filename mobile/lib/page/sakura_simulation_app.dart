@@ -17,11 +17,13 @@ class SakuraSimulationApp extends HookWidget {
       Container(),
     ];
     final selectedIndex = useState(0);
-    return Scaffold(
-      body: pageList[selectedIndex.value],
-      bottomNavigationBar: BottomNavigation(
-        currentIndex: selectedIndex.value,
-        onTap: (index) => selectedIndex.value = index,
+    return SafeArea(
+      child: Scaffold(
+        body: pageList[selectedIndex.value],
+        bottomNavigationBar: BottomNavigation(
+          currentIndex: selectedIndex.value,
+          onTap: (index) => selectedIndex.value = index,
+        ),
       ),
     );
   }
