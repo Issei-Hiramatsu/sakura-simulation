@@ -1,35 +1,62 @@
-// import 'package:flutter/material.dart';
-// import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
-// import 'package:sakura_simulation/component/shared/token/color/color.dart';
-// import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
+import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
+import 'package:sakura_simulation/component/shared/token/color/color.dart';
 
-//モーダル予定
+import '../../../../../../page/todo_and_timer_page/elements/todo_app/hooks/temp_todo_list.dart';
+import '../../../../../shared/token/navigator/navigator.dart';
+import '../../../../../shared/token/text_style/text_style.dart';
 
-// Future showAddTodoModal(BuildContext context) {
-//   return showModalBottomSheet(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return Container(
-//         height: 450,
-//         padding: const EdgeInsets.only(top: 15),
-//         margin: const EdgeInsets.only(top: 64),
-//         decoration: BoxDecoration(
-//           color: backgroundLightBlack,
-//           borderRadius: const BorderRadius.only(
-//             topLeft: Radius.circular(20),
-//             topRight: Radius.circular(20),
-//           ),
-//         ),
-//         child: Row(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: const [
-//             TodoRadioButton(isSelected: false),
-//             SpaceBox(width: 12),
-//             Expanded(child: TextField()),
-//           ],
-//         ),
-//       );
-//     },
-//     backgroundColor: transparent,
-//   );
-// }
+Future showAddTodoModal(BuildContext context, WidgetRef ref) {
+  return showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      final bottomSpace = MediaQuery.of(context).viewInsets.bottom;
+      final controller = TextEditingController();
+      return SingleChildScrollView(
+        reverse: true,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: bottomSpace),
+          child: Container(
+            decoration: BoxDecoration(
+              color: backgroundLightBlack,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: TodoRadioButton(isSelected: false),
+                ),
+                Expanded(
+                    child: TextField(
+                  style: labelLarge(white),
+                  controller: controller,
+                  keyboardType: TextInputType.multiline,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    hintText: 'タスクの追加',
+                    hintStyle: labelLarge(gray),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 0, color: backgroundLightBlack)),
+                  ),
+                  onSubmitted: (value) {
+                    print(controller);
+                    NavigatorPop(context);
+                    ref.read(tempTodoListProvider.notifier).addTodoList();
+                  },
+                )),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+    backgroundColor: transparent,
+  );
+}

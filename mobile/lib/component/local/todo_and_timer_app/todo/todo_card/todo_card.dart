@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../shared/token/color/color.dart';
@@ -13,29 +14,29 @@ class TodoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65,
+      height: 56.sp,
       decoration: BoxDecoration(
         color: backgroundLightBlack,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
         child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10),
           leading: TodoRadioButton(isSelected: false),
           //TODO: お気に入りボタン
+
           trailing: IconButton(
+            padding: EdgeInsets.all(0),
             onPressed: () {},
             icon: Icon(
               Icons.star_outline,
               color: gray,
-              size: 26,
+              size: 18.sp,
             ),
           ),
           title: Text(
             text,
-            style: isSelected
-                ? title3Regular(white)
-                : title3RegularLineThrough(gray),
+            style: isSelected ? labelLarge(white) : labelLargeLineThrough(gray),
           ),
         ),
       ),

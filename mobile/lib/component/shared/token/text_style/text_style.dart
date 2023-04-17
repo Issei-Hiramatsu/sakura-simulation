@@ -88,19 +88,19 @@ TextStyle headLineRegular(Color color) => TextStyle(
       fontSize: 15,
     );
 
-TextStyle labelLarge(FontWeight weight, Color color) => TextStyle(
+TextStyle labelLarge(Color color) => TextStyle(
       color: color,
-      fontWeight: weight,
+      fontWeight: FontWeight.w300,
       fontSize: 14,
     );
-TextStyle labelMedium(FontWeight weight, Color color) => TextStyle(
+TextStyle labelMedium(Color color) => TextStyle(
       color: color,
-      fontWeight: weight,
+      fontWeight: FontWeight.w300,
       fontSize: 12,
     );
-TextStyle labelSmall(FontWeight weight, Color color) => TextStyle(
+TextStyle labelSmall(Color color) => TextStyle(
       color: color,
-      fontWeight: weight,
+      fontWeight: FontWeight.w300,
       fontSize: 10,
     );
 
@@ -167,6 +167,25 @@ TextStyle caption2Regular(Color color) => TextStyle(
     );
 
 //取り消し線つき
+TextStyle labelLargeLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 14,
+      decoration: TextDecoration.lineThrough,
+    );
+TextStyle labelMediumLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 12,
+      decoration: TextDecoration.lineThrough,
+    );
+TextStyle labelSmallLineThrough(Color color) => TextStyle(
+      color: color,
+      fontWeight: FontWeight.w300,
+      fontSize: 10,
+      decoration: TextDecoration.lineThrough,
+    );
+
 TextStyle title1RegularLineThrough(Color color) => TextStyle(
       color: color,
       fontWeight: FontWeight.w300,
@@ -187,6 +206,7 @@ TextStyle title3RegularLineThrough(Color color) => TextStyle(
       fontSize: 18,
       decoration: TextDecoration.lineThrough,
     );
+
 TextStyle titleMediumLineThrough(FontWeight weight, Color color) => TextStyle(
       color: color,
       fontWeight: weight,

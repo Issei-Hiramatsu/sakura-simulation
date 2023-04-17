@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
-import 'package:sakura_simulation/component/shared/single/bottom_navigation/bottom_navigation.dart';
-import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/timer_app_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
+import 'elements/timer_app/timer_app_page.dart';
 import 'elements/todo_app/todo_app_page.dart';
 
 class TodoAndTimerPage extends StatelessWidget {
@@ -13,7 +13,9 @@ class TodoAndTimerPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(),
+        resizeToAvoidBottomInset: false,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(42.sp), child: AppBar()),
         body: Column(
           children: const [
             CustomTabBar(
@@ -28,7 +30,6 @@ class TodoAndTimerPage extends StatelessWidget {
                 TimerAppPage(),
               ]),
             ),
-            BottomNavigation()
           ],
         ),
       ),

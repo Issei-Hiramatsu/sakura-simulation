@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
-import '../../../../../page/todo_and_timer_page/elements/todo_app/hooks/temp_todo_list.dart';
+import 'elements/add_todo_modal.dart';
 
 class TodoAddButton extends ConsumerWidget {
   const TodoAddButton({super.key});
@@ -28,7 +28,7 @@ class TodoAddButton extends ConsumerWidget {
             ],
           ),
           onPressed: () {
-            ref.read(tempTodoListProvider.notifier).addTodoList();
+            showAddTodoModal(context, ref);
           }),
     );
   }
