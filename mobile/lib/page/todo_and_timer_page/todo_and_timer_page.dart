@@ -13,6 +13,7 @@ class TodoAndTimerPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(42.sp), child: AppBar()),
         body: Column(
