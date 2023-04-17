@@ -28,7 +28,18 @@ Future showAddTodoModal(BuildContext context) {
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
                   child: TodoRadioButton(isSelected: false),
                 ),
-                Expanded(child: TextField()),
+                Expanded(
+                    child: TextField(
+                  style: labelLarge(white),
+                  keyboardType: TextInputType.multiline,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                      hintText: 'タスクの追加',
+                      hintStyle: labelLarge(gray),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              width: 0, color: backgroundLightBlack))),
+                )),
               ],
             ),
           ),
