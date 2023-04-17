@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../shared/single/custom_radio_button/custom_radio_button.dart';
+import '../../../../shared/single/button/custom_radio_button/custom_radio_button.dart';
 import '../../../../shared/token/color/color.dart';
 
 class TodoRadioButton extends StatelessWidget {
