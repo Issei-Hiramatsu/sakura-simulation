@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 
+import '../../../../../shared/token/navigator/navigator.dart';
 import '../../../../../shared/token/text_style/text_style.dart';
 
 Future showAddTodoModal(BuildContext context) {
@@ -9,6 +10,7 @@ Future showAddTodoModal(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       final bottomSpace = MediaQuery.of(context).viewInsets.bottom;
+      final controller = TextEditingController();
       return SingleChildScrollView(
         reverse: true,
         child: Padding(
@@ -31,14 +33,20 @@ Future showAddTodoModal(BuildContext context) {
                 Expanded(
                     child: TextField(
                   style: labelLarge(white),
+                  controller: controller,
                   keyboardType: TextInputType.multiline,
                   autofocus: true,
                   decoration: InputDecoration(
-                      hintText: 'タスクの追加',
-                      hintStyle: labelLarge(gray),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 0, color: backgroundLightBlack))),
+                    hintText: 'タスクの追加',
+                    hintStyle: labelLarge(gray),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 0, color: backgroundLightBlack)),
+                  ),
+                  onSubmitted: (value) {
+                    print(controller);
+                    NavigatorPop(context);
+                  },
                 )),
               ],
             ),
