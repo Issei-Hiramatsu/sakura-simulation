@@ -28,7 +28,7 @@ class TodoAddButton extends ConsumerWidget {
             ],
           ),
           onPressed: () {
-            showAddTodoModal(context);
+            showAddTodoModal(context, ref);
           }),
     );
   }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 
+import '../../../../../../page/todo_and_timer_page/elements/todo_app/hooks/temp_todo_list.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
 import '../../../../../shared/token/text_style/text_style.dart';
 
-Future showAddTodoModal(BuildContext context) {
+Future showAddTodoModal(BuildContext context, WidgetRef ref) {
   return showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -46,6 +48,7 @@ Future showAddTodoModal(BuildContext context) {
                   onSubmitted: (value) {
                     print(controller);
                     NavigatorPop(context);
+                    ref.read(tempTodoListProvider.notifier).addTodoList();
                   },
                 )),
               ],
