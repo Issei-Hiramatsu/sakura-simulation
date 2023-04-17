@@ -17,14 +17,14 @@ class TodoAndTimerPage extends StatelessWidget {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(42.sp), child: AppBar()),
         body: Column(
-          children: const [
+          children: [
             CustomTabBar(
               tab: [
-                Tab(text: 'タスク', height: 32),
-                Tab(text: 'タイマー', height: 32),
+                Tab(text: 'タスク', height: 26.sp),
+                Tab(text: 'タイマー', height: 26.sp),
               ],
             ),
-            Expanded(
+            const Expanded(
               child: TabBarView(children: [
                 TodoAppPage(),
                 TimerAppPage(),

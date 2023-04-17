@@ -14,19 +14,19 @@ class TodoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56.sp,
+      height: 52.sp,
       decoration: BoxDecoration(
         color: backgroundLightBlack,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          leading: TodoRadioButton(isSelected: false),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          leading: const TodoRadioButton(isSelected: false),
           //TODO: お気に入りボタン
 
           trailing: IconButton(
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             onPressed: () {},
             icon: Icon(
               Icons.star_outline,
