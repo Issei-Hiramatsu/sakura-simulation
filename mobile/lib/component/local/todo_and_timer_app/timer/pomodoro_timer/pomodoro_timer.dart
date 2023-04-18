@@ -6,8 +6,8 @@ import 'package:sakura_simulation/component/shared/token/text_style/text_style.d
 import '../../../../shared/single/button/circle_button/circle_button.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 
-class PomodoroTimerWithTodo extends StatelessWidget {
-  const PomodoroTimerWithTodo({super.key});
+class PomodoroTimer extends StatelessWidget {
+  const PomodoroTimer({super.key});
 
   @override
   Widget build(BuildContext context) {

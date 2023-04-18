@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../component/local/todo_and_timer_app/timer/pomodoro_timer/pomodoro_timer_with_todo.dart';
+import '../../../../../../component/local/todo_and_timer_app/timer/pomodoro_timer/pomodoro_timer.dart';
 
 class PomodoroTimerPage extends StatelessWidget {
   const PomodoroTimerPage({super.key});
@@ -9,7 +9,7 @@ class PomodoroTimerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: PomodoroTimerWithTodo(),
+      body: const PomodoroTimer(),
     );
   }
 }
