@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sakura_simulation/page/sakura_simulation_app.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+import 'component/local/todo_and_timer_app/timer/pomodoro_timer/hooks/use_pomodoro_timer.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    initializeDateFormatting('ja');
     return ScreenUtilInit(
         //FIXME:
         designSize: const Size(390, 844),
@@ -21,11 +24,12 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const SakuraSimulationApp(),
+            home: TimerSamplePage(),
           );
         });
   }
 }
+
 
 //対応する項目に色がつくように変更する
 //各ページに対応するページを配置する　未作成の場合は概要を記載しておく。
@@ -41,3 +45,6 @@ class MyApp extends StatelessWidget {
 //イベント要素について
 //AppBarにLv やアイテム数の表示　左上アイコンの設置
 //灰？　成長剤？
+
+//ポモドーロ todoも付いている
+//集中　後ろが桜の背景
