@@ -58,24 +58,27 @@ class PomodoroTimerState extends ConsumerState {
             Text(displayTime, style: displayLarge(black)),
           ],
         ),
-        Row(
-          children: [
-            CircleElevatedButton(
-              size: 70.sp,
-              text: 'キャンセル',
-              textStyle: labelLarge(primary),
-              onPressed: () {
-                startTimer(10);
-              },
-            ),
-            const Spacer(),
-            CircleElevatedButton(
-              size: 70.sp,
-              text: '一時停止',
-              textStyle: labelLarge(primary),
-              onPressed: () {},
-            ),
-          ],
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.sp),
+          child: Row(
+            children: [
+              CircleElevatedButton(
+                size: 70.sp,
+                text: 'キャンセル',
+                textStyle: labelLarge(primary),
+                onPressed: () {
+                  startTimer(10);
+                },
+              ),
+              const Spacer(),
+              CircleElevatedButton(
+                size: 70.sp,
+                text: '一時停止',
+                textStyle: labelLarge(primary),
+                onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ],
     );
