@@ -1,64 +1,65 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 
-class TimerSamplePage extends StatefulWidget {
-  const TimerSamplePage({super.key});
+final cooperationTimerProvider = StateProvider<int>((ref) => 0);
 
-  // 状態を持ちたいので StatefulWidget を継承
+class PageWidget1 extends ConsumerStatefulWidget {
+  const PageWidget1({Key? key}) : super(key: key);
+
   @override
-  _TimerSamplePageState createState() => _TimerSamplePageState();
+  _PageWidget1State createState() => _PageWidget1State();
 }
 
-class _TimerSamplePageState extends State<TimerSamplePage> {
-  late Timer _timer; // この辺が状態
-  late DateTime _time;
+class _PageWidget1State extends ConsumerState<PageWidget1> {
+  DateTime? _createTime;
+  Timer? _timer;
 
   @override
   void initState() {
-    // 初期化処理
-    _time = DateTime.utc(0, 0, 0);
-    super.initState();
+    super.initState(); // initState 関数の実装は、super.initState を呼び出して開始する必要があります。
+    _createTime = DateTime.now(); //変数_createTimeにDateTime.nowを代入
+    _startTimer();
+  }
+
+  // タイマーのスタート
+  void _startTimer() {
+    final createTime = _createTime!.add(const Duration(minutes: 1)); // タイマーの時間
+    _timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+      final remain = createTime.difference(DateTime.now());
+      if (remain > Duration.zero) {
+        ref.read(cooperationTimerProvider.state).state =
+            remain.inMilliseconds; //タイマーが動く
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // setState() の度に実行される
+    final timer = ref.watch(cooperationTimerProvider);
+    final displayTime =
+        Duration(milliseconds: timer).toString().substring(2, 10); // ミリ秒設定
+
+    // 作成した時間
+    final createTime = DateFormat('yyyy/MM/dd/HH:mm').format(_createTime!);
     return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Text(
-        DateFormat.Hms().format(_time),
-        style: Theme.of(context).textTheme.headline2,
-      ),
-      Row(
+      body: Center(
+          child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FloatingActionButton(
-            onPressed: () {
-              // Stopボタンタップ時の処理
-
-              if (_timer != null && _timer.isActive) _timer.cancel();
-            },
-            child: const Text("Stop"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('残り時間'),
+              const SizedBox(width: 10),
+              Text(displayTime),
+            ],
           ),
-          FloatingActionButton(
-            onPressed: () {
-              // Startボタンタップ時の処理
-              _timer = Timer.periodic(
-                const Duration(seconds: 1), // 1秒毎に定期実行
-                (Timer timer) {
-                  setState(() {
-                    // 変更を画面に反映するため、setState()している
-                    _time = _time.add(const Duration(seconds: 1));
-                  });
-                },
-              );
-            },
-            child: const Text("Start"),
-          ),
+          const SizedBox(height: 20),
+          Text(createTime),
         ],
-      )
-    ]));
+      )),
+    );
   }
 }
