@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
+import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../shared/single/button/circle_button/circle_button.dart';
@@ -51,6 +52,7 @@ class PomodoroTimerState extends ConsumerState {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SpaceBox(height: 12.sp),
         Stack(
           alignment: AlignmentDirectional.center,
           children: [
