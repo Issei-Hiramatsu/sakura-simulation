@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../../../../../../../shared/token/color/color.dart';
 
+enum TimerAnimationState {
+  forward,
+  stop,
+}
+
 class TimerAnimation extends StatelessWidget {
   const TimerAnimation({
     super.key,
@@ -10,6 +15,7 @@ class TimerAnimation extends StatelessWidget {
   });
   final double size;
   final double strokeWidth;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -17,7 +23,7 @@ class TimerAnimation extends StatelessWidget {
       height: size,
       child: TweenAnimationBuilder<double>(
         tween: Tween<double>(begin: 0, end: 1),
-        duration: const Duration(milliseconds: 100000),
+        duration: const Duration(minutes: 2),
         builder: (context, value, _) => CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(gray),
           value: value,
