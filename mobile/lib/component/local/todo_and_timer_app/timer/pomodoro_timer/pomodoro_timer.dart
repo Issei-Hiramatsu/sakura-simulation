@@ -3,12 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/pomodoro_timer/hooks/use_pomodoro_timer.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../shared/single/button/circle_button/circle_button.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
+
+final cooperationTimerProvider = StateProvider<int>((ref) => 0);
+
+//知りたいこと　initStateを使う意味
+//DateTime.now()とは何者なのか
 
 class PomodoroTimer extends ConsumerStatefulWidget {
   const PomodoroTimer({Key? key}) : super(key: key);
@@ -19,21 +23,21 @@ class PomodoroTimer extends ConsumerStatefulWidget {
 
 class PomodoroTimerState extends ConsumerState {
   DateTime? _createTime;
-  Timer? _timer;
+  Timer? timer;
+
   @override
   void initState() {
-    super.initState(); // initState 関数の実装は、super.initState を呼び出して開始する必要があります。
-    _createTime = DateTime.now(); //変数_createTimeにDateTime.nowを代入
+    super.initState();
+    _createTime = DateTime.now();
   }
 
-  void _startTimer(int minutes) {
-    final createTime =
-        _createTime!.add(const Duration(minutes: 10)); // TODO: タイマーの時間を決められる
-    _timer = Timer.periodic(const Duration(milliseconds: 10), (timer) {
+  void startTimer(int minutes) {
+    final createTime = _createTime!.add(Duration(minutes: minutes));
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final remain = createTime.difference(DateTime.now());
       if (remain > Duration.zero) {
         ref.read(cooperationTimerProvider.notifier).state =
-            remain.inMilliseconds; //タイマーが動く
+            remain.inMilliseconds;
       }
     });
   }
@@ -42,7 +46,7 @@ class PomodoroTimerState extends ConsumerState {
   Widget build(BuildContext context) {
     final timer = ref.watch(cooperationTimerProvider);
     final displayTime =
-        Duration(milliseconds: timer).toString().substring(2, 10); // ミリ秒設定
+        Duration(milliseconds: timer).toString().substring(2, 7);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +64,9 @@ class PomodoroTimerState extends ConsumerState {
               size: 70.sp,
               text: 'キャンセル',
               textStyle: labelLarge(primary),
-              onPressed: () {},
+              onPressed: () {
+                startTimer(10);
+              },
             ),
             const Spacer(),
             CircleElevatedButton(
