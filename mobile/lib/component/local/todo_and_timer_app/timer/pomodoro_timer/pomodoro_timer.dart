@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../shared/single/button/circle_button/circle_button.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
+import 'hooks/temp_user_settings.dart';
 
 final cooperationTimerProvider = StateProvider<int>((ref) => 0);
 
@@ -47,8 +49,7 @@ class PomodoroTimerState extends ConsumerState {
   Widget build(BuildContext context) {
     final timer = ref.watch(cooperationTimerProvider);
     final displayTime =
-        Duration(milliseconds: timer).toString().substring(2, 7);
-
+        Duration(milliseconds: timer).toString().substring(2, 7); //タイマーの領域を指定する
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -69,7 +70,7 @@ class PomodoroTimerState extends ConsumerState {
                 text: 'キャンセル',
                 textStyle: labelLarge(primary),
                 onPressed: () {
-                  startTimer(10);
+                  startTimer(workTime);
                 },
               ),
               const Spacer(),

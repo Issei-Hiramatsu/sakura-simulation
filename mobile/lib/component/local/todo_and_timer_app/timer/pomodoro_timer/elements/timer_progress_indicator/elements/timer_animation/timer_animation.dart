@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../../../shared/token/color/color.dart';
-
-enum TimerAnimationState {
-  forward,
-  stop,
-}
+import '../../../../hooks/temp_user_settings.dart';
 
 class TimerAnimation extends StatelessWidget {
   const TimerAnimation({
@@ -23,7 +19,7 @@ class TimerAnimation extends StatelessWidget {
       height: size,
       child: TweenAnimationBuilder<double>(
         tween: Tween<double>(begin: 0, end: 1),
-        duration: const Duration(minutes: 2),
+        duration: const Duration(minutes: workTime),
         builder: (context, value, _) => CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation(gray),
           value: value,
