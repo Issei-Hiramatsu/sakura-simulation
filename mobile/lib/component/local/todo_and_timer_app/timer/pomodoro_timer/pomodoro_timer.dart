@@ -39,8 +39,7 @@ class PomodoroTimerState extends ConsumerState {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final remain = createTime.difference(DateTime.now());
       if (remain > Duration.zero) {
-        ref.read(cooperationTimerProvider.notifier).state =
-            remain.inMilliseconds;
+        ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
       }
     });
   }
@@ -49,7 +48,7 @@ class PomodoroTimerState extends ConsumerState {
   Widget build(BuildContext context) {
     final timer = ref.watch(cooperationTimerProvider);
     final displayTime =
-        Duration(milliseconds: timer).toString().substring(2, 7); //タイマーの領域を指定する
+        Duration(seconds: timer).toString().substring(2, 7); //タイマーの領域を指定する
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
