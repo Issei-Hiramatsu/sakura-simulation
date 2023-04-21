@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
-import 'component/local/todo_and_timer_app/timer/pomodoro_timer/hooks/use_pomodoro_timer.dart';
+import 'page/todo_and_timer_page/elements/timer_app/elements/pomodoro_timer_page/pomodoro_timer_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -24,11 +24,16 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: TimerSamplePage(),
+            home: PomodoroTimerPage(),
           );
         });
   }
 }
+
+//zennへの記載 ボタンのデザイン調整　todoをつけるなどを行う。
+//少しぐちゃぐちゃになってしまったので調整したい。
+
+
 
 
 //対応する項目に色がつくように変更する
