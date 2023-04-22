@@ -12,8 +12,9 @@ class TimerProgressIndicator extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final timer = ref.watch(cooperationTimerProvider) / 60 / 100;
-    final end = timer / workTime;
+    final timer =
+        ref.watch(cooperationTimerProvider) / 60; //ミリ秒まで取得してしまうので分の単位に直す
+    final end = 1 - timer / workTime; //1分に対しての比率を求められる //1は最大値を表す。
     return Stack(
       children: [
         WorkAndBreakPieChart(
