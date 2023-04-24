@@ -15,6 +15,7 @@ import 'hooks/temp_user_settings.dart';
 
 //知りたいこと　initStateを使う意味
 //DateTime.now()とは何者なのか
+//Notifierで一瞬でできた　何者だ？
 class PomodoroTimer extends ConsumerStatefulWidget {
   const PomodoroTimer({Key? key}) : super(key: key);
 
