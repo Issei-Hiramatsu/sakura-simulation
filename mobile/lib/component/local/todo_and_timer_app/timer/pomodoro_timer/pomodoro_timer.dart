@@ -9,14 +9,12 @@ import 'package:sakura_simulation/component/shared/token/space_box/space_box.dar
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../shared/single/button/circle_button/circle_button.dart';
+import 'elements/timer_progress_indicator/hooks/use_pomodoro_timer.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 import 'hooks/temp_user_settings.dart';
 
-final cooperationTimerProvider = StateProvider<int>((ref) => 0);
-
 //知りたいこと　initStateを使う意味
 //DateTime.now()とは何者なのか
-
 class PomodoroTimer extends ConsumerStatefulWidget {
   const PomodoroTimer({Key? key}) : super(key: key);
 
@@ -35,6 +33,7 @@ class PomodoroTimerState extends ConsumerState {
   }
 
   void startTimer(int minutes) {
+    ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
     final createTime = _createTime!.add(Duration(minutes: minutes));
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final remain = createTime.difference(DateTime.now());
