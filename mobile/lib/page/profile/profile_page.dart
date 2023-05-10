@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
 
+import '../../component/local/profile/active_overview/active_overview.dart';
+
 class SlackProfilePage extends StatelessWidget {
   final String name;
   final String photoUrl;
@@ -39,6 +41,7 @@ class SlackProfilePage extends StatelessWidget {
               ],
             ),
           ),
+          const ActiveOverView()
         ],
       ),
     );
