@@ -36,13 +36,22 @@ class PomodoroTimerState extends ConsumerState {
   void startTimer(int minutes) {
     ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
     final createTime = _createTime!.add(Duration(minutes: minutes));
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      final remain = createTime.difference(DateTime.now());
-      if (remain > Duration.zero) {
-        ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
-      }
-    });
+    timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        final remain = createTime.difference(DateTime.now());
+        if (remain > Duration.zero) {
+          ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
+        }
+      },
+    );
   }
+
+  void stopTimer(remainSeconds) {
+    timer?.cancel();
+  }
+
+  void resumeTimer(remainSeconds) {}
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +86,9 @@ class PomodoroTimerState extends ConsumerState {
                 size: 70.sp,
                 text: '一時停止',
                 textStyle: labelLarge(primary),
-                onPressed: () {},
+                onPressed: () {
+                  stopTimer(timer);
+                },
               ),
             ],
           ),
