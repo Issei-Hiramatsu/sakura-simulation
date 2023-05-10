@@ -43,6 +43,7 @@ dependencies:
   freezed_annotation:
   fl_chart: ^0.62.0
   intl: ^0.18.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:
