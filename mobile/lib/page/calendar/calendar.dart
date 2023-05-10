@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../component/local/calendar/event_card/event_card.dart';
@@ -8,46 +9,17 @@ final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
 
-class TableEventsExample extends StatefulWidget {
-  const TableEventsExample({super.key});
-
-  @override
-  _TableEventsExampleState createState() => _TableEventsExampleState();
-}
-
-class _TableEventsExampleState extends State<TableEventsExample> {
-  late final ValueNotifier<List<Event>> _selectedEvents;
+class TableEventsExample extends HookWidget {
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  final _focusedDay = useState(DateTime.now());
+  final _selectedDay = useState(DateTime.now());
 
-  @override
-  void initState() {
-    super.initState();
-
-    _selectedDay = _focusedDay;
-    _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay!));
-  }
-
-  @override
-  void dispose() {
-    _selectedEvents.dispose();
-    super.dispose();
-  }
-
-  List<Event> _getEventsForDay(DateTime day) {
-    // Implementation example
-    return kEvents[day] ?? [];
-  }
+  TableEventsExample({super.key});
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    if (!isSameDay(_selectedDay, selectedDay)) {
-      setState(() {
-        _selectedDay = selectedDay;
-        _focusedDay = focusedDay;
-      });
-
-      _selectedEvents.value = _getEventsForDay(selectedDay);
+    if (!isSameDay(_selectedDay.value, selectedDay)) {
+      _selectedDay.value = selectedDay;
+      _focusedDay.value = focusedDay;
     }
   }
 
@@ -63,10 +35,10 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             firstDay: kFirstDay,
             lastDay: kLastDay,
             locale: 'ja_JP',
-            focusedDay: _focusedDay,
-            selectedDayPredicate: (day) => isSameDay(_selectedDay, day), //選択できる
+            focusedDay: _focusedDay.value,
+            selectedDayPredicate: (day) =>
+                isSameDay(_selectedDay.value, day), //選択できる
             calendarFormat: _calendarFormat,
-            eventLoader: _getEventsForDay,
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
               // Use `CalendarStyle` to customize the UI
@@ -81,32 +53,25 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             onDaySelected: _onDaySelected,
             onFormatChanged: (format) {
               if (_calendarFormat != CalendarFormat.week) {
-                setState(() {
-                  _calendarFormat = CalendarFormat.week;
-                });
+                _calendarFormat = CalendarFormat.week;
               } else if (_calendarFormat != CalendarFormat.month) {
-                setState(() {
-                  _calendarFormat = CalendarFormat.month;
-                });
+                _calendarFormat = CalendarFormat.month;
               }
             },
             onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
+              _focusedDay.value = focusedDay;
             },
           ),
           const SizedBox(height: 8.0),
           Expanded(
-            child: ValueListenableBuilder<List<Event>>(
-              valueListenable: _selectedEvents,
-              builder: (context, value, _) {
-                return ListView.builder(
-                  itemCount: value.length,
-                  itemBuilder: (context, index) {
-                    return EventCard(
-                      index: index,
-                      value: value,
-                    );
-                  },
+            child: ListView.builder(
+              itemCount: kEvent.length,
+              itemBuilder: (context, index) {
+                //日付を習得して対応するデータをここで読み込み予定です。
+                final getSelectedDay = _selectedDay.value;
+                return EventCard(
+                  //データが取得されているかの確認用
+                  title: getSelectedDay.toString(),
                 );
               },
             ),
