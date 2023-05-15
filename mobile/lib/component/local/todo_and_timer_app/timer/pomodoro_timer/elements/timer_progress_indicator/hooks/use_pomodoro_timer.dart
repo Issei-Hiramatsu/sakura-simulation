@@ -1,0 +1,21 @@
+//メモ
+//circularインディケータの処理について
+//　残りの時間/設定してあった時間がそのままになるのでそれを代入する。
+
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final cooperationTimerProvider = StateProvider<int>((ref) => 0);
+
+final timerAnimationParameterProvider =
+    NotifierProvider<TimerAnimationParameter, double>(
+  () => TimerAnimationParameter(),
+);
+
+class TimerAnimationParameter extends Notifier<double> {
+  @override
+  double build() => 0;
+
+  void startTimerAnimation() => state = 1;
+
+  void stopTimerAnimation(int parameter) => state /= parameter;
+}
