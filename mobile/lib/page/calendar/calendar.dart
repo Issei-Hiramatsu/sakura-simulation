@@ -41,6 +41,7 @@ class TableEventsExample extends HookWidget {
       body: Column(
         children: [
           TableCalendar<Event>(
+            //FIXME: カレンダー上限について 現状予定と連携されていないためエラーが発生する場合がある
             firstDay: kFirstDay,
             lastDay: kLastDay,
             locale: 'ja_JP',
