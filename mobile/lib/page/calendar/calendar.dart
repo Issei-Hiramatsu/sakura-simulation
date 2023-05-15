@@ -52,7 +52,13 @@ class TableEventsExample extends HookWidget {
             calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
             ),
-
+            onFormatChanged: (format) {
+              if (_calendarFormat.value != CalendarFormat.week) {
+                _calendarFormat.value = CalendarFormat.week;
+              } else if (_calendarFormat.value != CalendarFormat.month) {
+                _calendarFormat.value = CalendarFormat.month;
+              }
+            },
             headerStyle: const HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
