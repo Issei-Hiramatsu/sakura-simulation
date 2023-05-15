@@ -10,7 +10,7 @@ final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
 final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
 
 class TableEventsExample extends HookWidget {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
+  final _calendarFormat = useState(CalendarFormat.month);
   final _focusedDay = useState(DateTime.now());
   final _selectedDay = useState(DateTime.now());
 
@@ -20,6 +20,7 @@ class TableEventsExample extends HookWidget {
     if (!isSameDay(_selectedDay.value, selectedDay)) {
       _selectedDay.value = selectedDay;
       _focusedDay.value = focusedDay;
+      _calendarFormat.value = CalendarFormat.week;
     }
   }
 
@@ -38,7 +39,7 @@ class TableEventsExample extends HookWidget {
             focusedDay: _focusedDay.value,
             selectedDayPredicate: (day) =>
                 isSameDay(_selectedDay.value, day), //選択できる
-            calendarFormat: _calendarFormat,
+            calendarFormat: _calendarFormat.value,
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
               // Use `CalendarStyle` to customize the UI
@@ -51,13 +52,6 @@ class TableEventsExample extends HookWidget {
                   TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
             ),
             onDaySelected: _onDaySelected,
-            onFormatChanged: (format) {
-              if (_calendarFormat != CalendarFormat.week) {
-                _calendarFormat = CalendarFormat.week;
-              } else if (_calendarFormat != CalendarFormat.month) {
-                _calendarFormat = CalendarFormat.month;
-              }
-            },
             onPageChanged: (focusedDay) {
               _focusedDay.value = focusedDay;
             },
