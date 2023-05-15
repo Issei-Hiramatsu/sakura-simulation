@@ -8,7 +8,9 @@ const Color primary5 = Color(0xffE2F6FC);
 
 const Color primary10 = Color(0xffB8E9F7);
 
-const Color secondary = Color(0xffE7A15F);
+const Color secondary = Color(0xffFFA500);
+
+const Color secondary5 = Color(0xffE7A15F);
 
 const Color tertiary = Color(0xffF2CFAA);
 
