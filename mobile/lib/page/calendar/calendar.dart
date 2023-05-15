@@ -15,6 +15,7 @@ class TableEventsExample extends HookWidget {
   final _focusedDay = useState(DateTime.now());
   final _selectedDay = useState(DateTime.now());
   final _controller = useState(PreloadPageController(initialPage: 0));
+  final _currentIndex = useState(0);
 
   TableEventsExample({super.key});
 
@@ -62,7 +63,26 @@ class TableEventsExample extends HookWidget {
             child: PreloadPageView.builder(
               preloadPagesCount: 2,
               controller: _controller.value,
-              onPageChanged: (index) {},
+              onPageChanged: (index) {
+                if (index <= _currentIndex.value) {
+                  //FIXME: 左スワイプがすぐに限界に達してしまう。
+                  //戻ったの処理
+                  _focusedDay.value = DateTime(
+                    _focusedDay.value.year,
+                    _focusedDay.value.month,
+                    _focusedDay.value.day - 1,
+                  );
+                } else if (index >= _currentIndex.value) {
+                  //一ページ進んだ時の処理
+                  _focusedDay.value = DateTime(
+                    _focusedDay.value.year,
+                    _focusedDay.value.month,
+                    _focusedDay.value.day + 1,
+                  );
+                }
+                _selectedDay.value = _focusedDay.value;
+                _currentIndex.value = index;
+              },
               itemCount:
                   10, //10で仮置きデータを読み込む際に増えていくような感じでどうだろうか ただし増えすぎても負荷の原因となる気がする
               itemBuilder: (context, index) {
