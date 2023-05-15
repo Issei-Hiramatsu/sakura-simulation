@@ -23,7 +23,8 @@ class TableEventsExample extends HookWidget {
     if (!isSameDay(_selectedDay.value, selectedDay)) {
       _selectedDay.value = selectedDay;
       _focusedDay.value = focusedDay;
-      _calendarFormat.value = CalendarFormat.week;
+      _calendarFormat.value =
+          CalendarFormat.week; //この処理はUIがweekにした方がいい箇所を指す　モーダル等にすることを見越したもの
     }
   }
 
@@ -65,7 +66,6 @@ class TableEventsExample extends HookWidget {
               controller: _controller.value,
               onPageChanged: (index) {
                 if (index <= _currentIndex.value) {
-                  //FIXME: 左スワイプがすぐに限界に達してしまう。
                   //戻ったの処理
                   _focusedDay.value = DateTime(
                     _focusedDay.value.year,
@@ -81,6 +81,7 @@ class TableEventsExample extends HookWidget {
                   );
                 }
                 _selectedDay.value = _focusedDay.value;
+                _calendarFormat.value = CalendarFormat.week;
                 _currentIndex.value = index;
               },
               itemCount:
