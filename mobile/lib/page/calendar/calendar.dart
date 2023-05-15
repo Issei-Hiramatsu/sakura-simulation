@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../component/local/calendar/event_card/event_card.dart';
@@ -13,6 +14,7 @@ class TableEventsExample extends HookWidget {
   final _calendarFormat = useState(CalendarFormat.month);
   final _focusedDay = useState(DateTime.now());
   final _selectedDay = useState(DateTime.now());
+  final _controller = useState(PreloadPageController(initialPage: 0));
 
   TableEventsExample({super.key});
 
@@ -42,7 +44,6 @@ class TableEventsExample extends HookWidget {
             calendarFormat: _calendarFormat.value,
             startingDayOfWeek: StartingDayOfWeek.monday,
             calendarStyle: const CalendarStyle(
-              // Use `CalendarStyle` to customize the UI
               outsideDaysVisible: false,
             ),
             headerStyle: const HeaderStyle(
@@ -58,8 +59,12 @@ class TableEventsExample extends HookWidget {
           ),
           const SizedBox(height: 8.0),
           Expanded(
-            child: ListView.builder(
-              itemCount: kEvent.length,
+            child: PreloadPageView.builder(
+              preloadPagesCount: 2,
+              controller: _controller.value,
+              onPageChanged: (index) {},
+              itemCount:
+                  10, //10で仮置きデータを読み込む際に増えていくような感じでどうだろうか ただし増えすぎても負荷の原因となる気がする
               itemBuilder: (context, index) {
                 //日付を習得して対応するデータをここで読み込み予定です。
                 final getSelectedDay = _selectedDay.value;
