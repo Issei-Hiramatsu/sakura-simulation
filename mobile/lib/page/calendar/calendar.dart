@@ -14,7 +14,11 @@ class TableEventsExample extends HookWidget {
   final _calendarFormat = useState(CalendarFormat.month);
   final _focusedDay = useState(DateTime.now());
   final _selectedDay = useState(DateTime.now());
-  final _controller = useState(PreloadPageController(initialPage: 0));
+  //TODO: このinitialPageの値を調節することで左スクロールも可能になる。
+  //最小値：　サービス開始日の3ヶ月前から
+  //最大値:  今日の日付+三ヶ月の範囲にするのがいいと思う。
+  //（そしてinitialPageの値をそれらの中心を常に取るようにしてればいけそうな気がするのだ）
+  final _controller = useState(PreloadPageController(initialPage: 50));
   final _currentIndex = useState(0);
 
   TableEventsExample({super.key});
@@ -48,6 +52,7 @@ class TableEventsExample extends HookWidget {
             calendarStyle: const CalendarStyle(
               outsideDaysVisible: false,
             ),
+
             headerStyle: const HeaderStyle(
               titleCentered: true,
               formatButtonVisible: false,
@@ -84,8 +89,8 @@ class TableEventsExample extends HookWidget {
                 _calendarFormat.value = CalendarFormat.week;
                 _currentIndex.value = index;
               },
-              itemCount:
-                  10, //10で仮置きデータを読み込む際に増えていくような感じでどうだろうか ただし増えすぎても負荷の原因となる気がする
+              itemCount: 100, //100で仮置きする
+              //ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
               itemBuilder: (context, index) {
                 //日付を習得して対応するデータをここで読み込み予定です。
                 final getSelectedDay = _selectedDay.value;
