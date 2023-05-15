@@ -61,19 +61,19 @@ TextStyle bodySmall(FontWeight weight, Color color) => TextStyle(
       fontSize: 12,
     );
 
-TextStyle displayLarge(Color color) => TextStyle(
+TextStyle displayLarge(FontWeight weight, Color color) => TextStyle(
       color: color,
-      fontWeight: FontWeight.w300,
+      fontWeight: weight,
       fontSize: 58,
     );
-TextStyle displayMedium(Color color) => TextStyle(
+TextStyle displayMedium(FontWeight weight, Color color) => TextStyle(
       color: color,
-      fontWeight: FontWeight.w300,
+      fontWeight: weight,
       fontSize: 46,
     );
-TextStyle displaySmall(Color color) => TextStyle(
+TextStyle displaySmall(FontWeight weight, Color color) => TextStyle(
       color: color,
-      fontWeight: FontWeight.w300,
+      fontWeight: weight,
       fontSize: 36,
     );
 
