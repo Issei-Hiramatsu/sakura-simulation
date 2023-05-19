@@ -5,9 +5,11 @@ import '../../../../shared/single/button/custom_radio_button/custom_radio_button
 import '../../../../shared/token/color/color.dart';
 
 class TodoRadioButton extends StatelessWidget {
-  const TodoRadioButton({super.key, required this.isSelected});
+  const TodoRadioButton(
+      {super.key, required this.isSelected, required this.onPressed});
 
   final bool isSelected;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +18,7 @@ class TodoRadioButton extends StatelessWidget {
       isSelected: isSelected,
       borderColor: gray,
       selectedFillColor: gray,
-      onPressed: () {},
-      icon: const Icon(Icons.check),
+      onPressed: onPressed,
     );
   }
 }

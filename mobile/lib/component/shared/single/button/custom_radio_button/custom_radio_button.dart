@@ -9,14 +9,12 @@ class CustomRadioButton extends StatelessWidget {
     required this.onPressed,
     required this.isSelected,
     required this.selectedFillColor,
-    required this.icon,
   });
 
   final double size;
   final Color borderColor;
   final Color selectedFillColor;
-  final Function onPressed;
-  final Icon icon;
+  final VoidCallback onPressed;
   final bool isSelected;
 
   @override
@@ -31,8 +29,8 @@ class CustomRadioButton extends StatelessWidget {
         color: isSelected ? selectedFillColor : transparent,
       ),
       child: OutlinedButton(
-        onPressed: onPressed(),
-        child: isSelected ? icon : Container(),
+        onPressed: onPressed,
+        child: Container(),
       ),
     );
   }
