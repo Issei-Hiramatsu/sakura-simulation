@@ -47,7 +47,7 @@ class TodoCard extends ConsumerWidget {
             ),
           ),
           title: Text(
-            todo.todo,
+            todo.title,
             style: todo.isCompleted
                 ? labelLargeLineThrough(gray)
                 : labelLarge(white),

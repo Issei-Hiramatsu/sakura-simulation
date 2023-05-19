@@ -5,19 +5,19 @@ import 'package:sakura_simulation/domain/todo/todo.dart';
 final tempTodoList = <Todo>[
   const Todo(
     id: '1',
-    todo: 'イベントに参加する',
+    title: 'イベントに参加する',
     isCompleted: false,
     isFavorite: false,
   ),
   const Todo(
     id: '2',
-    todo: 'duo3.0を進める',
+    title: 'duo3.0を進める',
     isCompleted: false,
     isFavorite: false,
   ),
   const Todo(
     id: '3',
-    todo: '数学の宿題を終わらせる',
+    title: '数学の宿題を終わらせる',
     isCompleted: false,
     isFavorite: false,
   ),
@@ -34,7 +34,7 @@ class TempTodoListNotifier extends Notifier<List<Todo>> {
   void addTodoList(String todo) {
     state = [
       ...state,
-      Todo(todo: todo),
+      Todo(title: todo),
     ];
   }
 
@@ -44,7 +44,7 @@ class TempTodoListNotifier extends Notifier<List<Todo>> {
         if (todo.id == id)
           Todo(
             id: todo.id,
-            todo: todo.todo,
+            title: todo.title,
             isCompleted: !todo.isCompleted,
             isFavorite: todo.isFavorite,
           )
@@ -59,7 +59,7 @@ class TempTodoListNotifier extends Notifier<List<Todo>> {
         if (todo.id == id)
           Todo(
             id: todo.id,
-            todo: todo.todo,
+            title: todo.title,
             isCompleted: todo.isCompleted,
             isFavorite: !todo.isFavorite,
           )
