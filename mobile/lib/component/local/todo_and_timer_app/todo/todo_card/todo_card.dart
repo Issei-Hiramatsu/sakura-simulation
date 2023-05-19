@@ -13,10 +13,12 @@ class TodoCard extends ConsumerWidget {
     required this.id,
     required this.text,
     required this.isCompleted,
+    required this.isFavorite,
   });
 
   final String text;
   final bool isCompleted;
+  final bool isFavorite;
   final String id;
 
   @override
@@ -38,9 +40,11 @@ class TodoCard extends ConsumerWidget {
           ),
           trailing: IconButton(
             padding: const EdgeInsets.all(0),
-            onPressed: () {},
+            onPressed: () {
+              ref.read(tempTodoListProvider.notifier).toggleIsFavorite(id);
+            },
             icon: Icon(
-              Icons.star_outline,
+              isFavorite ? Icons.star : Icons.star_outline,
               color: gray,
               size: 18.sp,
             ),

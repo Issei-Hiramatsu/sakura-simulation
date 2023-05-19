@@ -20,10 +20,10 @@ class TodoAppPage extends ConsumerWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
                 child: TodoCard(
-                  id: todoList[index].id,
-                  text: todoList[index].todo.toString(),
-                  isCompleted: todoList[index].isCompleted,
-                ),
+                    id: todoList[index].id,
+                    text: todoList[index].todo.toString(),
+                    isCompleted: todoList[index].isCompleted,
+                    isFavorite: todoList[index].isFavorite),
               );
             },
           ),

@@ -52,4 +52,19 @@ class TempTodoListNotifier extends Notifier<List<Todo>> {
           todo,
     ];
   }
+
+  void toggleIsFavorite(String id) {
+    state = [
+      for (final todo in state)
+        if (todo.id == id)
+          Todo(
+            id: todo.id,
+            todo: todo.todo,
+            isCompleted: todo.isCompleted,
+            isFavorite: !todo.isFavorite,
+          )
+        else
+          todo,
+    ];
+  }
 }
