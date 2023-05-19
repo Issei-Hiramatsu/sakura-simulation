@@ -3,9 +3,24 @@ import 'package:sakura_simulation/domain/todo/todo.dart';
 
 //オズの魔法使いようの一時的なtodoList
 final tempTodoList = <Todo>[
-  const Todo(todo: 'イベントに参加する'),
-  const Todo(todo: 'duo3.0を進める'),
-  const Todo(todo: '数学の宿題を終わらせる'),
+  const Todo(
+    id: '1',
+    todo: 'イベントに参加する',
+    isCompleted: false,
+    isFavorite: false,
+  ),
+  const Todo(
+    id: '2',
+    todo: 'duo3.0を進める',
+    isCompleted: false,
+    isFavorite: false,
+  ),
+  const Todo(
+    id: '3',
+    todo: '数学の宿題を終わらせる',
+    isCompleted: false,
+    isFavorite: false,
+  ),
 ];
 
 final tempTodoListProvider = NotifierProvider<TempTodoListNotifier, List<Todo>>(
@@ -20,6 +35,21 @@ class TempTodoListNotifier extends Notifier<List<Todo>> {
     state = [
       ...state,
       Todo(todo: todo),
+    ];
+  }
+
+  void toggleIsCompleted(String id) {
+    state = [
+      for (final todo in state)
+        if (todo.id == id)
+          Todo(
+            id: todo.id,
+            todo: todo.todo,
+            isCompleted: !todo.isCompleted,
+            isFavorite: todo.isFavorite,
+          )
+        else
+          todo,
     ];
   }
 }
