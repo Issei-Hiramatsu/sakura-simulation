@@ -29,9 +29,12 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-                  child: TodoRadioButton(isSelected: false),
+                  child: TodoRadioButton(
+                    isSelected: false,
+                    onPressed: () {},
+                  ),
                 ),
                 Expanded(
                     child: TextField(
