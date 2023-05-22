@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
-import 'package:sakura_simulation/domain/todo/todo.dart';
 
 import '../../hooks/temp_todo_list.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
@@ -30,7 +29,10 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 22, //TodoAddButtonがちょうど見えなくなる高さ
+                  ),
                   child: TodoRadioButton(
                     isSelected: false,
                     onPressed: () {},
@@ -45,9 +47,8 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
                   decoration: InputDecoration(
                     hintText: 'タスクの追加',
                     hintStyle: labelLarge(gray),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 0, color: backgroundLightBlack)),
+                    focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(width: 0)),
                   ),
                   onSubmitted: (value) {
                     NavigatorPop(context);
