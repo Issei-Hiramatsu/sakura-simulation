@@ -17,7 +17,7 @@ class TodoRadioButton extends StatelessWidget {
       onTap: onPressed,
       behavior: HitTestBehavior.opaque,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: CustomRadioButton(
           size: 26.sp,
           isSelected: isSelected,
