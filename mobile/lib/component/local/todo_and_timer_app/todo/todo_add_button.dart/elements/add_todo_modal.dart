@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_card/elements/todo_radio_button/todo_radio_button.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 
 import '../../hooks/temp_todo_list.dart';
