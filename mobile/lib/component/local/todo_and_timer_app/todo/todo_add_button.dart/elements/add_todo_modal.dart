@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_radio_button/todo_radio_button.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_card/elements/todo_radio_button/todo_radio_button.dart';
 import 'package:sakura_simulation/component/shared/token/color/color.dart';
 
-import '../../../../../../page/todo_and_timer_page/elements/todo_app/hooks/temp_todo_list.dart';
+import '../../hooks/temp_todo_list.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
 import '../../../../../shared/token/text_style/text_style.dart';
 
@@ -28,9 +28,15 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-                  child: TodoRadioButton(isSelected: false),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 22, //TodoAddButtonがちょうど見えなくなる高さ
+                  ),
+                  child: TodoRadioButton(
+                    isSelected: false,
+                    onPressed: () {},
+                  ),
                 ),
                 Expanded(
                     child: TextField(
@@ -42,13 +48,16 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
                     hintText: 'タスクの追加',
                     hintStyle: labelLarge(gray),
                     focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 0, color: backgroundLightBlack)),
+                        borderSide: BorderSide(
+                            width: 0,
+                            color: transparent)), //下部インディケータとボーダの非表示のため
                   ),
                   onSubmitted: (value) {
-                    print(controller);
                     NavigatorPop(context);
-                    ref.read(tempTodoListProvider.notifier).addTodoList();
+                    ref
+                        .read(tempTodoListProvider.notifier)
+                        .addTodoList(controller.text);
+                    controller.clear();
                   },
                 )),
               ],

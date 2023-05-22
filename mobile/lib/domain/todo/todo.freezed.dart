@@ -20,7 +20,10 @@ Todo _$TodoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Todo {
-  String get todo => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  bool get isCompleted => throw _privateConstructorUsedError;
+  bool get isFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -32,7 +35,7 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
-  $Res call({String todo});
+  $Res call({int id, String title, bool isCompleted, bool isFavorite});
 }
 
 /// @nodoc
@@ -48,13 +51,28 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todo = null,
+    Object? id = null,
+    Object? title = null,
+    Object? isCompleted = null,
+    Object? isFavorite = null,
   }) {
     return _then(_value.copyWith(
-      todo: null == todo
-          ? _value.todo
-          : todo // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -65,7 +83,7 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$$_TodoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String todo});
+  $Res call({int id, String title, bool isCompleted, bool isFavorite});
 }
 
 /// @nodoc
@@ -77,13 +95,28 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? todo = null,
+    Object? id = null,
+    Object? title = null,
+    Object? isCompleted = null,
+    Object? isFavorite = null,
   }) {
     return _then(_$_Todo(
-      todo: null == todo
-          ? _value.todo
-          : todo // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
+      isCompleted: null == isCompleted
+          ? _value.isCompleted
+          : isCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isFavorite: null == isFavorite
+          ? _value.isFavorite
+          : isFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -91,17 +124,30 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
 /// @nodoc
 @JsonSerializable()
 class _$_Todo implements _Todo {
-  const _$_Todo({this.todo = ''});
+  const _$_Todo(
+      {this.id = 0,
+      this.title = '',
+      this.isCompleted = false,
+      this.isFavorite = false});
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
   @override
   @JsonKey()
-  final String todo;
+  final int id;
+  @override
+  @JsonKey()
+  final String title;
+  @override
+  @JsonKey()
+  final bool isCompleted;
+  @override
+  @JsonKey()
+  final bool isFavorite;
 
   @override
   String toString() {
-    return 'Todo(todo: $todo)';
+    return 'Todo(id: $id, title: $title, isCompleted: $isCompleted, isFavorite: $isFavorite)';
   }
 
   @override
@@ -109,12 +155,18 @@ class _$_Todo implements _Todo {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Todo &&
-            (identical(other.todo, todo) || other.todo == todo));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.isCompleted, isCompleted) ||
+                other.isCompleted == isCompleted) &&
+            (identical(other.isFavorite, isFavorite) ||
+                other.isFavorite == isFavorite));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, todo);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, isCompleted, isFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -131,12 +183,22 @@ class _$_Todo implements _Todo {
 }
 
 abstract class _Todo implements Todo {
-  const factory _Todo({final String todo}) = _$_Todo;
+  const factory _Todo(
+      {final int id,
+      final String title,
+      final bool isCompleted,
+      final bool isFavorite}) = _$_Todo;
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
   @override
-  String get todo;
+  int get id;
+  @override
+  String get title;
+  @override
+  bool get isCompleted;
+  @override
+  bool get isFavorite;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

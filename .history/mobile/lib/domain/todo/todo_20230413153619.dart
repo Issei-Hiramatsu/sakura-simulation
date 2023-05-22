@@ -5,10 +5,7 @@ part 'todo.g.dart';
 @freezed
 class Todo with _$Todo {
   const factory Todo({
-    @Default(0) int id,
-    @Default('') String title,
-    @Default(false) bool isCompleted,
-    @Default(false) bool isFavorite,
+    @Default('') String todo,
   }) = _Todo;
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
