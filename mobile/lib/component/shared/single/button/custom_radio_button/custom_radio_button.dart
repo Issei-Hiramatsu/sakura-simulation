@@ -19,17 +19,18 @@ class CustomRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: size,
       height: size,
-      decoration: ShapeDecoration(
-        shape: CircleBorder(
-          side: BorderSide(color: borderColor, width: 2),
-        ),
-        color: isSelected ? selectedFillColor : transparent,
-      ),
       child: OutlinedButton(
         onPressed: onPressed,
+        style: OutlinedButton.styleFrom(
+          shape: CircleBorder(
+            side: BorderSide(color: borderColor, width: 2),
+          ),
+          side: BorderSide(color: borderColor, width: 2),
+          backgroundColor: isSelected ? selectedFillColor : transparent,
+        ),
         child: Container(),
       ),
     );

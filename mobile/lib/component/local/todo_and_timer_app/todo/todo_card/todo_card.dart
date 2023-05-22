@@ -19,38 +19,34 @@ class TodoCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 52.sp,
+      height: 58.sp,
       decoration: BoxDecoration(
         color: backgroundLightBlack,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Center(
-        child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-          leading: TodoRadioButton(
-            isSelected: todo.isCompleted,
-            onPressed: () {
-              ref
-                  .read(tempTodoListProvider.notifier)
-                  .toggleIsCompleted(todo.id);
-            },
-          ),
-          trailing: IconButton(
-            padding: const EdgeInsets.all(0),
-            onPressed: () {
-              ref.read(tempTodoListProvider.notifier).toggleIsFavorite(todo.id);
-            },
-            icon: Icon(
-              todo.isFavorite ? Icons.star : Icons.star_outline,
-              color: gray,
-              size: 18.sp,
-            ),
-          ),
-          title: Text(
-            todo.title,
-            style: todo.isCompleted
-                ? labelLargeLineThrough(gray)
-                : labelLarge(white),
+      child: ListTile(
+        contentPadding: EdgeInsets.only(left: 18.sp),
+        leading: TodoRadioButton(
+          isSelected: todo.isCompleted,
+          onPressed: () {
+            ref.read(tempTodoListProvider.notifier).toggleIsCompleted(todo.id);
+          },
+        ),
+        title: Text(
+          todo.title,
+          style: todo.isCompleted
+              ? labelLargeLineThrough(gray)
+              : labelLarge(white),
+        ),
+        trailing: IconButton(
+          padding: const EdgeInsets.all(0),
+          onPressed: () {
+            ref.read(tempTodoListProvider.notifier).toggleIsFavorite(todo.id);
+          },
+          icon: Icon(
+            todo.isFavorite ? Icons.star : Icons.star_outline,
+            color: gray,
+            size: 22.sp,
           ),
         ),
       ),
