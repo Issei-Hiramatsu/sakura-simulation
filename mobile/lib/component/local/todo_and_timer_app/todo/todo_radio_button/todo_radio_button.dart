@@ -13,13 +13,19 @@ class TodoRadioButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //FIXME: デザインはそのままでクリックできる領域を大きくしたい(isComlitedとifFavoriteのボタン)
-    return CustomRadioButton(
-      size: 26.sp,
-      isSelected: isSelected,
-      borderColor: gray,
-      selectedFillColor: gray,
-      onPressed: onPressed,
+    return GestureDetector(
+      onTap: onPressed,
+      behavior: HitTestBehavior.opaque,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomRadioButton(
+          size: 26.sp,
+          isSelected: isSelected,
+          borderColor: gray,
+          selectedFillColor: gray,
+          onPressed: onPressed,
+        ),
+      ),
     );
   }
 }
