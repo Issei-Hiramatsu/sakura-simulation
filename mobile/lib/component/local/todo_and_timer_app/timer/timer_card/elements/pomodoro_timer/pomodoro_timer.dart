@@ -26,22 +26,31 @@ class PomodoroTimer extends ConsumerStatefulWidget {
 class PomodoroTimerState extends ConsumerState {
   DateTime? _createTime;
   Timer? timer;
+  bool isRemaining = false;
 
   @override
   void initState() {
     super.initState();
-    _createTime = DateTime.now();
+    _createTime = DateTime.now().add(const Duration(minutes: workTime));
   }
 
-  void startTimer(int minutes) {
+  void startTimer() {
+    setState(() {
+      isRemaining = true;
+    });
     ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
-    final createTime = _createTime!.add(Duration(minutes: minutes));
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
-        final remain = createTime.difference(DateTime.now());
+        final remain = _createTime!.difference(DateTime.now());
         if (remain > Duration.zero) {
           ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
+        } else {
+          setState(
+            () {
+              isRemaining = false;
+            },
+          );
         }
       },
     );
@@ -52,6 +61,10 @@ class PomodoroTimerState extends ConsumerState {
   }
 
   void resumeTimer(remainSeconds) {}
+
+  void resetTimer() {
+    _createTime = DateTime.now().add(const Duration(minutes: workTime));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,27 +84,51 @@ class PomodoroTimerState extends ConsumerState {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.sp),
-          child: Row(
-            children: [
-              CircleElevatedButton(
-                size: 70.sp,
-                text: 'キャンセル',
-                textStyle: labelLarge(primary),
-                onPressed: () {
-                  startTimer(workTime);
-                },
-              ),
-              const Spacer(),
-              CircleElevatedButton(
-                size: 70.sp,
-                text: '一時停止',
-                textStyle: labelLarge(primary),
-                onPressed: () {
-                  stopTimer(timer);
-                },
-              ),
-            ],
-          ),
+          child: isRemaining
+              ? Row(
+                  children: [
+                    CircleElevatedButton(
+                      size: 70.sp,
+                      text: 'ラップ',
+                      textStyle: labelLarge(white),
+                      backgroundColor: backgroundGray,
+                      onPressed: () {},
+                    ),
+                    const Spacer(),
+                    CircleElevatedButton(
+                      size: 70.sp,
+                      text: '一時停止',
+                      textStyle: labelLarge(white),
+                      backgroundColor: Colors.red,
+                      onPressed: () {
+                        stopTimer(timer);
+                      },
+                    ),
+                  ],
+                )
+              : Row(
+                  children: [
+                    CircleElevatedButton(
+                      size: 70.sp,
+                      text: 'リセット',
+                      textStyle: labelLarge(white),
+                      backgroundColor: backgroundGray,
+                      onPressed: () {
+                        resetTimer();
+                      },
+                    ),
+                    const Spacer(),
+                    CircleElevatedButton(
+                      size: 70.sp,
+                      text: '開始',
+                      textStyle: labelLarge(white),
+                      backgroundColor: Colors.green,
+                      onPressed: () {
+                        startTimer();
+                      },
+                    ),
+                  ],
+                ),
         ),
       ],
     );
