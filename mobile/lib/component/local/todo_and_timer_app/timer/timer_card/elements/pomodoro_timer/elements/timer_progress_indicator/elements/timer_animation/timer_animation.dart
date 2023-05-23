@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/pomodoro_timer/hooks/temp_user_settings.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/hooks/temp_user_settings.dart';
 
-import '../../../../../../../../shared/token/color/color.dart';
+import '../../../../../../../../../../shared/token/color/color.dart';
 
 class TimerAnimation extends StatelessWidget {
   const TimerAnimation({
