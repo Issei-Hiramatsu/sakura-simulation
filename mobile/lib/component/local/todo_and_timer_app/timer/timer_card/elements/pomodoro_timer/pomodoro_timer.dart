@@ -75,8 +75,8 @@ class PomodoroTimerState extends ConsumerState {
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
+        final remain = _createTime!.difference(DateTime.now());
         if (remain > Duration.zero) {
-          final remain = _createTime!.difference(DateTime.now());
           ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
         } else {}
       },
