@@ -16,6 +16,8 @@ import 'hooks/temp_user_settings.dart';
 //知りたいこと　initStateを使う意味
 //DateTime.now()とは何者なのか
 //Notifierで一瞬でできた　何者だ？
+//追記 タイマーの機能自体は作成完了 コードの分離が終わっていない
+//ConsumerStatefulWidgetはタイマーの部分 Hooksでタイマーの状態管理ができるようにするのが理想的だと思うのでやってみる。
 enum TimerState {
   notStarted(
     '開始',
@@ -64,9 +66,9 @@ class PomodoroTimerState extends ConsumerState {
     super.initState();
   }
 
-  void startTimer() {
+  void startTimer(int seconds) {
+    _createTime = DateTime.now().add(Duration(seconds: seconds));
     ref.read(timerStateProvider.notifier).state = TimerState.running;
-    _createTime = DateTime.now().add(const Duration(minutes: workTime));
     final remain = _createTime!.difference(DateTime.now());
     ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
     ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
@@ -81,15 +83,19 @@ class PomodoroTimerState extends ConsumerState {
     );
   }
 
-  void stopTimer(remainSeconds) {
+  void stopTimer() {
     timer?.cancel();
     ref.read(timerStateProvider.notifier).state = TimerState.paused;
   }
 
-  void resumeTimer(remainSeconds) {}
+  void resumeTimer(int remainSeconds) {
+    startTimer(remainSeconds);
+    ref.read(timerStateProvider.notifier).state = TimerState.running;
+  }
 
   void resetTimer() {
-    _createTime = DateTime.now().add(const Duration(minutes: workTime));
+    timer?.cancel();
+    ref.read(cooperationTimerProvider.notifier).state = workTime * 60;
     ref.read(timerStateProvider.notifier).state = TimerState.notStarted;
   }
 
@@ -99,7 +105,6 @@ class PomodoroTimerState extends ConsumerState {
     final timer = ref.watch(cooperationTimerProvider);
     final displayTime =
         Duration(seconds: timer).toString().substring(2, 7); //タイマーの領域を指定する
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -135,11 +140,13 @@ class PomodoroTimerState extends ConsumerState {
                   onPressed: () {
                     switch (timerState) {
                       case TimerState.notStarted:
-                        return startTimer();
+                        return startTimer(workTime * 60);
                       case TimerState.running:
-                        return stopTimer(2);
+                        return stopTimer();
                       case TimerState.paused:
-                        return startTimer();
+                        return resumeTimer(
+                          ref.read(cooperationTimerProvider.notifier).state,
+                        );
                     }
                   },
                 ),
