@@ -16,6 +16,34 @@ import 'hooks/temp_user_settings.dart';
 //知りたいこと　initStateを使う意味
 //DateTime.now()とは何者なのか
 //Notifierで一瞬でできた　何者だ？
+enum TimerState {
+  notStarted(
+    '開始',
+    Colors.white,
+    Colors.green,
+  ),
+  running(
+    '一時停止',
+    Colors.white,
+    Colors.orange,
+  ),
+  paused(
+    '再開',
+    Colors.white,
+    Colors.green,
+  );
+
+  final String displayButtonText;
+  final Color textColor;
+  final Color backgroundColor;
+
+  const TimerState(
+    this.displayButtonText,
+    this.textColor,
+    this.backgroundColor,
+  );
+}
+
 class PomodoroTimer extends ConsumerStatefulWidget {
   const PomodoroTimer({Key? key}) : super(key: key);
 
@@ -25,10 +53,11 @@ class PomodoroTimer extends ConsumerStatefulWidget {
 
 class PomodoroTimerState extends ConsumerState {
   final cooperationTimerProvider = StateProvider<int>((ref) => workTime * 60);
+  final timerStateProvider =
+      StateProvider<TimerState>((ref) => TimerState.notStarted);
 
   DateTime? _createTime;
   Timer? timer;
-  bool isRemaining = false;
 
   @override
   void initState() {
@@ -36,9 +65,7 @@ class PomodoroTimerState extends ConsumerState {
   }
 
   void startTimer() {
-    setState(() {
-      isRemaining = true;
-    });
+    ref.read(timerStateProvider.notifier).state = TimerState.running;
     _createTime = DateTime.now().add(const Duration(minutes: workTime));
     final remain = _createTime!.difference(DateTime.now());
     ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
@@ -49,37 +76,30 @@ class PomodoroTimerState extends ConsumerState {
         if (remain > Duration.zero) {
           final remain = _createTime!.difference(DateTime.now());
           ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
-        } else {
-          setState(
-            () {
-              isRemaining = false;
-            },
-          );
-        }
+        } else {}
       },
     );
   }
 
   void stopTimer(remainSeconds) {
     timer?.cancel();
-    setState(
-      () {
-        isRemaining = false;
-      },
-    );
+    ref.read(timerStateProvider.notifier).state = TimerState.paused;
   }
 
   void resumeTimer(remainSeconds) {}
 
   void resetTimer() {
     _createTime = DateTime.now().add(const Duration(minutes: workTime));
+    ref.read(timerStateProvider.notifier).state = TimerState.notStarted;
   }
 
   @override
   Widget build(BuildContext context) {
+    final timerState = ref.watch(timerStateProvider);
     final timer = ref.watch(cooperationTimerProvider);
     final displayTime =
         Duration(seconds: timer).toString().substring(2, 7); //タイマーの領域を指定する
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -92,53 +112,39 @@ class PomodoroTimerState extends ConsumerState {
           ],
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.sp),
-          child: isRemaining
-              ? Row(
-                  children: [
-                    CircleElevatedButton(
-                      size: 70.sp,
-                      text: 'ラップ',
-                      textStyle: labelLarge(white),
-                      backgroundColor: backgroundGray,
-                      onPressed: () {},
-                    ),
-                    const Spacer(),
-                    CircleElevatedButton(
-                      size: 70.sp,
-                      text: '一時停止',
-                      textStyle: labelLarge(white),
-                      backgroundColor: Colors.red,
-                      onPressed: () {
-                        stopTimer(timer);
-                      },
-                    ),
-                  ],
-                )
-              : Row(
-                  children: [
-                    CircleElevatedButton(
-                      size: 70.sp,
-                      text: 'リセット',
-                      textStyle: labelLarge(white),
-                      backgroundColor: backgroundGray,
-                      onPressed: () {
-                        resetTimer();
-                      },
-                    ),
-                    const Spacer(),
-                    CircleElevatedButton(
-                      size: 70.sp,
-                      text: '開始',
-                      textStyle: labelLarge(white),
-                      backgroundColor: Colors.green,
-                      onPressed: () {
-                        startTimer();
-                      },
-                    ),
-                  ],
+            padding: EdgeInsets.symmetric(horizontal: 12.sp),
+            child: Row(
+              children: [
+                CircleElevatedButton(
+                  size: 70.sp,
+                  text: 'キャンセル',
+                  textStyle: labelLarge(white),
+                  backgroundColor: backgroundGray,
+                  onPressed: timerState == TimerState.notStarted
+                      ? null
+                      : () {
+                          resetTimer();
+                        },
                 ),
-        ),
+                const Spacer(),
+                CircleElevatedButton(
+                  size: 70.sp,
+                  text: timerState.displayButtonText,
+                  textStyle: labelLarge(timerState.textColor),
+                  backgroundColor: timerState.backgroundColor,
+                  onPressed: () {
+                    switch (timerState) {
+                      case TimerState.notStarted:
+                        return startTimer();
+                      case TimerState.running:
+                        return stopTimer(2);
+                      case TimerState.paused:
+                        return startTimer();
+                    }
+                  },
+                ),
+              ],
+            )),
       ],
     );
   }
