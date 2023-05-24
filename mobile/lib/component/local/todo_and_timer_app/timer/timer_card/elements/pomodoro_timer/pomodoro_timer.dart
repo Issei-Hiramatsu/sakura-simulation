@@ -24,6 +24,8 @@ class PomodoroTimer extends ConsumerStatefulWidget {
 }
 
 class PomodoroTimerState extends ConsumerState {
+  final cooperationTimerProvider = StateProvider<int>((ref) => workTime * 60);
+
   DateTime? _createTime;
   Timer? timer;
   bool isRemaining = false;
@@ -31,19 +33,21 @@ class PomodoroTimerState extends ConsumerState {
   @override
   void initState() {
     super.initState();
-    _createTime = DateTime.now().add(const Duration(minutes: workTime));
   }
 
   void startTimer() {
     setState(() {
       isRemaining = true;
     });
+    _createTime = DateTime.now().add(const Duration(minutes: workTime));
+    final remain = _createTime!.difference(DateTime.now());
+    ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
     ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
-        final remain = _createTime!.difference(DateTime.now());
         if (remain > Duration.zero) {
+          final remain = _createTime!.difference(DateTime.now());
           ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
         } else {
           setState(
@@ -58,6 +62,11 @@ class PomodoroTimerState extends ConsumerState {
 
   void stopTimer(remainSeconds) {
     timer?.cancel();
+    setState(
+      () {
+        isRemaining = false;
+      },
+    );
   }
 
   void resumeTimer(remainSeconds) {}

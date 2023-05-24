@@ -4,8 +4,6 @@
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final cooperationTimerProvider = StateProvider<int>((ref) => 0);
-
 final timerAnimationParameterProvider =
     NotifierProvider<TimerAnimationParameter, double>(
   () => TimerAnimationParameter(),
