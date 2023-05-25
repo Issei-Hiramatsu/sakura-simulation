@@ -13,7 +13,7 @@ class TimerAnimationParameter extends Notifier<double> {
   @override
   double build() => 0;
 
-  void startTimerAnimation() => state = 1;
+  void startTimerAnimation() => state = 0;
 
-  void stopTimerAnimation(int parameter) => state /= parameter;
+  void stopTimerAnimation() => state = 0; //タイマーを使用停止状態にする
 }

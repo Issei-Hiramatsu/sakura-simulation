@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
 
 import '../../../../component/local/todo_and_timer_app/todo/todo_add_button.dart/todo_add_button.dart';
-import '../../../../component/local/todo_and_timer_app/todo/todo_card/todo_card.dart';
+import '../../../../component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 
 class TodoAppPage extends ConsumerWidget {
   const TodoAppPage({super.key});
@@ -13,19 +13,7 @@ class TodoAppPage extends ConsumerWidget {
     final todoList = ref.watch(tempTodoListProvider);
     return Column(
       children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: todoList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
-                child: TodoCard(
-                  todo: todoList[index],
-                ),
-              );
-            },
-          ),
-        ),
+        Expanded(child: TodoList(todoList: todoList)),
         const TodoAddButton(),
       ],
     );
