@@ -9,7 +9,6 @@ import 'package:sakura_simulation/component/shared/token/space_box/space_box.dar
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
 import '../../../../../../shared/single/button/circle_button/circle_button.dart';
-import 'elements/timer_progress_indicator/hooks/use_pomodoro_timer.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 import 'hooks/temp_user_settings.dart';
 
@@ -71,7 +70,6 @@ class PomodoroTimerState extends ConsumerState {
     ref.read(timerStateProvider.notifier).state = TimerState.running;
     final remain = _createTime!.difference(DateTime.now());
     ref.read(cooperationTimerProvider.notifier).state = remain.inSeconds;
-    ref.read(timerAnimationParameterProvider.notifier).startTimerAnimation();
     timer = Timer.periodic(
       const Duration(seconds: 1),
       (timer) {
