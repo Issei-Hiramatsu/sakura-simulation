@@ -4,8 +4,6 @@
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final cooperationTimerProvider = StateProvider<int>((ref) => 0);
-
 final timerAnimationParameterProvider =
     NotifierProvider<TimerAnimationParameter, double>(
   () => TimerAnimationParameter(),
@@ -15,7 +13,7 @@ class TimerAnimationParameter extends Notifier<double> {
   @override
   double build() => 0;
 
-  void startTimerAnimation() => state = 1;
+  void startTimerAnimation() => state = 0;
 
-  void stopTimerAnimation(int parameter) => state /= parameter;
+  void stopTimerAnimation() => state = 0; //タイマーを使用停止状態にする
 }

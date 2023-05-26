@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_card/elements/favorite_icon_button/favorite_icon_button.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_list/elements/todo_card/elements/favorite_icon_button/favorite_icon_button.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
-import '../../../../../domain/todo/todo.dart';
-import '../../../../shared/token/color/color.dart';
+import '../../../../../../../domain/todo/todo.dart';
+import '../../../../../../shared/token/color/color.dart';
 import 'elements/todo_radio_button/todo_radio_button.dart';
 
 class TodoCard extends ConsumerWidget {

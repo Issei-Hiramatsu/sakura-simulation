@@ -37,7 +37,7 @@ class WorkAndBreakPieChart extends StatelessWidget {
             ),
             PieChartSectionData(
               color: primary10,
-              value: breakMinutes,
+              value: 0,
               title: '',
               radius: chartWidth,
             ),
