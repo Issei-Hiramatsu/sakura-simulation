@@ -14,7 +14,7 @@ class TimerAppPage extends StatelessWidget {
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: 2,
+            itemCount: 1,
             itemBuilder: (BuildContext context, int index) {
               return HorizontalBorderBox(
                 borderColor: backgroundGray,
