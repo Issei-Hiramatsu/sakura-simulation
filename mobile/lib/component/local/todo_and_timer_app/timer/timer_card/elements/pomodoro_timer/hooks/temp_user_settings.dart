@@ -2,3 +2,5 @@
 
 const workTime = 3;
 const breakTime = 5;
+
+const timerUsageHistory = [];

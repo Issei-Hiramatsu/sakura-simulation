@@ -93,6 +93,8 @@ class PomodoroTimerState extends ConsumerState {
 
   void resetTimer() {
     timer?.cancel();
+    timerUsageHistory.add(//保存可能にする
+        workTime * 60 - ref.watch(cooperationTimerProvider.notifier).state);
     ref.read(cooperationTimerProvider.notifier).state = workTime * 60;
     ref.read(timerStateProvider.notifier).state = TimerState.notStarted;
   }
