@@ -12,8 +12,6 @@ class UsePomodoroTimer extends Notifier<int> {
   @override
   int build() => 0;
 
-  void setTimer(int seconds) => state = seconds;
-
   void startTimer(int seconds) {
     _createTime = DateTime.now().add(Duration(seconds: seconds));
     timer = Timer.periodic(
