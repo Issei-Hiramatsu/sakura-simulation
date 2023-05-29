@@ -63,7 +63,7 @@ class TimerControlButtons extends ConsumerWidget {
                       };
                     case TimerState.paused:
                       return {
-                        resetTimer(),
+                        resumeTimer(),
                         ref.read(timerStateProvider.notifier).state =
                             TimerState.running
                       };
