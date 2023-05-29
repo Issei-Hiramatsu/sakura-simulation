@@ -10,6 +10,8 @@ class User with _$User {
     @Default('') String email,
     @Default('') String userName,
     @Default('') String userImagePath,
+    @Default(25) int workTime,
+    @Default(5) int breakTime,
     DateTime? firstTimeUsing, //カレンダー日程を決めるため
   }) = _User;
 

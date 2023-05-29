@@ -7,5 +7,7 @@ final defaultData = [
     userName: 'issei',
     userImagePath: '/assets/images/kkrn_user_icons/kkrn_icon_user_1.png',
     firstTimeUsing: DateTime.utc(2023, 4, 1),
+    workTime: 25,
+    breakTime: 5,
   )
 ];

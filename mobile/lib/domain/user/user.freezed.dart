@@ -24,6 +24,8 @@ mixin _$User {
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImagePath => throw _privateConstructorUsedError;
+  int get workTime => throw _privateConstructorUsedError;
+  int get breakTime => throw _privateConstructorUsedError;
   DateTime? get firstTimeUsing => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,6 +43,8 @@ abstract class $UserCopyWith<$Res> {
       String email,
       String userName,
       String userImagePath,
+      int workTime,
+      int breakTime,
       DateTime? firstTimeUsing});
 }
 
@@ -61,6 +65,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? email = null,
     Object? userName = null,
     Object? userImagePath = null,
+    Object? workTime = null,
+    Object? breakTime = null,
     Object? firstTimeUsing = freezed,
   }) {
     return _then(_value.copyWith(
@@ -80,6 +86,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.userImagePath
           : userImagePath // ignore: cast_nullable_to_non_nullable
               as String,
+      workTime: null == workTime
+          ? _value.workTime
+          : workTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      breakTime: null == breakTime
+          ? _value.breakTime
+          : breakTime // ignore: cast_nullable_to_non_nullable
+              as int,
       firstTimeUsing: freezed == firstTimeUsing
           ? _value.firstTimeUsing
           : firstTimeUsing // ignore: cast_nullable_to_non_nullable
@@ -99,6 +113,8 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       String userName,
       String userImagePath,
+      int workTime,
+      int breakTime,
       DateTime? firstTimeUsing});
 }
 
@@ -115,6 +131,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? email = null,
     Object? userName = null,
     Object? userImagePath = null,
+    Object? workTime = null,
+    Object? breakTime = null,
     Object? firstTimeUsing = freezed,
   }) {
     return _then(_$_User(
@@ -134,6 +152,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.userImagePath
           : userImagePath // ignore: cast_nullable_to_non_nullable
               as String,
+      workTime: null == workTime
+          ? _value.workTime
+          : workTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      breakTime: null == breakTime
+          ? _value.breakTime
+          : breakTime // ignore: cast_nullable_to_non_nullable
+              as int,
       firstTimeUsing: freezed == firstTimeUsing
           ? _value.firstTimeUsing
           : firstTimeUsing // ignore: cast_nullable_to_non_nullable
@@ -150,6 +176,8 @@ class _$_User implements _User {
       this.email = '',
       this.userName = '',
       this.userImagePath = '',
+      this.workTime = 25,
+      this.breakTime = 5,
       this.firstTimeUsing});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
@@ -167,11 +195,17 @@ class _$_User implements _User {
   @JsonKey()
   final String userImagePath;
   @override
+  @JsonKey()
+  final int workTime;
+  @override
+  @JsonKey()
+  final int breakTime;
+  @override
   final DateTime? firstTimeUsing;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, firstTimeUsing: $firstTimeUsing)';
+    return 'User(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, workTime: $workTime, breakTime: $breakTime, firstTimeUsing: $firstTimeUsing)';
   }
 
   @override
@@ -185,14 +219,18 @@ class _$_User implements _User {
                 other.userName == userName) &&
             (identical(other.userImagePath, userImagePath) ||
                 other.userImagePath == userImagePath) &&
+            (identical(other.workTime, workTime) ||
+                other.workTime == workTime) &&
+            (identical(other.breakTime, breakTime) ||
+                other.breakTime == breakTime) &&
             (identical(other.firstTimeUsing, firstTimeUsing) ||
                 other.firstTimeUsing == firstTimeUsing));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, email, userName, userImagePath, firstTimeUsing);
+  int get hashCode => Object.hash(runtimeType, id, email, userName,
+      userImagePath, workTime, breakTime, firstTimeUsing);
 
   @JsonKey(ignore: true)
   @override
@@ -214,6 +252,8 @@ abstract class _User implements User {
       final String email,
       final String userName,
       final String userImagePath,
+      final int workTime,
+      final int breakTime,
       final DateTime? firstTimeUsing}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -226,6 +266,10 @@ abstract class _User implements User {
   String get userName;
   @override
   String get userImagePath;
+  @override
+  int get workTime;
+  @override
+  int get breakTime;
   @override
   DateTime? get firstTimeUsing;
   @override
