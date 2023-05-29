@@ -5,12 +5,16 @@ import 'package:sakura_simulation/component/shared/token/text_style/text_style.d
 
 import '../../../../shared/token/color/color.dart';
 import 'elements/pomodoro_timer/elements/timer_progress_indicator/elements/work_and_break_pie_chart/work_and_break_pie_chart.dart';
-import 'elements/pomodoro_timer/hooks/temp_user_settings.dart';
 
 class TimerCard extends StatelessWidget {
-  const TimerCard({super.key, required this.text, required this.timerPage});
+  const TimerCard(
+      {super.key,
+      required this.text,
+      required this.workTime,
+      required this.timerPage});
 
   final String text;
+  final int workTime;
   final Widget timerPage;
 
   @override
