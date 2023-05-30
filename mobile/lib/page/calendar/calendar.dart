@@ -68,12 +68,18 @@ class TableEventsExample extends HookWidget {
                 _calendarFormat.value = CalendarFormat.month;
               }
             },
-            headerStyle: const HeaderStyle(
-              titleCentered: true,
-              formatButtonVisible: false,
-              titleTextStyle:
-                  TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
-            ),
+            headerStyle: HeaderStyle(
+                titleCentered: true,
+                formatButtonVisible: false,
+                titleTextStyle: title1Bold(black),
+                leftChevronIcon: const Icon(
+                  Icons.chevron_left,
+                  color: primary,
+                ),
+                rightChevronIcon: const Icon(
+                  Icons.chevron_right,
+                  color: primary,
+                )),
             onDaySelected: _onDaySelected,
             onPageChanged: (focusedDay) {
               _focusedDay.value = focusedDay;
