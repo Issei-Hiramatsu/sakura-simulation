@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/shared/token/color/color.dart';
-
-import '../../token/text_style/text_style.dart';
+import '/component/shared/token/color/color.dart';
 
 class SharedAppBar extends StatelessWidget {
   const SharedAppBar(

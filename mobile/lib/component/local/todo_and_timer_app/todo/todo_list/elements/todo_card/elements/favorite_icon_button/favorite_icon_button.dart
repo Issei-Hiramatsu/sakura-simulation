@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../../domain/todo/todo.dart';
-import '../../../../../../../../shared/token/color/color.dart';
+import '/domain/account_level/elements/user/elements/todo/todo.dart';
 import '../../../../../hooks/todo_list.dart';
 
 class FavoriteIconButton extends HookConsumerWidget {

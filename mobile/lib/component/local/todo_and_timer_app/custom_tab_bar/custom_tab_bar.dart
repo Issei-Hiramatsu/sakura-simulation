@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../shared/token/color/color.dart';
+import 'package:sakura_simulation/importer.dart';
 
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({super.key, required this.tab});

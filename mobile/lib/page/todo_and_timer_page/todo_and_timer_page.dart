@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sakura_simulation/domain/default_data.dart';
+import 'package:sakura_simulation/importer.dart';
 
 import '../../component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '../../component/shared/token/color/color.dart';
-import '../../component/shared/token/text_style/text_style.dart';
 import 'elements/timer_app/timer_app_page.dart';
 import 'elements/todo_app/todo_app_page.dart';
+import '/domain/default_data.dart';
 
 class TodoAndTimerPage extends StatelessWidget {
   const TodoAndTimerPage({super.key});

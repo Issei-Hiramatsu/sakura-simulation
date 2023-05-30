@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'page/sakura_simulation_app.dart';
-import 'page/todo_and_timer_page/elements/timer_app/elements/pomodoro_timer_page/pomodoro_timer_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -49,3 +48,4 @@ class MyApp extends StatelessWidget {
 
 //またBgmの工夫も明記
 
+//User -> TimerSettings, TodoList, 

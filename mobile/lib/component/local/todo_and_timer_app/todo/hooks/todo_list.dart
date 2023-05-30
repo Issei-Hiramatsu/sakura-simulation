@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/domain/default_data.dart';
-import 'package:sakura_simulation/domain/todo/todo.dart';
+
+import '/domain/default_data.dart';
+import '/domain/account_level/elements/user/elements/todo/todo.dart';
 
 final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
   () => TodoListNotifier(),
