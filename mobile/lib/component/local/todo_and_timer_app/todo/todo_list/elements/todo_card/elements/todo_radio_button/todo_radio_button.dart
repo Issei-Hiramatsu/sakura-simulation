@@ -18,12 +18,19 @@ class TodoRadioButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: CustomRadioButton(
-          size: 26.sp,
-          isSelected: isSelected,
-          borderColor: gray,
-          selectedFillColor: gray,
-          onPressed: onPressed,
+        child: Stack(
+          children: [
+            CustomRadioButton(
+              size: 26.sp,
+              isSelected: isSelected,
+              borderColor: gray,
+              selectedFillColor: gray,
+              onPressed: onPressed,
+            ),
+            isSelected
+                ? const Icon(Icons.check, color: black)
+                : Icon(Icons.check, color: backgroundLightBlack),
+          ],
         ),
       ),
     );
