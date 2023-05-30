@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../todo/todo.dart';
 import 'elements/timer_settings/timer_settings.dart';
+import 'elements/todo/todo.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';

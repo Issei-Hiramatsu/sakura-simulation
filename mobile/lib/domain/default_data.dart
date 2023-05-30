@@ -1,7 +1,7 @@
-import 'package:sakura_simulation/domain/account_level/account_level.dart';
-import 'package:sakura_simulation/domain/todo/todo.dart';
-import 'package:sakura_simulation/domain/user/elements/timer_settings/timer_settings.dart';
-import 'package:sakura_simulation/domain/user/user.dart';
+import '/domain/account_level/account_level.dart';
+import '/domain/account_level/elements/user/user.dart';
+import '/domain/account_level/elements/user/elements/timer_settings/timer_settings.dart';
+import '/domain/account_level/elements/user/elements/todo/todo.dart';
 
 final defaultData = AccountLevel(
   premiumUser: [

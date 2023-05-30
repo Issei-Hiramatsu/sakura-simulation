@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../user/user.dart';
+import 'elements/user/user.dart';
 
 part 'account_level.freezed.dart';
 part 'account_level.g.dart';
