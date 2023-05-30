@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/shared/token/color/color.dart';
+import '/component/shared/token/color/color.dart';
 
 class CustomRadioButton extends StatelessWidget {
   const CustomRadioButton({

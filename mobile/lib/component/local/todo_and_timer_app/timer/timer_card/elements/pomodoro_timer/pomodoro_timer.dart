@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/elements/timer_control_buttons/timer_control_buttons.dart';
 
-import 'package:sakura_simulation/component/shared/token/color/color.dart';
-import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
-import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
-
-import '../../../../../../../domain/user/user.dart';
+import '/domain/account_level/elements/user/user.dart';
+import 'elements/timer_control_buttons/timer_control_buttons.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 import 'hooks/use_pomodoro_timer.dart';
 
@@ -48,7 +44,7 @@ class PomodoroTimer extends ConsumerWidget {
               startTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .startTimer(user.workTime * 60);
+                    .startTimer(user.timerSettings!.workTime * 60);
               },
               stopTimer: () =>
                   ref.read(usePomodoroTimerProvider.notifier).stopTimer(),
@@ -57,7 +53,7 @@ class PomodoroTimer extends ConsumerWidget {
                   .resumeTimer(remainSeconds),
               resetTimer: () => ref
                   .read(usePomodoroTimerProvider.notifier)
-                  .resetTimer(user.workTime * 60),
+                  .resetTimer(user.timerSettings!.workTime * 60),
             )),
       ],
     );

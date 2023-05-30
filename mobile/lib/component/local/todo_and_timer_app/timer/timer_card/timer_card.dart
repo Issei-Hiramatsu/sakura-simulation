@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sakura_simulation/component/shared/token/navigator/navigator.dart';
-import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
+import 'package:sakura_simulation/importer.dart';
 
-import '../../../../shared/token/color/color.dart';
+import 'package:sakura_simulation/component/shared/token/navigator/navigator.dart';
 import 'elements/pomodoro_timer/elements/timer_progress_indicator/elements/work_and_break_pie_chart/work_and_break_pie_chart.dart';
 
 class TimerCard extends StatelessWidget {

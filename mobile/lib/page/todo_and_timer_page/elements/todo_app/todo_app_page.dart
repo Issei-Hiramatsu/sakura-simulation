@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
 
+import '../../../../component/local/todo_and_timer_app/todo/hooks/todo_list.dart';
 import '../../../../component/local/todo_and_timer_app/todo/todo_add_button.dart/todo_add_button.dart';
 import '../../../../component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 
@@ -10,10 +10,14 @@ class TodoAppPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.watch(tempTodoListProvider);
+    final todoList = ref.watch(todoListProvider);
     return Column(
       children: [
-        Expanded(child: TodoList(todoList: todoList)),
+        Expanded(
+          child: TodoList(
+            todoList: todoList,
+          ),
+        ),
         const TodoAddButton(),
       ],
     );

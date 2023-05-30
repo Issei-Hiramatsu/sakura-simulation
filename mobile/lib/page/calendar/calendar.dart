@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakura_simulation/importer.dart';
+
 import 'package:preload_page_view/preload_page_view.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../component/local/calendar/event_card/event_card.dart';
 import '../../component/local/calendar/event_card/hooks/event.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '../../component/shared/token/color/color.dart';
-import '../../component/shared/token/text_style/text_style.dart';
 
 final kToday = DateTime.now();
 final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
