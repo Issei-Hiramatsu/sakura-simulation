@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sakura_simulation/domain/default_data.dart';
 
 import '../../component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
 import 'elements/timer_app/timer_app_page.dart';
@@ -10,6 +11,7 @@ class TodoAndTimerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //ここでデータベースからデータを取得する予定
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -24,10 +26,10 @@ class TodoAndTimerPage extends StatelessWidget {
                 Tab(text: 'タイマー', height: 26.sp),
               ],
             ),
-            const Expanded(
+            Expanded(
               child: TabBarView(children: [
-                TodoAppPage(),
-                TimerAppPage(),
+                const TodoAppPage(),
+                TimerAppPage(user: defaultData[0]),
               ]),
             ),
           ],
