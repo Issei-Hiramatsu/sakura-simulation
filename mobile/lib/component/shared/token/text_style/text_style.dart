@@ -134,14 +134,14 @@ TextStyle title3Regular(Color color) => TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: 18,
     );
-TextStyle titleMedium(FontWeight weight, Color color) => TextStyle(
+TextStyle titleMedium(Color color) => TextStyle(
       color: color,
-      fontWeight: weight,
+      fontWeight: FontWeight.w300,
       fontSize: 16,
     );
-TextStyle titleSmall(FontWeight weight, Color color) => TextStyle(
+TextStyle titleSmall(Color color) => TextStyle(
       color: color,
-      fontWeight: weight,
+      fontWeight: FontWeight.w300,
       fontSize: 14,
     );
 
