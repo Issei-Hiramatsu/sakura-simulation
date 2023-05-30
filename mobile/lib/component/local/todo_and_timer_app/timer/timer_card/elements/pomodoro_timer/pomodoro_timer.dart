@@ -48,7 +48,7 @@ class PomodoroTimer extends ConsumerWidget {
               startTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .startTimer(user.workTime * 60);
+                    .startTimer(user.timerSettings!.workTime * 60);
               },
               stopTimer: () =>
                   ref.read(usePomodoroTimerProvider.notifier).stopTimer(),
@@ -57,7 +57,7 @@ class PomodoroTimer extends ConsumerWidget {
                   .resumeTimer(remainSeconds),
               resetTimer: () => ref
                   .read(usePomodoroTimerProvider.notifier)
-                  .resetTimer(user.workTime * 60),
+                  .resetTimer(user.timerSettings!.workTime * 60),
             )),
       ],
     );

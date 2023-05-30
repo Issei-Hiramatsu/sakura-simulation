@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
 
 import '../../../../component/local/todo_and_timer_app/todo/todo_add_button.dart/todo_add_button.dart';
 import '../../../../component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
+import '../../../../domain/user/user.dart';
 
-class TodoAppPage extends ConsumerWidget {
-  const TodoAppPage({super.key});
+class TodoAppPage extends StatelessWidget {
+  const TodoAppPage({super.key, required this.user});
+
+  final User user;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.watch(tempTodoListProvider);
+  Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(child: TodoList(todoList: todoList)),
+        Expanded(
+          child: TodoList(
+            todoList: user.todoList['4/2']!,
+          ),
+        ),
         const TodoAddButton(),
       ],
     );

@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../todo/todo.dart';
+import 'elements/timer_settings/timer_settings.dart';
+
 part 'user.freezed.dart';
 part 'user.g.dart';
 
@@ -10,8 +13,8 @@ class User with _$User {
     @Default('') String email,
     @Default('') String userName,
     @Default('') String userImagePath,
-    @Default(25) int workTime,
-    @Default(5) int breakTime,
+    TimerSettings? timerSettings,
+    @Default({'': []}) Map<String, List<Todo>> todoList,
     DateTime? firstTimeUsing, //カレンダー日程を決めるため
   }) = _User;
 
