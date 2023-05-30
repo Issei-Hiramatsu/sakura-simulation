@@ -1,4 +1,3 @@
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 import 'package:sakura_simulation/domain/account_level/account_level.dart';
 import 'package:sakura_simulation/domain/todo/todo.dart';
 import 'package:sakura_simulation/domain/user/elements/timer_settings/timer_settings.dart';
@@ -38,19 +37,19 @@ final defaultData = AccountLevel(
         ],
         '4/2': [
           const Todo(
-            id: 1,
+            id: 4,
             title: 'イベントの感想を書く',
             isCompleted: false,
             isFavorite: false,
           ),
           const Todo(
-            id: 2,
+            id: 5,
             title: '文法特急を読む',
             isCompleted: false,
             isFavorite: false,
           ),
           const Todo(
-            id: 3,
+            id: 6,
             title: '世界史の宿題を終わらせる',
             isCompleted: false,
             isFavorite: false,

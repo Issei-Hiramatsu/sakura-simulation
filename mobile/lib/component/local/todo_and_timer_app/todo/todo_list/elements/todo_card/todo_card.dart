@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/hooks/todo_list.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/todo/todo_list/elements/todo_card/elements/favorite_icon_button/favorite_icon_button.dart';
 import 'package:sakura_simulation/component/shared/token/text_style/text_style.dart';
 
@@ -30,9 +30,7 @@ class TodoCard extends ConsumerWidget {
           leading: TodoRadioButton(
             isSelected: todo.isCompleted,
             onPressed: () {
-              ref
-                  .read(tempTodoListProvider.notifier)
-                  .toggleIsCompleted(todo.id);
+              ref.read(todoListProvider.notifier).toggleIsCompleted(todo.id);
             },
           ),
           title: Text(

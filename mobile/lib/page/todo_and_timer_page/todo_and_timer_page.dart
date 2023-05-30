@@ -37,7 +37,7 @@ class TodoAndTimerPage extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(children: [
-                TodoAppPage(user: defaultUser),
+                const TodoAppPage(),
                 TimerAppPage(user: defaultUser),
               ]),
             ),

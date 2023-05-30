@@ -5,7 +5,7 @@ import 'package:sakura_simulation/component/shared/single/shared_app_bar/shared_
 import 'package:sakura_simulation/component/shared/token/space_box/space_box.dart';
 
 import '../../../../../../component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/pomodoro_timer.dart';
-import '../../../../../../component/local/todo_and_timer_app/todo/hooks/temp_todo_list.dart';
+import '../../../../../../component/local/todo_and_timer_app/todo/hooks/todo_list.dart';
 import '../../../../../../component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 import '../../../../../../component/shared/token/color/color.dart';
 import '../../../../../../component/shared/token/text_style/text_style.dart';
@@ -20,7 +20,7 @@ class PomodoroTimerPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.watch(tempTodoListProvider);
+    final todoList = ref.watch(todoListProvider);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),

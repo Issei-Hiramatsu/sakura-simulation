@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../../../../domain/todo/todo.dart';
 import '../../../../../../../../shared/token/color/color.dart';
-import '../../../../../hooks/temp_todo_list.dart';
+import '../../../../../hooks/todo_list.dart';
 
 class FavoriteIconButton extends HookConsumerWidget {
   const FavoriteIconButton({
@@ -19,13 +19,13 @@ class FavoriteIconButton extends HookConsumerWidget {
     var iconSize = useState(20.sp);
     return GestureDetector(
       onTap: () {
-        ref.read(tempTodoListProvider.notifier).toggleIsFavorite(todo.id);
+        ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
       },
       onLongPressStart: ((details) {
         iconSize.value = 16.sp;
       }),
       onLongPressUp: () {
-        ref.read(tempTodoListProvider.notifier).toggleIsFavorite(todo.id);
+        ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
         iconSize.value = 20.sp;
       },
       behavior: HitTestBehavior.opaque,
@@ -34,7 +34,7 @@ class FavoriteIconButton extends HookConsumerWidget {
         child: IconButton(
           padding: const EdgeInsets.all(0),
           onPressed: () {
-            ref.read(tempTodoListProvider.notifier).toggleIsFavorite(todo.id);
+            ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
           },
           icon: Icon(
             todo.isFavorite ? Icons.star : Icons.star_outline,
