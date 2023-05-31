@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
+import '../../../../domain/default_data.dart';
 import '/domain/user/elements/todo/todo.dart';
 import 'elements/event_list_view/event_list_view.dart';
 
@@ -41,12 +42,16 @@ class EventListPageView extends HookWidget {
       itemCount: 100, //100で仮置きする
       //ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
       itemBuilder: (context, index) {
-        const getSelectedDay = '_selectedDay.value';
-        return EventListView(
-          eventList: eventList['4/1']!,
-          //データが取得されているかの確認用
-          //日付を習得して対応するデータをここで読み込み予定です。
-        );
+        //FIXME: 現状のような感じではなくここでリストを表示する形式にするべき　itemCountなど全く使えてない
+        final focusedDate =
+            DateTime(focusedDay.year, focusedDay.month, focusedDay.day);
+        if (focusedDate.isAtSameMomentAs(DateTime(2023, 4, 1))) {
+          return EventListView(eventList: defaultData[0].todoList['4/1']!);
+        } else if (focusedDate.isAfter(DateTime(2023, 4, 1))) {
+          return const EventListView(eventList: [Todo(title: '先のやつ！')]);
+        } else {
+          return const EventListView(eventList: [Todo(title: '前のやつ！')]);
+        }
       },
     );
   }
