@@ -24,22 +24,23 @@ class TodoCard extends ConsumerWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
-          contentPadding: EdgeInsets.only(left: 18.sp),
-          leading: TodoRadioButton(
-            isSelected: todo.isCompleted,
-            onPressed: () {
-              ref.read(todoListProvider.notifier).toggleIsCompleted(todo.id);
-            },
-          ),
-          title: Text(
-            todo.title,
-            style: todo.isCompleted
-                ? labelLargeLineThrough(gray)
-                : labelLarge(white),
-          ),
-          trailing: FavoriteIconButton(
-            todo: todo,
-          )),
+        contentPadding: EdgeInsets.only(left: 18.sp),
+        leading: TodoRadioButton(
+          isSelected: todo.isCompleted,
+          onPressed: () {
+            ref.read(todoListProvider.notifier).toggleIsCompleted(todo.id);
+          },
+        ),
+        title: Text(
+          todo.title,
+          style: todo.isCompleted
+              ? labelLargeLineThrough(gray)
+              : labelLarge(white),
+        ),
+        trailing: FavoriteIconButton(
+          todo: todo,
+        ),
+      ),
     );
   }
 }
