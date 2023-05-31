@@ -68,6 +68,7 @@ class CalendarPage extends HookWidget {
           Expanded(
             child: EventListPageView(
               focusedDay: _focusedDay.value,
+              eventList: user.todoList,
               goBackPage: () {
                 _focusedDay.value = DateTime(
                   _focusedDay.value.year,

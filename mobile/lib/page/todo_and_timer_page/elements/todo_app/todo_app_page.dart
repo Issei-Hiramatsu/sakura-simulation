@@ -14,9 +14,7 @@ class TodoAppPage extends ConsumerWidget {
     return Column(
       children: [
         Expanded(
-          child: TodoList(
-            todoList: todoList,
-          ),
+          child: TodoList(todoList: todoList),
         ),
         const TodoAddButton(),
       ],
