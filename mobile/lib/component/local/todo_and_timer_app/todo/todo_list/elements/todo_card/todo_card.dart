@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '/domain/user/elements/todo/todo.dart';
 import '../../../hooks/todo_list.dart';
-import '/domain/account_level/elements/user/elements/todo/todo.dart';
 import 'elements/favorite_icon_button/favorite_icon_button.dart';
 import 'elements/todo_radio_button/todo_radio_button.dart';
 

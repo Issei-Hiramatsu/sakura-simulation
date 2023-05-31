@@ -12,7 +12,7 @@ class TodoAndTimerPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultUser = defaultData.premiumUser[0];
+    final defaultUser = defaultData[0];
     //ここでデータベースからデータを取得する予定
     return DefaultTabController(
       length: 2,
