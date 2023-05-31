@@ -3,16 +3,16 @@ import 'package:sakura_simulation/importer.dart';
 
 import '../../component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
+import '/domain/user/user.dart';
 import 'elements/timer_app/timer_app_page.dart';
 import 'elements/todo_app/todo_app_page.dart';
-import '/domain/default_data.dart';
 
 class TodoAndTimerPage extends StatelessWidget {
-  const TodoAndTimerPage({super.key});
+  const TodoAndTimerPage({super.key, required this.user});
 
+  final User user;
   @override
   Widget build(BuildContext context) {
-    final defaultUser = defaultData[0];
     //ここでデータベースからデータを取得する予定
     return DefaultTabController(
       length: 2,
@@ -36,7 +36,7 @@ class TodoAndTimerPage extends StatelessWidget {
             Expanded(
               child: TabBarView(children: [
                 const TodoAppPage(),
-                TimerAppPage(user: defaultUser),
+                TimerAppPage(user: user),
               ]),
             ),
           ],

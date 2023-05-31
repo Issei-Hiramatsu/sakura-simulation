@@ -3,30 +3,39 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
 import '../../component/local/calendar/event_list_page_view/event_list_page_view.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
+import '../../component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
+import '/domain/user/user.dart';
 
-final kToday = DateTime.now();
-final kFirstDay = DateTime(kToday.year, kToday.month - 3, kToday.day);
-final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
-
-class TableEventsExample extends HookWidget {
-  TableEventsExample({super.key});
-  final _calendarFormat = useState(CalendarFormat.month);
-  final _focusedDay = useState(DateTime.now());
+class CalendarPage extends HookWidget {
+  CalendarPage({
+    super.key,
+    required this.user,
+  });
+  final User user;
   final _selectedDay = useState(DateTime.now());
+  final _focusedDay = useState(DateTime.now());
+  final calendarFormat = useState(CalendarFormat.month);
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay.value, selectedDay)) {
       _selectedDay.value = selectedDay;
       _focusedDay.value = focusedDay;
-      _calendarFormat.value = CalendarFormat.week;
+      calendarFormat.value = CalendarFormat.week;
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final kToday = DateTime.now();
+    final kFirstDay = DateTime(
+      user.firstTimeUsing!.year,
+      user.firstTimeUsing!.month,
+      user.firstTimeUsing!.day,
+    );
+    final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
@@ -42,17 +51,17 @@ class TableEventsExample extends HookWidget {
             lastDay: kLastDay,
             focusedDay: _focusedDay.value,
             selectedDay: _selectedDay.value,
-            calendarFormat: _calendarFormat.value,
+            calendarFormat: calendarFormat.value,
             onFormatChanged: () {
-              if (_calendarFormat.value != CalendarFormat.week) {
-                _calendarFormat.value = CalendarFormat.week;
-              } else if (_calendarFormat.value != CalendarFormat.month) {
-                _calendarFormat.value = CalendarFormat.month;
+              if (calendarFormat.value != CalendarFormat.week) {
+                calendarFormat.value = CalendarFormat.week;
+              } else if (calendarFormat.value != CalendarFormat.month) {
+                calendarFormat.value = CalendarFormat.month;
               }
             },
             onDaySelected: () => _onDaySelected,
             onPageChanged: () => (focusedDay) {
-              _focusedDay.value = focusedDay;
+              focusedDay.value = focusedDay;
             },
           ),
           const SizedBox(height: 8.0),
@@ -75,7 +84,7 @@ class TableEventsExample extends HookWidget {
               },
               onPageChanged: () {
                 _selectedDay.value = _focusedDay.value;
-                _calendarFormat.value = CalendarFormat.week;
+                calendarFormat.value = CalendarFormat.week;
               },
             ),
           ),
