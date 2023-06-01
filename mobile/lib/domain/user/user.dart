@@ -16,7 +16,7 @@ class User with _$User {
     @Default('') String userImagePath,
     TimerSettings? timerSettings,
     @Default(AccountLevel.guest) AccountLevel accountLevel,
-    @Default({'': []}) Map<String, List<Todo>> todoList,
+    Map<DateTime, List<Todo>>? todoList,
     DateTime? firstTimeUsing, //カレンダー日程を決めるため
   }) = _User;
 

@@ -16,7 +16,7 @@ final defaultData = [
       breakTime: 5,
     ),
     todoList: {
-      '4/1': [
+      DateTime(2023, 4, 1): [
         const Todo(
           id: 1,
           title: 'イベントに参加する',
@@ -36,7 +36,7 @@ final defaultData = [
           isFavorite: false,
         ),
       ],
-      '4/2': [
+      DateTime(2023, 4, 2): [
         const Todo(
           id: 4,
           title: 'イベントの感想を書く',

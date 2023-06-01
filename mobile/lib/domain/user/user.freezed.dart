@@ -26,7 +26,7 @@ mixin _$User {
   String get userImagePath => throw _privateConstructorUsedError;
   TimerSettings? get timerSettings => throw _privateConstructorUsedError;
   AccountLevel get accountLevel => throw _privateConstructorUsedError;
-  Map<String, List<Todo>> get todoList => throw _privateConstructorUsedError;
+  Map<DateTime, List<Todo>>? get todoList => throw _privateConstructorUsedError;
   DateTime? get firstTimeUsing => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -46,7 +46,7 @@ abstract class $UserCopyWith<$Res> {
       String userImagePath,
       TimerSettings? timerSettings,
       AccountLevel accountLevel,
-      Map<String, List<Todo>> todoList,
+      Map<DateTime, List<Todo>>? todoList,
       DateTime? firstTimeUsing});
 
   $TimerSettingsCopyWith<$Res>? get timerSettings;
@@ -71,7 +71,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? userImagePath = null,
     Object? timerSettings = freezed,
     Object? accountLevel = null,
-    Object? todoList = null,
+    Object? todoList = freezed,
     Object? firstTimeUsing = freezed,
   }) {
     return _then(_value.copyWith(
@@ -99,10 +99,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.accountLevel
           : accountLevel // ignore: cast_nullable_to_non_nullable
               as AccountLevel,
-      todoList: null == todoList
+      todoList: freezed == todoList
           ? _value.todoList
           : todoList // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Todo>>,
+              as Map<DateTime, List<Todo>>?,
       firstTimeUsing: freezed == firstTimeUsing
           ? _value.firstTimeUsing
           : firstTimeUsing // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String userImagePath,
       TimerSettings? timerSettings,
       AccountLevel accountLevel,
-      Map<String, List<Todo>> todoList,
+      Map<DateTime, List<Todo>>? todoList,
       DateTime? firstTimeUsing});
 
   @override
@@ -158,7 +158,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? userImagePath = null,
     Object? timerSettings = freezed,
     Object? accountLevel = null,
-    Object? todoList = null,
+    Object? todoList = freezed,
     Object? firstTimeUsing = freezed,
   }) {
     return _then(_$_User(
@@ -186,10 +186,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
           ? _value.accountLevel
           : accountLevel // ignore: cast_nullable_to_non_nullable
               as AccountLevel,
-      todoList: null == todoList
+      todoList: freezed == todoList
           ? _value._todoList
           : todoList // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<Todo>>,
+              as Map<DateTime, List<Todo>>?,
       firstTimeUsing: freezed == firstTimeUsing
           ? _value.firstTimeUsing
           : firstTimeUsing // ignore: cast_nullable_to_non_nullable
@@ -208,7 +208,7 @@ class _$_User implements _User {
       this.userImagePath = '',
       this.timerSettings,
       this.accountLevel = AccountLevel.guest,
-      final Map<String, List<Todo>> todoList = const {'': []},
+      final Map<DateTime, List<Todo>>? todoList,
       this.firstTimeUsing})
       : _todoList = todoList;
 
@@ -231,13 +231,14 @@ class _$_User implements _User {
   @override
   @JsonKey()
   final AccountLevel accountLevel;
-  final Map<String, List<Todo>> _todoList;
+  final Map<DateTime, List<Todo>>? _todoList;
   @override
-  @JsonKey()
-  Map<String, List<Todo>> get todoList {
+  Map<DateTime, List<Todo>>? get todoList {
+    final value = _todoList;
+    if (value == null) return null;
     if (_todoList is EqualUnmodifiableMapView) return _todoList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_todoList);
+    return EqualUnmodifiableMapView(value);
   }
 
   @override
@@ -303,7 +304,7 @@ abstract class _User implements User {
       final String userImagePath,
       final TimerSettings? timerSettings,
       final AccountLevel accountLevel,
-      final Map<String, List<Todo>> todoList,
+      final Map<DateTime, List<Todo>>? todoList,
       final DateTime? firstTimeUsing}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
@@ -321,7 +322,7 @@ abstract class _User implements User {
   @override
   AccountLevel get accountLevel;
   @override
-  Map<String, List<Todo>> get todoList;
+  Map<DateTime, List<Todo>>? get todoList;
   @override
   DateTime? get firstTimeUsing;
   @override

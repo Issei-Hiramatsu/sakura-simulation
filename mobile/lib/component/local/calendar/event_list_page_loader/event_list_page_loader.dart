@@ -20,7 +20,7 @@ class EventListPageView extends HookWidget {
   final VoidCallback goBackPage;
   final VoidCallback goFrontPage;
   final DateTime focusedDay;
-  final Map<String, List<Todo>> eventList;
+  final Map<DateTime, List<Todo>>? eventList;
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +39,13 @@ class EventListPageView extends HookWidget {
         onPageChanged();
         currentIndex.value = index;
       },
-      itemCount: 100, //100で仮置きする
-      //ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
+      itemCount: 100, //100で仮置きする。ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
       itemBuilder: (context, index) {
-        //FIXME: 現状のような感じではなくここでリストを表示する形式にするべき　itemCountなど全く使えてない
-        //もらえるユーザ情報から選別する event.todoList.tododate　みたいな？
         final focusedDate =
             DateTime(focusedDay.year, focusedDay.month, focusedDay.day);
-        if (focusedDate.isAtSameMomentAs(DateTime(2023, 4, 1))) {
-          return EventListView(eventList: defaultData[0].todoList['4/1']!);
-        } else if (focusedDate.isAfter(DateTime(2023, 4, 1))) {
-          return const EventListView(eventList: [Todo(title: '先のやつ！')]);
-        } else {
-          return const EventListView(eventList: [Todo(title: '前のやつ！')]);
-        }
+        return EventListView(
+          eventList: defaultData[0].todoList?[focusedDate] ?? [], //何もないなら[]を返す
+        );
       },
     );
   }
