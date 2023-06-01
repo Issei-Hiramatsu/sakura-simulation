@@ -23,11 +23,10 @@ class EventListView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: EventGraph(),
-            )),
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: eventList.length,

@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../component/local/calendar/event_list_page_view/event_list_page_view.dart';
+import '../../component/local/calendar/event_list_page_loader/event_list_page_loader.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
 import '../../component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
 import '/domain/user/user.dart';
