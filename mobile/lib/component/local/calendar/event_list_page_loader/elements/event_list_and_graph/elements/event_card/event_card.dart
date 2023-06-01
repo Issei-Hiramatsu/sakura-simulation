@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../../../importer.dart';
+import '../../../../../../../../importer.dart';
 
 class EventCard extends StatelessWidget {
   const EventCard({

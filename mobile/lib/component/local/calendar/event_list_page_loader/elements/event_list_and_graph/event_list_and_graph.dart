@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sakura_simulation/component/local/calendar/event_list_page_loader/elements/event_list_and_graph/elements/event_graph/event_graph.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../../domain/user/elements/todo/todo.dart';
-import 'elements/event_card.dart';
+import 'elements/event_card/event_card.dart';
 
 class EventListView extends StatelessWidget {
   const EventListView({
@@ -22,10 +23,11 @@ class EventListView extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Text('ここに棒グラフ', style: title1Regular(black)), //FIXME:
-            ),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: EventGraph(),
+            )),
             Expanded(
               child: ListView.builder(
                 itemCount: eventList.length,

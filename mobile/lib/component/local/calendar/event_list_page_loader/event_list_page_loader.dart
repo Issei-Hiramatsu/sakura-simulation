@@ -4,7 +4,7 @@ import 'package:preload_page_view/preload_page_view.dart';
 
 import '../../../../domain/default_data.dart';
 import '/domain/user/elements/todo/todo.dart';
-import 'elements/event_list_view/event_list_view.dart';
+import 'elements/event_list_and_graph/event_list_and_graph.dart';
 
 class EventListPageView extends HookWidget {
   const EventListPageView({
@@ -43,6 +43,7 @@ class EventListPageView extends HookWidget {
       //ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
       itemBuilder: (context, index) {
         //FIXME: 現状のような感じではなくここでリストを表示する形式にするべき　itemCountなど全く使えてない
+        //もらえるユーザ情報から選別する event.todoList.tododate　みたいな？
         final focusedDate =
             DateTime(focusedDay.year, focusedDay.month, focusedDay.day);
         if (focusedDate.isAtSameMomentAs(DateTime(2023, 4, 1))) {
