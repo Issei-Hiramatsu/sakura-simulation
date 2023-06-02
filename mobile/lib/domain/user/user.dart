@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sakura_simulation/domain/user/elements/account_level/account_level.dart';
 
 import 'elements/timer_settings/timer_settings.dart';
 import 'elements/todo/todo.dart';
@@ -14,7 +15,8 @@ class User with _$User {
     @Default('') String userName,
     @Default('') String userImagePath,
     TimerSettings? timerSettings,
-    @Default({'': []}) Map<String, List<Todo>> todoList,
+    @Default(AccountLevel.guest) AccountLevel accountLevel,
+    Map<DateTime, List<Todo>>? todoList,
     DateTime? firstTimeUsing, //カレンダー日程を決めるため
   }) = _User;
 

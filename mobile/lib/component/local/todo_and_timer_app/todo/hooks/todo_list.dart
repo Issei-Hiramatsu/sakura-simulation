@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '/domain/user/elements/todo/todo.dart';
 import '/domain/default_data.dart';
-import '/domain/account_level/elements/user/elements/todo/todo.dart';
 
 final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
   () => TodoListNotifier(),
@@ -9,7 +9,7 @@ final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
 
 class TodoListNotifier extends Notifier<List<Todo>> {
   @override
-  List<Todo> build() => state = defaultData.premiumUser[0].todoList['4/1']!;
+  List<Todo> build() => state = defaultData[0].todoList![DateTime(2023, 4, 1)]!;
 
   void addTodoList(String title) {
     state = [

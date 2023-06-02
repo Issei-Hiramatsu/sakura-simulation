@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '/domain/account_level/elements/user/user.dart';
+import '/domain/user/user.dart';
 import 'elements/timer_control_buttons/timer_control_buttons.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 import 'hooks/use_pomodoro_timer.dart';
