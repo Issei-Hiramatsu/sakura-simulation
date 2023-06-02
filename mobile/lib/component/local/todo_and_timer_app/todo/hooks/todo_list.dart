@@ -9,7 +9,7 @@ final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
 
 class TodoListNotifier extends Notifier<List<Todo>> {
   @override
-  List<Todo> build() => state = defaultData[0].todoList!['4/1']!;
+  List<Todo> build() => state = defaultData[0].todoList![DateTime(2023, 4, 1)]!;
 
   void addTodoList(String title) {
     state = [
