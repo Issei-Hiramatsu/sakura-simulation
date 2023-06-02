@@ -9,10 +9,16 @@ import '/page/calendar/calendar_page.dart';
 import '/page/profile/profile_page.dart';
 
 class SakuraSimulationApp extends HookWidget {
-  const SakuraSimulationApp({Key? key}) : super(key: key);
+  const SakuraSimulationApp({
+    this.pageIndex = 0,
+    Key? key,
+  }) : super(key: key);
+
+  final int pageIndex;
 
   @override
   Widget build(BuildContext context) {
+    final selectedIndex = useState(pageIndex);
     final defaultUser = defaultData[0];
     List pageList = [
       const HomePage(),
@@ -23,7 +29,6 @@ class SakuraSimulationApp extends HookWidget {
         photoUrl: '0',
       ),
     ];
-    final selectedIndex = useState(0);
     return SafeArea(
       child: Scaffold(
         body: pageList[selectedIndex.value],

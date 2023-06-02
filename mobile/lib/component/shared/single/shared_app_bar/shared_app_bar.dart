@@ -7,15 +7,18 @@ class SharedAppBar extends StatelessWidget {
     required this.titleText,
     required this.textStyle,
     this.leading,
+    this.automaticallyImplyLeading = false,
   });
 
   final String titleText;
   final TextStyle textStyle;
   final Widget? leading;
+  final bool automaticallyImplyLeading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: automaticallyImplyLeading,
       leading: leading,
       backgroundColor: primary,
       title: Text(

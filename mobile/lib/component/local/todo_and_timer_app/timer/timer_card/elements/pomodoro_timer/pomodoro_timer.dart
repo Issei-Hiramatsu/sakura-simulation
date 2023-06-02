@@ -55,7 +55,10 @@ class PomodoroTimer extends ConsumerWidget {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
                     .resetTimer(user.timerSettings!.workTime * 60);
-                NavigatorPush(context, page: TimerReviewPage(user: user));
+                NavigatorPush(context,
+                    page: TimerReviewPage(
+                      user: user,
+                    ));
               }),
         ),
       ],
