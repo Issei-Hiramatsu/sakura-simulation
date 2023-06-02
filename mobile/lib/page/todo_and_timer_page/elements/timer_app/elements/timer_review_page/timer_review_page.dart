@@ -25,6 +25,12 @@ class TimerReviewPage extends ConsumerWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
         child: SharedAppBar(
+          leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: white,
+              )),
           titleText: 'タイマー終了',
           textStyle: titleMedium(white),
         ),
