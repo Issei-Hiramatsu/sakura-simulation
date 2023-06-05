@@ -1,6 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/domain/default_data.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/timer_review_page/hooks/temp_timer_log.dart';
 
@@ -36,7 +34,8 @@ class EventGraph extends StatelessWidget {
                   GraphDetailCard(
                     title: '集中時間',
                     timeText:
-                        '${tempTimerLog[DateTime(2023, 4, 1)]![0].inMinutes}分',
+                        //FIXME:
+                        '${tempTimerLog[DateTime(2023, 4, 1)]!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
                     barColor: primary,
                   ),
                   const SpaceBox(width: 8),
