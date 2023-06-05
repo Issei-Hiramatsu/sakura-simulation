@@ -52,13 +52,15 @@ class PomodoroTimer extends ConsumerWidget {
                   .read(usePomodoroTimerProvider.notifier)
                   .resumeTimer(remainSeconds),
               resetTimer: () {
+                final workSeconds =
+                    user.timerSettings!.workTime * 60 - remainSeconds;
                 ref
                     .read(usePomodoroTimerProvider.notifier)
                     .resetTimer(user.timerSettings!.workTime * 60);
                 NavigatorPush(context,
                     page: TimerReviewPage(
                       user: user,
-                      workSeconds: remainSeconds,
+                      workSeconds: workSeconds,
                     ));
               }),
         ),
