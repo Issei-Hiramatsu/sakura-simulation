@@ -1,6 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
+import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/timer_review_page/hooks/temp_timer_log.dart';
 
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
@@ -11,7 +11,7 @@ class EventGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150.sp,
+      height: 130.sp,
       decoration: BoxDecoration(
         border: Border.all(
           color: gray,
@@ -30,14 +30,16 @@ class EventGraph extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
-                children: const [
+                children: [
                   GraphDetailCard(
                     title: '集中時間',
-                    timeText: '30分',
+                    timeText:
+                        //FIXME:
+                        '${tempTimerLog[DateTime(2023, 4, 1)]!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
                     barColor: primary,
                   ),
-                  SpaceBox(width: 8),
-                  GraphDetailCard(
+                  const SpaceBox(width: 8),
+                  const GraphDetailCard(
                     title: '休憩時間',
                     timeText: '5分',
                     barColor: secondary,

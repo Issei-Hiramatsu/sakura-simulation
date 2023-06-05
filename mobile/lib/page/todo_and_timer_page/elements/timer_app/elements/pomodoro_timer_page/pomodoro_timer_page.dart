@@ -22,6 +22,7 @@ class PomodoroTimerPage extends ConsumerWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
         child: SharedAppBar(
+          automaticallyImplyLeading: true,
           titleText: 'タイマー',
           textStyle: titleMedium(white),
         ),
