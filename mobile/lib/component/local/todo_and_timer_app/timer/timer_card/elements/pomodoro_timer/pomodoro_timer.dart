@@ -58,6 +58,7 @@ class PomodoroTimer extends ConsumerWidget {
                 NavigatorPush(context,
                     page: TimerReviewPage(
                       user: user,
+                      workSeconds: remainSeconds,
                     ));
               }),
         ),
