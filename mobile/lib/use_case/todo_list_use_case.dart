@@ -5,6 +5,10 @@ class TodoListUseCase {
   TodoListUseCase({required this.todoListRepository});
   final ITodoListRepository todoListRepository;
 
+  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
+    return todoListRepository.fetchAllTodoList();
+  }
+
   Stream<List<Todo>> fetchTodoListByDate({required DateTime date}) {
     return todoListRepository.fetchTodoListByDate(date);
   }
