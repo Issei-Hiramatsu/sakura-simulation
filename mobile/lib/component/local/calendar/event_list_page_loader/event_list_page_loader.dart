@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 
-import '../../../../domain/default_data.dart';
 import '/domain/user/elements/todo/todo.dart';
 import 'elements/event_list_and_graph/event_list_and_graph.dart';
 
@@ -20,14 +19,16 @@ class EventListPageView extends HookWidget {
   final VoidCallback goBackPage;
   final VoidCallback goFrontPage;
   final DateTime focusedDay;
-  final Map<DateTime, List<Todo>>? eventList;
+  final List<Todo> eventList;
 
   @override
   Widget build(BuildContext context) {
     final currentIndex = useState(0);
     final controller = useState(PreloadPageController(initialPage: 50));
 
-    return PreloadPageView.builder(
+    return
+        //TODO: 例外処理の実装
+        PreloadPageView.builder(
       preloadPagesCount: 2,
       controller: controller.value,
       onPageChanged: (index) {
@@ -44,7 +45,7 @@ class EventListPageView extends HookWidget {
         final focusedDate =
             DateTime(focusedDay.year, focusedDay.month, focusedDay.day);
         return EventListView(
-          eventList: defaultData[0].todoList?[focusedDate] ?? [], //何もないなら[]を返す
+          eventList: eventList,
         );
       },
     );
