@@ -1,27 +1,29 @@
-import 'dart:async';
+//1秒ごとに足されるStopWatchにならないため無効化する.stable時にこのコードが使用されていない場合このコードは破棄しても良い。
 
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+// import 'dart:async';
 
-final useStopWatchProvider = NotifierProvider<UseStopWatch, int>(
-  () => UseStopWatch(),
-);
+// import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UseStopWatch extends Notifier<int> {
-  Timer? timer;
-  @override
-  int build() => 0;
+// final useStopWatchProvider = NotifierProvider<UseStopWatch, int>(
+//   () => UseStopWatch(),
+// );
 
-  void startTimer() {
-    timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (timer) {
-        state++;
-      },
-    );
-  }
+// class UseStopWatch extends Notifier<int> {
+//   Timer? timer;
+//   @override
+//   int build() => 0;
 
-  void stopTimer() {
-    timer?.cancel();
-    state = 0;
-  }
-}
+//   void startTimer() {
+//     timer = Timer.periodic(
+//       const Duration(seconds: 1),
+//       (timer) {
+//         state++;
+//       },
+//     );
+//   }
+
+//   void stopTimer() {
+//     timer?.cancel();
+//     state = 0;
+//   }
+// }
