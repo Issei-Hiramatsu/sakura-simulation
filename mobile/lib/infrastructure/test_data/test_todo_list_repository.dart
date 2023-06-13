@@ -6,7 +6,7 @@ class TestTodoListRepository extends ITodoListRepository {
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
     return Stream.value(
       {
-        DateTime.utc(2023, 4, 1): [
+        DateTime(2023, 4, 1): [
           const Todo(
             id: 1,
             title: 'イベントに参加する',
@@ -26,7 +26,7 @@ class TestTodoListRepository extends ITodoListRepository {
             isFavorite: false,
           ),
         ],
-        DateTime.utc(2023, 4, 3): [
+        DateTime(2023, 4, 3): [
           const Todo(
             id: 4,
             title: 'イベントに参加しない',
