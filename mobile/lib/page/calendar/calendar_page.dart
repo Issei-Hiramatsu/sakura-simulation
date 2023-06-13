@@ -28,6 +28,11 @@ class CalendarPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final focusedDate = DateTime(
+      _focusedDay.value.year,
+      _focusedDay.value.month,
+      _focusedDay.value.day,
+    );
     final kToday = DateTime.now();
     final kFirstDay = DateTime(
       user.firstTimeUsing!.year,
@@ -71,30 +76,22 @@ class CalendarPage extends HookWidget {
           const SizedBox(height: 8.0),
           Expanded(
             child: EventPageLoaderByDate(
-              focusedDay: _focusedDay.value,
+              focusedDate: focusedDate,
+              firstPageDate: kFirstDay,
+              lastPageDate: kLastDay,
               goBackPage: () {
-                if (_focusedDay.value != kFirstDay ||
-                    _focusedDay.value != kLastDay) {
-                  _focusedDay.value = DateTime(
-                    _focusedDay.value.year,
-                    _focusedDay.value.month,
-                    _focusedDay.value.day - 1,
-                  );
-                } else {
-                  _focusedDay.value = DateTime(2023, 5, 24);
-                }
+                _focusedDay.value = DateTime(
+                  _focusedDay.value.year,
+                  _focusedDay.value.month,
+                  _focusedDay.value.day - 1,
+                );
               },
               goFrontPage: () {
-                if (_focusedDay.value != kFirstDay ||
-                    _focusedDay.value != kLastDay) {
-                  _focusedDay.value = DateTime(
-                    _focusedDay.value.year,
-                    _focusedDay.value.month,
-                    _focusedDay.value.day + 1,
-                  );
-                } else {
-                  _focusedDay.value = DateTime(2023, 5, 24);
-                }
+                _focusedDay.value = DateTime(
+                  _focusedDay.value.year,
+                  _focusedDay.value.month,
+                  _focusedDay.value.day + 1,
+                );
               },
               onPageChanged: () {
                 _selectedDay.value = _focusedDay.value;

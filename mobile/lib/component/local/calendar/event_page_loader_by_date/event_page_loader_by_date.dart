@@ -34,9 +34,9 @@ class EventPageLoaderByDate extends HookConsumerWidget {
       preloadPagesCount: 2,
       controller: controller.value,
       onPageChanged: (index) {
-        if (index <= currentIndex.value) {
+        if (index <= currentIndex.value && focusedDate != firstPageDate) {
           goBackPage();
-        } else if (index >= currentIndex.value) {
+        } else if (index >= currentIndex.value && focusedDate != lastPageDate) {
           goFrontPage();
         }
         currentIndex.value = index;
