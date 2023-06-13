@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../component/local/calendar/event_list_page_loader/event_list_page_loader.dart';
+import '../../component/local/calendar/event_page_loader_by_date/event_page_loader_by_date.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
 import '../../component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
 import '/domain/user/user.dart';
@@ -34,7 +34,11 @@ class CalendarPage extends HookWidget {
       user.firstTimeUsing!.month,
       user.firstTimeUsing!.day,
     );
-    final kLastDay = DateTime(kToday.year, kToday.month + 3, kToday.day);
+    final kLastDay = DateTime(
+      kToday.year,
+      kToday.month + 3,
+      kToday.day,
+    );
 
     return Scaffold(
       appBar: PreferredSize(
@@ -61,26 +65,36 @@ class CalendarPage extends HookWidget {
             },
             onDaySelected: () => _onDaySelected,
             onPageChanged: () => (focusedDay) {
-              focusedDay.value = focusedDay;
+              _focusedDay.value = focusedDay;
             },
           ),
           const SizedBox(height: 8.0),
           Expanded(
-            child: EventListPageView(
+            child: EventPageLoaderByDate(
               focusedDay: _focusedDay.value,
               goBackPage: () {
-                _focusedDay.value = DateTime(
-                  _focusedDay.value.year,
-                  _focusedDay.value.month,
-                  _focusedDay.value.day - 1,
-                );
+                if (_focusedDay.value != kFirstDay ||
+                    _focusedDay.value != kLastDay) {
+                  _focusedDay.value = DateTime(
+                    _focusedDay.value.year,
+                    _focusedDay.value.month,
+                    _focusedDay.value.day - 1,
+                  );
+                } else {
+                  _focusedDay.value = DateTime(2023, 5, 24);
+                }
               },
               goFrontPage: () {
-                _focusedDay.value = DateTime(
-                  _focusedDay.value.year,
-                  _focusedDay.value.month,
-                  _focusedDay.value.day + 1,
-                );
+                if (_focusedDay.value != kFirstDay ||
+                    _focusedDay.value != kLastDay) {
+                  _focusedDay.value = DateTime(
+                    _focusedDay.value.year,
+                    _focusedDay.value.month,
+                    _focusedDay.value.day + 1,
+                  );
+                } else {
+                  _focusedDay.value = DateTime(2023, 5, 24);
+                }
               },
               onPageChanged: () {
                 _selectedDay.value = _focusedDay.value;
