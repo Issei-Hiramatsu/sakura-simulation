@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:preload_page_view/preload_page_view.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '../../../shared/single/shared_dialog/shared_dialog.dart';
 import '../../todo_and_timer_app/todo/todo_list/elements/hooks/fetch_todo_list.dart';
 import 'elements/event_list_and_graph/event_list_and_graph.dart';
 
@@ -38,6 +39,15 @@ class EventPageLoaderByDate extends HookConsumerWidget {
           goBackPage();
         } else if (index >= currentIndex.value && focusedDate != lastPageDate) {
           goFrontPage();
+        } else {
+          showDialog(
+              context: context,
+              builder: (_) {
+                return const SharedDialog(
+                  title: 'ページ表示上限',
+                  message: 'このページの表示上限に達しました',
+                );
+              });
         }
         currentIndex.value = index;
         onPageChanged();
