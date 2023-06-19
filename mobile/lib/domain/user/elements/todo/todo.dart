@@ -13,3 +13,9 @@ class Todo with _$Todo {
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 }
+
+//TodoListの抽象クラス
+abstract class ITodoListRepository {
+  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList();
+  Stream<List<Todo>> fetchTodoListByDate(DateTime date);
+}

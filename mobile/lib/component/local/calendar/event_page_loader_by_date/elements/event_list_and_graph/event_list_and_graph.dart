@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sakura_simulation/component/local/calendar/event_list_page_loader/elements/event_list_and_graph/elements/event_graph/event_graph.dart';
+import 'package:sakura_simulation/component/local/calendar/event_page_loader_by_date/elements/event_list_and_graph/elements/event_graph/event_graph.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../../domain/user/elements/todo/todo.dart';
