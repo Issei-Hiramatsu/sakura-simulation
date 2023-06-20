@@ -57,6 +57,6 @@ class TestTodoListRepository extends ITodoListRepository {
 
   @override
   void updateTodoList(DateTime date, List<Todo> todoList) {
-    testTodoList.update(date, (value) => todoList);
+    testTodoList[date] = todoList;
   }
 }

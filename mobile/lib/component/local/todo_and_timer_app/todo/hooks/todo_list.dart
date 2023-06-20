@@ -1,7 +1,11 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
+import '../../../../../use_case/todo_list_use_case.dart';
 import '/domain/user/elements/todo/todo.dart';
-import '/domain/default_data.dart';
+
+final updateTodoList = Provider(
+    (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
 
 final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
   () => TodoListNotifier(),
@@ -9,7 +13,7 @@ final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
 
 class TodoListNotifier extends Notifier<List<Todo>> {
   @override
-  List<Todo> build() => state = defaultData[0].todoList;
+  List<Todo> build() => state = [];
 
   void addTodoList(String title) {
     state = [
@@ -19,6 +23,14 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         title: title,
       ),
     ];
+    ref.read(updateTodoList).updateTodoList(
+          date: DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          ),
+          todoList: state,
+        );
   }
 
   void toggleIsCompleted(int id) {

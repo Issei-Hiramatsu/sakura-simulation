@@ -48,9 +48,8 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
                     hintText: 'タスクの追加',
                     hintStyle: labelLarge(gray),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 0,
-                            color: transparent)), //下部インディケータとボーダの非表示のため
+                      borderSide: BorderSide(width: 0, color: transparent),
+                    ), //下部インディケータとボーダの非表示のため
                   ),
                   onSubmitted: (value) {
                     NavigatorPop(context);
