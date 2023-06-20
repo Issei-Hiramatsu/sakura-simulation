@@ -18,4 +18,5 @@ class Todo with _$Todo {
 abstract class ITodoListRepository {
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList();
   Stream<List<Todo>> fetchTodoListByDate(DateTime date);
+  void updateTodoList(DateTime date, List<Todo> todoList);
 }

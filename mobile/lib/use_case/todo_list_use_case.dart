@@ -12,4 +12,8 @@ class TodoListUseCase {
   Stream<List<Todo>> fetchTodoListByDate({required DateTime date}) {
     return todoListRepository.fetchTodoListByDate(date);
   }
+
+  void updateTodoList({required DateTime date, required List<Todo> todoList}) {
+    return todoListRepository.updateTodoList(date, todoList);
+  }
 }
