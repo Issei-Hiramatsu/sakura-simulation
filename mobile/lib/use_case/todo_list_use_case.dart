@@ -13,6 +13,10 @@ class TodoListUseCase {
     return todoListRepository.fetchTodoListByDate(date);
   }
 
+  Stream<List<Todo>> fetchLatestTodoList() {
+    return todoListRepository.fetchLatestTodoList();
+  }
+
   void updateTodoList({required DateTime date, required List<Todo> todoList}) {
     return todoListRepository.updateTodoList(date, todoList);
   }

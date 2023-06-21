@@ -56,6 +56,14 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
+  Stream<List<Todo>> fetchLatestTodoList() {
+    final sortedList = testTodoList.entries.toList()
+      ..sort((a, b) => a.key.compareTo(b.key));
+    final newestKey = sortedList.last;
+    return Stream.value(testTodoList[newestKey] ?? []);
+  }
+
+  @override
   void updateTodoList(DateTime date, List<Todo> todoList) {
     testTodoList[date] = todoList;
   }
