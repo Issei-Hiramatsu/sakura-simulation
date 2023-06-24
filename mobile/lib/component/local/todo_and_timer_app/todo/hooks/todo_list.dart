@@ -4,6 +4,13 @@ import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
 import '../../../../../use_case/todo_list_use_case.dart';
 import '/domain/user/elements/todo/todo.dart';
 
+final fetchLatestTodoList = StreamProvider.family(
+  (ref, arg) {
+    return TodoListUseCase(todoListRepository: TestTodoListRepository())
+        .fetchLatestTodoList();
+  },
+);
+
 final updateTodoList = Provider(
     (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
 
@@ -16,10 +23,13 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   List<Todo> build() => state = [];
 
   void addTodoList(String title) {
+    //FIXME: 本来であればDataBaseからfetchLatestTodoListを使用して最終のデータを取得したかったところ
+    //データ自体を取得することができなかったので以下で妥協する。
+    //どのような形にしても常にNullで帰ってきてしまう。(他のところでは普通に値が返ってきたのでここだけで発生する)
     state = [
       ...state,
       Todo(
-        id: state.last.id + 1, //簡易的にリスト最終列に1を足す(リストを削除する意向はないので問題ないと思う)
+        id: testTodoList[testTodoList.keys.last]!.last.id + 1,
         title: title,
       ),
     ];
