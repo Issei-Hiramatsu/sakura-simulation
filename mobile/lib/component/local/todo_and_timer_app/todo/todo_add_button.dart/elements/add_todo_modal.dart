@@ -53,9 +53,11 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
                   ),
                   onSubmitted: (value) {
                     NavigatorPop(context);
-                    ref
-                        .read(todoListProvider.notifier)
-                        .addTodoList(controller.text);
+                    if (controller.text.isEmpty == false) {
+                      ref
+                          .read(todoListProvider.notifier)
+                          .addTodoList(controller.text);
+                    }
                     controller.clear();
                   },
                 )),
