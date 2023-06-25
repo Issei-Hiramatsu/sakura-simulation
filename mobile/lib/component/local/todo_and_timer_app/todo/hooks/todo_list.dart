@@ -4,13 +4,6 @@ import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
 import '../../../../../use_case/todo_list_use_case.dart';
 import '/domain/user/elements/todo/todo.dart';
 
-final fetchLatestTodoList = StreamProvider.family(
-  (ref, arg) {
-    return TodoListUseCase(todoListRepository: TestTodoListRepository())
-        .fetchLatestTodoList();
-  },
-);
-
 final updateTodoListProvider = Provider(
     (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
 
@@ -29,10 +22,15 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     state = [
       ...state,
       Todo(
-        id: testTodoList[testTodoList.keys.last]!.last.id + 1,
+        id: testTodoList[testTodoList.keys.last]?.last.id ?? 0 + 1,
         title: title,
       ),
     ];
+    updateTodoList();
+  }
+
+  void deleteTodoList(int id) {
+    state.removeWhere((todo) => todo.id != id);
     updateTodoList();
   }
 
