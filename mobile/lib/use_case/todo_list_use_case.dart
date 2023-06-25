@@ -9,6 +9,10 @@ class TodoListUseCase {
     return todoListRepository.fetchAllTodoList();
   }
 
+  Stream<Map<DateTime, List<Todo>>> fetchAllCompletedTodoList() {
+    return todoListRepository.fetchAllCompletedTodoList();
+  }
+
   Stream<List<Todo>> fetchTodoListByDate({required DateTime date}) {
     return todoListRepository.fetchTodoListByDate(date);
   }
