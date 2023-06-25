@@ -24,26 +24,31 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   List<Todo> build() => state = [];
 
   void addTodoList(String title) {
-    //FIXME: 本来であればDataBaseからfetchLatestTodoListを使用して最終のデータを取得したかったところ
-    //データ自体を取得することができなかったので以下で妥協する。
-    //どのような形にしても常にNullで帰ってきてしまう。(他のところでは普通に値が返ってきたのでここだけで発生する)
+    var uuid = const Uuid();
+    var newId = uuid.v4();
+    //FIXME: 私には解決できない最初にのみ既存のIDを読み込むことができない
+    //関係でIDをチェックする工程がおろそかになってしまっている。
+    state = [
+      ...state,
+      Todo(
+        id: newId,
+        title: title,
+      ),
+    ];
+    updateTodoList();
+  }
+
+//例のコード
+  String checkNewId(String newId) {
     ref.watch(fetchAllTodoIdList(ref)).whenData(
-      (todoIdList) {
+      (dataList) {
         var uuid = const Uuid();
-        var newId = uuid.v4();
-        while (todoIdList.contains(newId)) {
+        while (dataList.contains(newId)) {
           newId = uuid.v4();
         }
-        state = [
-          ...state,
-          Todo(
-            id: newId,
-            title: title,
-          ),
-        ];
       },
     );
-    updateTodoList();
+    return newId;
   }
 
   void deleteTodoList(String id) {
