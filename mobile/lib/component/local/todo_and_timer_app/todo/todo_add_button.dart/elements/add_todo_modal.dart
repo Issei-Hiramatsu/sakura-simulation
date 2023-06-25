@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../shared/token/navigator/navigator.dart';
 
-import '../../hooks/todo_list.dart';
+import '../../hooks/use_todo_list.dart';
 import '../../todo_list/elements/todo_card/elements/todo_radio_button/todo_radio_button.dart';
 
 Future showAddTodoModal(BuildContext context, WidgetRef ref) {
@@ -48,15 +48,16 @@ Future showAddTodoModal(BuildContext context, WidgetRef ref) {
                     hintText: 'タスクの追加',
                     hintStyle: labelLarge(gray),
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 0,
-                            color: transparent)), //下部インディケータとボーダの非表示のため
+                      borderSide: BorderSide(width: 0, color: transparent),
+                    ), //下部インディケータとボーダの非表示のため
                   ),
                   onSubmitted: (value) {
                     NavigatorPop(context);
-                    ref
-                        .read(todoListProvider.notifier)
-                        .addTodoList(controller.text);
+                    if (controller.text.isEmpty == false) {
+                      ref
+                          .read(todoListProvider.notifier)
+                          .addTodoList(controller.text);
+                    }
                     controller.clear();
                   },
                 )),

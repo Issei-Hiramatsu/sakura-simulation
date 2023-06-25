@@ -5,7 +5,7 @@ part 'todo.g.dart';
 @freezed
 class Todo with _$Todo {
   const factory Todo({
-    @Default(0) int id,
+    @Default('') String id,
     @Default('') String title,
     @Default(false) bool isCompleted,
     @Default(false) bool isFavorite,
@@ -17,5 +17,7 @@ class Todo with _$Todo {
 //TodoListの抽象クラス
 abstract class ITodoListRepository {
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList();
-  Stream<List<Todo>> fetchTodoListByDate(DateTime date);
+  Stream<List<String>> fetchAllTodoIdList();
+  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList();
+  void updateTodoList(DateTime date, List<Todo> todoList);
 }

@@ -6,10 +6,14 @@ class EventCard extends StatelessWidget {
   const EventCard({
     super.key,
     required this.title,
+    required this.isFavorite,
+    required this.isCompleted,
     required this.eventTime,
   });
 
   final String title;
+  final bool isFavorite;
+  final bool isCompleted;
   final String eventTime;
   @override
   Widget build(BuildContext context) {
@@ -27,10 +31,12 @@ class EventCard extends StatelessWidget {
         leading: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: primary5,
+            color: isFavorite ? tertiary : primary5,
             borderRadius: BorderRadius.circular(16.sp),
           ),
-          child: const Icon(Icons.check),
+          child: isCompleted
+              ? Icon(Icons.check, color: isFavorite ? yellow : gray)
+              : const Icon(Icons.check, color: tertiary),
         ),
         title: Text(title, style: labelLargeLineThrough(black)),
         trailing: Text(eventTime),

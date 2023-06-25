@@ -5,7 +5,7 @@ import 'package:preload_page_view/preload_page_view.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../shared/single/shared_dialog/shared_dialog.dart';
-import '../../todo_and_timer_app/todo/todo_list/elements/hooks/fetch_todo_list.dart';
+import '../../todo_and_timer_app/todo/hooks/fetch_todo_list.dart';
 import 'elements/event_list_and_graph/event_list_and_graph.dart';
 
 class EventPageLoaderByDate extends HookConsumerWidget {
@@ -55,10 +55,12 @@ class EventPageLoaderByDate extends HookConsumerWidget {
       //FIXME: データの処理構造が違うかも
       itemCount: 100, //100で仮置きする。ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
       itemBuilder: (context, index) {
-        return ref.watch(fetchAllTodoList(context)).when(
-              data: (dataList) => EventListView(
-                eventList: dataList[focusedDate] ?? [],
-              ),
+        return ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
+              data: (dataList) {
+                return EventListView(
+                  eventList: dataList[focusedDate] ?? [],
+                );
+              },
               error: (error, _) => const Icon(Icons.error),
               loading: () => const Center(
                 child: CircularProgressIndicator(
@@ -70,6 +72,3 @@ class EventPageLoaderByDate extends HookConsumerWidget {
     );
   }
 }
-
-
-  // if (focusedDate == firstPageDate || focusedDay == lastPageDate) {}
