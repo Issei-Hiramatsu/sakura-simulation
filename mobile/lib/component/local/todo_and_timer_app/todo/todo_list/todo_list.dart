@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../domain/user/elements/todo/todo.dart';
-import '../../../../../importer.dart';
+import '../confirm_delete_modal/delete_todo_modal.dart';
 import 'elements/todo_card/todo_card.dart';
+import 'elements/todo_slidable_action/todo_slidable_action.dart';
 
-class TodoList extends StatelessWidget {
+class TodoList extends ConsumerWidget {
   const TodoList({
     super.key,
     required this.todoList,
@@ -14,26 +15,12 @@ class TodoList extends StatelessWidget {
   final List<Todo> todoList;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView.builder(
       itemCount: todoList.length,
       itemBuilder: (BuildContext context, int index) {
-        return Slidable(
-          key: UniqueKey(),
-          closeOnScroll: true,
-          endActionPane: ActionPane(
-            extentRatio: 0.25,
-            dismissible: DismissiblePane(onDismissed: () {}),
-            motion: const ScrollMotion(),
-            children: const [
-              SlidableAction(
-                onPressed: null, //TODO: 後で 推したら削除のmodalが出現するようにする
-                backgroundColor: tertiary,
-                foregroundColor: white,
-                icon: Icons.delete_outline,
-              ),
-            ],
-          ),
+        return TodoSlidableAction(
+          onDismissed: () => deleteTodoModal(context, ref, todoList[index]),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 4),
             child: TodoCard(
