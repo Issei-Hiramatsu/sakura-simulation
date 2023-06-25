@@ -13,16 +13,12 @@ class BottomNavigation extends StatelessWidget {
   final Function(int) onTap;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 48.sp,
-      // decoration: const BoxDecoration(
-      //   border: Border(top: BorderSide(color: borderHighEmphasis, width: 1.0)),
-      // ),
       child: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: primary,
         unselectedItemColor: lowEmphasis.withOpacity(0.5),
-        //labelをnullにすることはできないので
         selectedFontSize: 0,
         unselectedFontSize: 0,
         currentIndex: currentIndex,

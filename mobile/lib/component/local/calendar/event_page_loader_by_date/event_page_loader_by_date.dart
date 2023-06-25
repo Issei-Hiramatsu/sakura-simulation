@@ -29,7 +29,9 @@ class EventPageLoaderByDate extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = useState(0);
-    final controller = useState(PreloadPageController(initialPage: 50));
+    final controller = useState(PreloadPageController(
+      initialPage: DateTime.now().difference(firstPageDate).inDays,
+    ));
 
     return PreloadPageView.builder(
       preloadPagesCount: 2,
@@ -52,8 +54,7 @@ class EventPageLoaderByDate extends HookConsumerWidget {
         currentIndex.value = index;
         onPageChanged();
       },
-      //FIXME: データの処理構造が違うかも
-      itemCount: 100, //100で仮置きする。ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
+      itemCount: lastPageDate.difference(firstPageDate).inDays,
       itemBuilder: (context, index) {
         return ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
               data: (dataList) {

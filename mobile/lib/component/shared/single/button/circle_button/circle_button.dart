@@ -16,7 +16,7 @@ class CircleElevatedButton extends StatelessWidget {
   final Function()? onPressed;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: size,
       height: size,
       child: ElevatedButton(

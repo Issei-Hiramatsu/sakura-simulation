@@ -68,7 +68,6 @@ class SimulationScreen extends HookConsumerWidget {
         children: [
           FadeTransition(
             opacity: fadeInAnimation,
-            //TODO: 写真予定場所 下記の形式で行う。
             child: Image.asset(
               fullBloomSakuraList[beginIndex.value],
               fit: BoxFit.fill,
@@ -77,7 +76,6 @@ class SimulationScreen extends HookConsumerWidget {
           ),
           FadeTransition(
             opacity: fadeOutAnimation,
-            //TODO:  写真予定場所
             child: Image.asset(
               fullBloomSakuraList[endIndex.value],
               fit: BoxFit.fill,
