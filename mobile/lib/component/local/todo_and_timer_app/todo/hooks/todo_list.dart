@@ -56,6 +56,14 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todo,
     ];
+    ref.read(updateTodoList).updateTodoList(
+          date: DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          ),
+          todoList: state,
+        );
   }
 
   void toggleIsFavorite(int id) {
