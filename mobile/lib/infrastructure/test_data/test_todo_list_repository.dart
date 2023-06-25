@@ -4,19 +4,19 @@ import '../../domain/user/elements/todo/todo.dart';
 final testTodoList = {
   DateTime(2023, 4, 1): [
     const Todo(
-      id: 1,
+      id: '1',
       title: 'イベントに参加する',
       isCompleted: false,
       isFavorite: false,
     ),
     const Todo(
-      id: 2,
+      id: '2',
       title: 'duo3.0を進める',
       isCompleted: false,
       isFavorite: true,
     ),
     const Todo(
-      id: 3,
+      id: '3',
       title: '数学の宿題を終わらせる',
       isCompleted: true,
       isFavorite: true,
@@ -24,19 +24,19 @@ final testTodoList = {
   ],
   DateTime(2023, 4, 3): [
     const Todo(
-      id: 4,
+      id: '4',
       title: 'イベントに参加しない',
       isCompleted: true,
       isFavorite: true,
     ),
     const Todo(
-      id: 5,
+      id: '5',
       title: '英語',
       isCompleted: true,
       isFavorite: true,
     ),
     const Todo(
-      id: 6,
+      id: '6',
       title: 'タスク管理',
       isCompleted: true,
       isFavorite: true,
@@ -48,6 +48,17 @@ class TestTodoListRepository extends ITodoListRepository {
   @override
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
     return Stream.value(testTodoList);
+  }
+
+  @override
+  Stream<List<String>> fetchAllTodoIdList() {
+    List<String> todoIdList = [];
+    for (var todoList in testTodoList.values) {
+      for (var todo in todoList) {
+        todoIdList.add(todo.id.toString());
+      }
+    }
+    return Stream.value(todoIdList);
   }
 
   @override

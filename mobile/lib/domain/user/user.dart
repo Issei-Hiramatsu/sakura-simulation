@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sakura_simulation/domain/user/elements/account_level/account_level.dart';
 
+import 'elements/account_level/account_level.dart';
 import 'elements/timer_settings/timer_settings.dart';
 import 'elements/todo/todo.dart';
 

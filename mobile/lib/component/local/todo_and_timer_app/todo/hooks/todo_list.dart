@@ -1,8 +1,16 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
 import '../../../../../use_case/todo_list_use_case.dart';
-import '/domain/user/elements/todo/todo.dart';
+import '../../../../../domain/user/elements/todo/todo.dart';
+
+final fetchAllTodoIdList = StreamProvider.family(
+  (ref, arg) {
+    return TodoListUseCase(todoListRepository: TestTodoListRepository())
+        .fetchAllTodoIdList();
+  },
+);
 
 final updateTodoListProvider = Provider(
     (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
@@ -19,22 +27,33 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     //FIXME: 本来であればDataBaseからfetchLatestTodoListを使用して最終のデータを取得したかったところ
     //データ自体を取得することができなかったので以下で妥協する。
     //どのような形にしても常にNullで帰ってきてしまう。(他のところでは普通に値が返ってきたのでここだけで発生する)
-    state = [
-      ...state,
-      Todo(
-        id: testTodoList[testTodoList.keys.last]?.last.id ?? 0 + 1,
-        title: title,
-      ),
-    ];
+    ref.watch(fetchAllTodoIdList(ref)).whenData(
+      (todoIdList) {
+        var uuid = const Uuid();
+        var newId = uuid.v4();
+        while (todoIdList.contains(newId)) {
+          newId = uuid.v4();
+        }
+        state = [
+          ...state,
+          Todo(
+            id: newId,
+            title: title,
+          ),
+        ];
+      },
+    );
     updateTodoList();
   }
 
-  void deleteTodoList(int id) {
-    state.removeWhere((todo) => todo.id != id);
+  void deleteTodoList(String id) {
+    state.removeWhere((todo) {
+      return todo.id == id;
+    });
     updateTodoList();
   }
 
-  void toggleIsCompleted(int id) {
+  void toggleIsCompleted(String id) {
     state = [
       for (final todo in state)
         if (todo.id == id)
@@ -50,7 +69,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     updateTodoList();
   }
 
-  void toggleIsFavorite(int id) {
+  void toggleIsFavorite(String id) {
     state = [
       for (final todo in state)
         if (todo.id == id)

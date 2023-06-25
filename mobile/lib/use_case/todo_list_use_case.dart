@@ -9,6 +9,10 @@ class TodoListUseCase {
     return todoListRepository.fetchAllTodoList();
   }
 
+  Stream<List<String>> fetchAllTodoIdList() {
+    return todoListRepository.fetchAllTodoIdList();
+  }
+
   Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
     return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
   }
