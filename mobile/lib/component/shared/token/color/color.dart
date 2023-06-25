@@ -14,6 +14,8 @@ const Color secondary5 = Color(0xffE7A15F);
 
 const Color tertiary = Color(0xFFF44336);
 
+const Color yellow = Color(0xFFFFEB3B);
+
 const Color white = Color(0xffFFFFFF);
 
 Color gray = const Color(0xffa9a9a9);

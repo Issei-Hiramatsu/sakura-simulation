@@ -31,8 +31,14 @@ class EventListView extends StatelessWidget {
               child: ListView.builder(
                 itemCount: eventList.length,
                 itemBuilder: (BuildContext context, int index) {
+                  final sortedEventList = [
+                    ...eventList.where((todo) => todo.isFavorite),
+                    ...eventList.where((todo) => !todo.isFavorite),
+                  ];
                   return EventCard(
-                    title: eventList[index].title,
+                    isCompleted: sortedEventList[index].isCompleted,
+                    isFavorite: sortedEventList[index].isFavorite,
+                    title: sortedEventList[index].title,
                     eventTime: '09:00',
                   );
                 },
