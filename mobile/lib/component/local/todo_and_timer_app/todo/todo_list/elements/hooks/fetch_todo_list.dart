@@ -10,6 +10,12 @@ final fetchAllTodoList = StreamProvider.family(
         .fetchAllTodoList();
   },
 );
+final fetchAllFavoriteAndCompletedTodoList = StreamProvider.family(
+  (ref, arg) {
+    return TodoListUseCase(todoListRepository: TestTodoListRepository())
+        .fetchAllFavoriteAndCompletedTodoList();
+  },
+);
 
 final fetchAllCompletedTodoList = StreamProvider.family(
   (ref, arg) {

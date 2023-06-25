@@ -55,10 +55,12 @@ class EventPageLoaderByDate extends HookConsumerWidget {
       //FIXME: データの処理構造が違うかも
       itemCount: 100, //100で仮置きする。ただし増えすぎても負荷の原因となる気がするので検証してからこの値を変更してほしい。
       itemBuilder: (context, index) {
-        return ref.watch(fetchAllTodoList(context)).when(
-              data: (dataList) => EventListView(
-                eventList: dataList[focusedDate] ?? [],
-              ),
+        return ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
+              data: (dataList) {
+                return EventListView(
+                  eventList: dataList[focusedDate] ?? [],
+                );
+              },
               error: (error, _) => const Icon(Icons.error),
               loading: () => const Center(
                 child: CircularProgressIndicator(
@@ -70,6 +72,3 @@ class EventPageLoaderByDate extends HookConsumerWidget {
     );
   }
 }
-
-
-  // if (focusedDate == firstPageDate || focusedDay == lastPageDate) {}

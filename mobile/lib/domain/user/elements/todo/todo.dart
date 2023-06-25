@@ -17,6 +17,7 @@ class Todo with _$Todo {
 //TodoListの抽象クラス
 abstract class ITodoListRepository {
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList();
+  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList();
   Stream<Map<DateTime, List<Todo>>> fetchAllCompletedTodoList();
   Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteTodoList();
   Stream<List<Todo>> fetchTodoListByDate(DateTime date);

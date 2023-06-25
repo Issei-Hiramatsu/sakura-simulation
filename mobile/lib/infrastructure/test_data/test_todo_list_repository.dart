@@ -6,13 +6,13 @@ final testTodoList = {
     const Todo(
       id: 1,
       title: 'イベントに参加する',
-      isCompleted: true,
-      isFavorite: true,
+      isCompleted: false,
+      isFavorite: false,
     ),
     const Todo(
       id: 2,
       title: 'duo3.0を進める',
-      isCompleted: true,
+      isCompleted: false,
       isFavorite: true,
     ),
     const Todo(
@@ -48,6 +48,19 @@ class TestTodoListRepository extends ITodoListRepository {
   @override
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
     return Stream.value(testTodoList);
+  }
+
+  @override
+  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
+    Map<DateTime, List<Todo>> favoriteAndCompletedTodoList = {};
+    testTodoList.forEach((date, todo) {
+      List<Todo> favoriteAndCompletedTodo =
+          todo.where((todo) => todo.isCompleted || todo.isFavorite).toList();
+      if (favoriteAndCompletedTodo.isNotEmpty) {
+        favoriteAndCompletedTodoList[date] = favoriteAndCompletedTodo;
+      }
+    });
+    return Stream.value(favoriteAndCompletedTodoList);
   }
 
   @override
