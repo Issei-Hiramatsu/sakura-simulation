@@ -5,6 +5,7 @@ import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
 import '../../../../../use_case/todo_list_use_case.dart';
 import '../../../../../domain/user/elements/todo/todo.dart';
 
+//例のコード
 final fetchAllTodoIdList = StreamProvider.family(
   (ref, arg) {
     return TodoListUseCase(todoListRepository: TestTodoListRepository())
@@ -26,8 +27,9 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   void addTodoList(String title) {
     var uuid = const Uuid();
     var newId = uuid.v4();
-    //FIXME: 私には解決できない最初にのみ既存のIDを読み込むことができない
-    //関係でIDをチェックする工程がおろそかになってしまっている。
+    //FIXME: 最初にTodoを追加する際に限り既存のIDが読み込めないため新規Todoを追加することができない。
+    //そのためIDをチェックする工程がおろそかになってしまっている。
+    //checkNewId(newId);
     state = [
       ...state,
       Todo(
@@ -39,17 +41,17 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   }
 
 //例のコード
-  // String checkNewId(String newId) {
-  //   ref.watch(fetchAllTodoIdList(ref)).whenData(
-  //     (dataList) {
-  //       var uuid = const Uuid();
-  //       while (dataList.contains(newId)) {
-  //         newId = uuid.v4();
-  //       }
-  //     },
-  //   );
-  //   return newId;
-  // }
+  String checkNewId(String newId) {
+    ref.watch(fetchAllTodoIdList(ref)).whenData(
+      (dataList) {
+        var uuid = const Uuid();
+        while (dataList.contains(newId)) {
+          newId = uuid.v4();
+        }
+      },
+    );
+    return newId;
+  }
 
   void deleteTodoList(String id) {
     state.removeWhere((todo) {
@@ -71,6 +73,10 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todo,
     ];
+    state = [
+      ...state.where((todo) => !todo.isCompleted),
+      ...state.where((todo) => todo.isCompleted),
+    ];
     updateTodoList();
   }
 
@@ -87,7 +93,10 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todo,
     ];
-    sortTodoListByFavorite();
+    state = [
+      ...state.where((todo) => todo.isFavorite),
+      ...state.where((todo) => !todo.isFavorite),
+    ];
     updateTodoList();
   }
 
@@ -101,12 +110,5 @@ class TodoListNotifier extends Notifier<List<Todo>> {
           ),
           todoList: state,
         );
-  }
-
-  void sortTodoListByFavorite() {
-    state = [
-      ...state.where((todo) => todo.isFavorite),
-      ...state.where((todo) => !todo.isFavorite),
-    ];
   }
 }

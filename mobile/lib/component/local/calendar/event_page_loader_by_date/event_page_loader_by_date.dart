@@ -5,7 +5,7 @@ import 'package:preload_page_view/preload_page_view.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../shared/single/shared_dialog/shared_dialog.dart';
-import '../../todo_and_timer_app/todo/todo_list/elements/hooks/fetch_todo_list.dart';
+import '../../todo_and_timer_app/todo/hooks/fetch_todo_list.dart';
 import 'elements/event_list_and_graph/event_list_and_graph.dart';
 
 class EventPageLoaderByDate extends HookConsumerWidget {

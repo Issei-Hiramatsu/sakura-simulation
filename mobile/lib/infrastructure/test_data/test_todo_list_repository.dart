@@ -75,44 +75,6 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllCompletedTodoList() {
-    Map<DateTime, List<Todo>> completedTodoList = {};
-    testTodoList.forEach((date, todo) {
-      List<Todo> completedTodo =
-          todo.where((todo) => todo.isCompleted).toList();
-      if (completedTodo.isNotEmpty) {
-        completedTodoList[date] = completedTodo;
-      }
-    });
-    return Stream.value(completedTodoList);
-  }
-
-  @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteTodoList() {
-    Map<DateTime, List<Todo>> favoriteTodoList = {};
-    testTodoList.forEach((date, todo) {
-      List<Todo> favoriteTodo = todo.where((todo) => todo.isFavorite).toList();
-      if (favoriteTodo.isNotEmpty) {
-        favoriteTodoList[date] = favoriteTodo;
-      }
-    });
-    return Stream.value(favoriteTodoList);
-  }
-
-  @override
-  Stream<List<Todo>> fetchTodoListByDate(DateTime date) {
-    return Stream.value(testTodoList[date] ?? []);
-  }
-
-  @override
-  Stream<List<Todo>> fetchLatestTodoList() {
-    final sortedList = testTodoList.entries.toList()
-      ..sort((a, b) => a.key.compareTo(b.key));
-    final latestList = sortedList.last;
-    return Stream.value(testTodoList[latestList.key] ?? []);
-  }
-
-  @override
   void updateTodoList(DateTime date, List<Todo> todoList) {
     testTodoList[date] = todoList;
   }

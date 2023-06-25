@@ -17,22 +17,6 @@ class TodoListUseCase {
     return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
   }
 
-  Stream<Map<DateTime, List<Todo>>> fetchAllCompletedTodoList() {
-    return todoListRepository.fetchAllCompletedTodoList();
-  }
-
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteTodoList() {
-    return todoListRepository.fetchAllFavoriteTodoList();
-  }
-
-  Stream<List<Todo>> fetchTodoListByDate({required DateTime date}) {
-    return todoListRepository.fetchTodoListByDate(date);
-  }
-
-  Stream<List<Todo>> fetchLatestTodoList() {
-    return todoListRepository.fetchLatestTodoList();
-  }
-
   void updateTodoList({required DateTime date, required List<Todo> todoList}) {
     return todoListRepository.updateTodoList(date, todoList);
   }
