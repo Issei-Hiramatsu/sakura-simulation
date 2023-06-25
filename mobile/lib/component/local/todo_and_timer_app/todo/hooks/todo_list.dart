@@ -39,17 +39,17 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   }
 
 //例のコード
-  String checkNewId(String newId) {
-    ref.watch(fetchAllTodoIdList(ref)).whenData(
-      (dataList) {
-        var uuid = const Uuid();
-        while (dataList.contains(newId)) {
-          newId = uuid.v4();
-        }
-      },
-    );
-    return newId;
-  }
+  // String checkNewId(String newId) {
+  //   ref.watch(fetchAllTodoIdList(ref)).whenData(
+  //     (dataList) {
+  //       var uuid = const Uuid();
+  //       while (dataList.contains(newId)) {
+  //         newId = uuid.v4();
+  //       }
+  //     },
+  //   );
+  //   return newId;
+  // }
 
   void deleteTodoList(String id) {
     state.removeWhere((todo) {
@@ -92,6 +92,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   }
 
   void updateTodoList() {
+    state = [...state];
     ref.read(updateTodoListProvider).updateTodoList(
           date: DateTime(
             DateTime.now().year,

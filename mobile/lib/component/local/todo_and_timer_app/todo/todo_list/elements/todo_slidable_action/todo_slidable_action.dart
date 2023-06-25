@@ -19,7 +19,10 @@ class TodoSlidableAction extends StatelessWidget {
       closeOnScroll: true,
       endActionPane: ActionPane(
         extentRatio: 0.25,
-        dismissible: DismissiblePane(onDismissed: onDismissed),
+        dismissible: DismissiblePane(
+          onDismissed: () => onDismissed(),
+          closeOnCancel: true,
+        ),
         motion: const ScrollMotion(),
         children: [
           SlidableAction(

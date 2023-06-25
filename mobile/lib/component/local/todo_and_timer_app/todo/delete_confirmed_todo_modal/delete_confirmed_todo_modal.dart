@@ -29,6 +29,7 @@ Future deleteConfirmedTodoModal(
         cancelButton: CupertinoActionSheetAction(
           isDefaultAction: true,
           onPressed: () {
+            ref.read(todoListProvider.notifier).updateTodoList();
             NavigatorPop(context);
           },
           child: const Text('キャンセル'),
