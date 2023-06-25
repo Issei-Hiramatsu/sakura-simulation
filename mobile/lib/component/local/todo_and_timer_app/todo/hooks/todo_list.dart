@@ -11,7 +11,7 @@ final fetchLatestTodoList = StreamProvider.family(
   },
 );
 
-final updateTodoList = Provider(
+final updateTodoListProvider = Provider(
     (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
 
 final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
@@ -33,14 +33,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         title: title,
       ),
     ];
-    ref.read(updateTodoList).updateTodoList(
-          date: DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-          ),
-          todoList: state,
-        );
+    updateTodoList();
   }
 
   void toggleIsCompleted(int id) {
@@ -56,14 +49,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todo,
     ];
-    ref.read(updateTodoList).updateTodoList(
-          date: DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-          ),
-          todoList: state,
-        );
+    updateTodoList();
   }
 
   void toggleIsFavorite(int id) {
@@ -78,6 +64,26 @@ class TodoListNotifier extends Notifier<List<Todo>> {
           )
         else
           todo,
+    ];
+    sortTodoListByFavorite();
+    updateTodoList();
+  }
+
+  void updateTodoList() {
+    ref.read(updateTodoListProvider).updateTodoList(
+          date: DateTime(
+            DateTime.now().year,
+            DateTime.now().month,
+            DateTime.now().day,
+          ),
+          todoList: state,
+        );
+  }
+
+  void sortTodoListByFavorite() {
+    state = [
+      ...state.where((todo) => todo.isFavorite),
+      ...state.where((todo) => !todo.isFavorite),
     ];
   }
 }

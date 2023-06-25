@@ -18,6 +18,13 @@ final fetchAllCompletedTodoList = StreamProvider.family(
   },
 );
 
+final fetchAllFavoriteTodoList = StreamProvider.family(
+  (ref, arg) {
+    return TodoListUseCase(todoListRepository: TestTodoListRepository())
+        .fetchAllFavoriteTodoList();
+  },
+);
+
 final fetchTodoListByDate = StreamProvider.family(
   (ref, DateTime date) {
     return TodoListUseCase(todoListRepository: TestTodoListRepository())

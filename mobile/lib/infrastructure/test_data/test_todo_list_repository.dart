@@ -64,6 +64,18 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
+  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteTodoList() {
+    Map<DateTime, List<Todo>> favoriteTodoList = {};
+    testTodoList.forEach((date, todo) {
+      List<Todo> favoriteTodo = todo.where((todo) => todo.isFavorite).toList();
+      if (favoriteTodo.isNotEmpty) {
+        favoriteTodoList[date] = favoriteTodo;
+      }
+    });
+    return Stream.value(favoriteTodoList);
+  }
+
+  @override
   Stream<List<Todo>> fetchTodoListByDate(DateTime date) {
     return Stream.value(testTodoList[date] ?? []);
   }
