@@ -29,9 +29,7 @@ class PomodoroTimerPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          PomodoroTimer(
-            user: user,
-          ),
+          PomodoroTimer(user: user),
           SpaceBox(height: 12.sp),
           Expanded(
             child: TodoList(
