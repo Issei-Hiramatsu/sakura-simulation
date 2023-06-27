@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../timer_review/hooks/use_stop_watch.dart';
 import 'elements/timer_control_buttons/timer_control_buttons.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
 import '/domain/user/user.dart';
@@ -50,6 +51,7 @@ class PomodoroTimer extends ConsumerWidget {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
                     .resetTimer(user.timerSettings!.workTime * 60);
+                ref.read(useStopUseStopWatchProvider.notifier).startTimer();
                 NavigatorPush(context,
                     page: TimerReviewPage(
                       user: user,
