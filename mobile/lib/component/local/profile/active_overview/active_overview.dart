@@ -16,7 +16,7 @@ class ActiveOverView extends StatelessWidget {
             return Container(
               width: 12,
               height: 12,
-              margin: EdgeInsets.all(2),
+              margin: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(2),
@@ -26,7 +26,7 @@ class ActiveOverView extends StatelessWidget {
           return Container(
             width: 12,
             height: 12,
-            margin: EdgeInsets.all(2),
+            margin: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               color: Color.lerp(
                 Colors.white,

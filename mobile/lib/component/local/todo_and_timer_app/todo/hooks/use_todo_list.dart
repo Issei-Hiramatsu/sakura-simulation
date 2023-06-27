@@ -5,14 +5,6 @@ import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
 import '../../../../../use_case/todo_list_use_case.dart';
 import '../../../../../domain/user/elements/todo/todo.dart';
 
-//例のコード
-final fetchAllTodoIdList = StreamProvider.family(
-  (ref, arg) {
-    return TodoListUseCase(todoListRepository: TestTodoListRepository())
-        .fetchAllTodoIdList();
-  },
-);
-
 final updateTodoListProvider = Provider(
     (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
 
@@ -26,10 +18,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
 
   void addTodoList(String title) {
     var uuid = const Uuid();
-    var newId = uuid.v4();
-    //FIXME: 最初にTodoを追加する際に限り既存のIDが読み込めないため新規Todoを追加することができない。
-    //そのためIDをチェックする工程がおろそかになってしまっている。
-    //checkNewId(newId);
+    var newId = uuid.v1();
     state = [
       ...state,
       Todo(
@@ -38,19 +27,6 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       ),
     ];
     updateTodoList();
-  }
-
-//例のコード
-  String checkNewId(String newId) {
-    ref.watch(fetchAllTodoIdList(ref)).whenData(
-      (dataList) {
-        var uuid = const Uuid();
-        while (dataList.contains(newId)) {
-          newId = uuid.v4();
-        }
-      },
-    );
-    return newId;
   }
 
   void deleteTodoList(String id) {
