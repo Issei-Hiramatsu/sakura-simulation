@@ -26,7 +26,7 @@ class UsePomodoroTimer extends Notifier<int> {
         final remain = _createTime!.difference(DateTime.now());
         if (remain > Duration.zero) {
           state = remain.inSeconds;
-        } else {}
+        }
       },
     );
   }

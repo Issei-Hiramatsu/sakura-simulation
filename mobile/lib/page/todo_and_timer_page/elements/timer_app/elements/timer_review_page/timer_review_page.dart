@@ -26,7 +26,10 @@ class TimerReviewPage extends ConsumerWidget {
       backgroundColor: white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: TimerReviewAppBar(user: user),
+        child: TimerReviewAppBar(
+          user: user,
+          workSeconds: workSeconds,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

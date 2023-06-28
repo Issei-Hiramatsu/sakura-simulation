@@ -20,9 +20,25 @@ class PomodoroTimer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    void initiateReviewStopWatchWorkflow(int workSeconds) {
+      ref.read(useStopUseStopWatchProvider.notifier).startTimer();
+      NavigatorPush(context,
+          page: TimerReviewPage(
+            user: user,
+            workSeconds: workSeconds,
+          ));
+    }
+
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
+    final workSeconds = user.timerSettings!.workTime * 60 - remainSeconds;
     final displayTime =
         Duration(seconds: remainSeconds).toString().substring(2, 7);
+    if (remainSeconds == 0) {
+      ref
+          .read(usePomodoroTimerProvider.notifier)
+          .resetTimer(user.timerSettings!.workTime * 60);
+      initiateReviewStopWatchWorkflow(workSeconds);
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -46,17 +62,10 @@ class PomodoroTimer extends ConsumerWidget {
                   .read(usePomodoroTimerProvider.notifier)
                   .resumeTimer(remainSeconds),
               resetTimer: () {
-                final workSeconds =
-                    user.timerSettings!.workTime * 60 - remainSeconds;
                 ref
                     .read(usePomodoroTimerProvider.notifier)
                     .resetTimer(user.timerSettings!.workTime * 60);
-                ref.read(useStopUseStopWatchProvider.notifier).startTimer();
-                NavigatorPush(context,
-                    page: TimerReviewPage(
-                      user: user,
-                      workSeconds: workSeconds,
-                    ));
+                initiateReviewStopWatchWorkflow(workSeconds);
               }),
         ),
       ],

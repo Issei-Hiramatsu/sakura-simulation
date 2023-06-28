@@ -10,9 +10,9 @@ class SakuraReviewScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final stopwatch = ref.watch(useStopUseStopWatchProvider);
+    final elapsedTime = ref.watch(useStopUseStopWatchProvider);
     final displayTime =
-        '${(stopwatch.inHours).toString().padLeft(2, '0')}:${(stopwatch.inMinutes % 60).toString().padLeft(2, '0')}:${(stopwatch.inSeconds % 60).toString().padLeft(2, '0')}';
+        '${(elapsedTime.inHours).toString().padLeft(2, '0')}:${(elapsedTime.inMinutes % 60).toString().padLeft(2, '0')}:${(elapsedTime.inSeconds % 60).toString().padLeft(2, '0')}';
 
     return Column(
       children: [

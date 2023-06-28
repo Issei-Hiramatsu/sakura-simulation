@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
-import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/timer_review_page/hooks/temp_timer_log.dart';
 
+import '../../../../../../todo_and_timer_app/timer/timer_review/hooks/temp_timer_log.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
