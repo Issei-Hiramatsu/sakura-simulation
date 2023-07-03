@@ -12,7 +12,7 @@ final defaultData = [
     timerDetail: const Timer(
       workTime: 25,
       breakTime: 5,
-      timerLog: [],
+      timerLog: {},
     ),
     firstTimeUsing: DateTime.utc(2023, 4, 1),
     todoList: [],

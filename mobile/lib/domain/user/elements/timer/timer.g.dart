@@ -7,16 +7,21 @@ part of 'timer.dart';
 // **************************************************************************
 
 _$_Timer _$$_TimerFromJson(Map<String, dynamic> json) => _$_Timer(
-      timerLog: (json['timerLog'] as List<dynamic>?)
-              ?.map((e) => Duration(microseconds: e as int))
-              .toList() ??
-          const [],
+      timerLog: (json['timerLog'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(
+                k,
+                (e as List<dynamic>)
+                    .map((e) => Duration(microseconds: e as int))
+                    .toList()),
+          ) ??
+          const {},
       workTime: json['workTime'] as int? ?? 25,
       breakTime: json['breakTime'] as int? ?? 5,
     );
 
 Map<String, dynamic> _$$_TimerToJson(_$_Timer instance) => <String, dynamic>{
-      'timerLog': instance.timerLog.map((e) => e.inMicroseconds).toList(),
+      'timerLog': instance.timerLog
+          .map((k, e) => MapEntry(k, e.map((e) => e.inMicroseconds).toList())),
       'workTime': instance.workTime,
       'breakTime': instance.breakTime,
     };

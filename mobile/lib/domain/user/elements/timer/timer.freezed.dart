@@ -20,7 +20,8 @@ Timer _$TimerFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Timer {
-  List<Duration> get timerLog => throw _privateConstructorUsedError;
+  Map<String, List<Duration>> get timerLog =>
+      throw _privateConstructorUsedError;
   int get workTime => throw _privateConstructorUsedError;
   int get breakTime => throw _privateConstructorUsedError;
 
@@ -34,7 +35,8 @@ abstract class $TimerCopyWith<$Res> {
   factory $TimerCopyWith(Timer value, $Res Function(Timer) then) =
       _$TimerCopyWithImpl<$Res, Timer>;
   @useResult
-  $Res call({List<Duration> timerLog, int workTime, int breakTime});
+  $Res call(
+      {Map<String, List<Duration>> timerLog, int workTime, int breakTime});
 }
 
 /// @nodoc
@@ -58,7 +60,7 @@ class _$TimerCopyWithImpl<$Res, $Val extends Timer>
       timerLog: null == timerLog
           ? _value.timerLog
           : timerLog // ignore: cast_nullable_to_non_nullable
-              as List<Duration>,
+              as Map<String, List<Duration>>,
       workTime: null == workTime
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -77,7 +79,8 @@ abstract class _$$_TimerCopyWith<$Res> implements $TimerCopyWith<$Res> {
       __$$_TimerCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Duration> timerLog, int workTime, int breakTime});
+  $Res call(
+      {Map<String, List<Duration>> timerLog, int workTime, int breakTime});
 }
 
 /// @nodoc
@@ -97,7 +100,7 @@ class __$$_TimerCopyWithImpl<$Res> extends _$TimerCopyWithImpl<$Res, _$_Timer>
       timerLog: null == timerLog
           ? _value._timerLog
           : timerLog // ignore: cast_nullable_to_non_nullable
-              as List<Duration>,
+              as Map<String, List<Duration>>,
       workTime: null == workTime
           ? _value.workTime
           : workTime // ignore: cast_nullable_to_non_nullable
@@ -114,7 +117,7 @@ class __$$_TimerCopyWithImpl<$Res> extends _$TimerCopyWithImpl<$Res, _$_Timer>
 @JsonSerializable()
 class _$_Timer implements _Timer {
   const _$_Timer(
-      {final List<Duration> timerLog = const [],
+      {final Map<String, List<Duration>> timerLog = const {},
       this.workTime = 25,
       this.breakTime = 5})
       : _timerLog = timerLog;
@@ -122,13 +125,13 @@ class _$_Timer implements _Timer {
   factory _$_Timer.fromJson(Map<String, dynamic> json) =>
       _$$_TimerFromJson(json);
 
-  final List<Duration> _timerLog;
+  final Map<String, List<Duration>> _timerLog;
   @override
   @JsonKey()
-  List<Duration> get timerLog {
-    if (_timerLog is EqualUnmodifiableListView) return _timerLog;
+  Map<String, List<Duration>> get timerLog {
+    if (_timerLog is EqualUnmodifiableMapView) return _timerLog;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_timerLog);
+    return EqualUnmodifiableMapView(_timerLog);
   }
 
   @override
@@ -176,14 +179,14 @@ class _$_Timer implements _Timer {
 
 abstract class _Timer implements Timer {
   const factory _Timer(
-      {final List<Duration> timerLog,
+      {final Map<String, List<Duration>> timerLog,
       final int workTime,
       final int breakTime}) = _$_Timer;
 
   factory _Timer.fromJson(Map<String, dynamic> json) = _$_Timer.fromJson;
 
   @override
-  List<Duration> get timerLog;
+  Map<String, List<Duration>> get timerLog;
   @override
   int get workTime;
   @override
