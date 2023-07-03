@@ -16,6 +16,6 @@ class Timer with _$Timer {
 
 //グラフに表示する際は大きさごとに並び替えるので大きい順に取得するものを作成する
 abstract class ITimerLogRepository {
-  Stream<Map<DateTime, Map<String, Duration>>> fetchAllTimerLog();
-  void updateTimerLog(DateTime date, Map<String, Duration> timerLog);
+  Stream<Map<DateTime, Map<String, List<Duration>>>> fetchAllTimerLog();
+  void updateTimerLog(DateTime date, String workedType, Duration workedTime);
 }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '../../../../../../todo_and_timer_app/timer/timer_review/hooks/temp_timer_log.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
 class EventGraph extends StatelessWidget {
-  const EventGraph({super.key});
+  const EventGraph({
+    super.key,
+    required this.timerLog,
+  });
 
+  final Map<String, List<Duration>> timerLog;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +37,7 @@ class EventGraph extends StatelessWidget {
                   GraphDetailCard(
                     title: '集中時間',
                     timeText:
-                        '${tempTimerLog[DateTime(2023, 4, 1)]!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
+                        '${timerLog['集中時間']!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
                     barColor: primary,
                   ),
                   const SpaceBox(width: 8),

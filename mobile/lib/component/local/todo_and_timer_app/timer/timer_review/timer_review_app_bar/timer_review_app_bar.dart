@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_review/timer_review_app_bar/hooks/use_timer_review.dart';
 
-import '../../../../../../importer.dart';
-import '../../../../../../page/sakura_simulation_app.dart';
+import '/importer.dart';
+import '/page/sakura_simulation_app.dart';
 import '../../../../../shared/single/shared_app_bar/shared_app_bar.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
 import '../hooks/use_stop_watch.dart';
@@ -21,13 +21,17 @@ class TimerReviewAppBar extends ConsumerWidget {
     return SharedAppBar(
       leading: IconButton(
           onPressed: () {
-            ref
-                .read(updateTimerLogProvider)
-                .updateTodoList(date: DateTime(2023, 4, 1), timerLog: {
-              'workTime': Duration(
-                seconds: workSeconds + elapsedTime.inSeconds,
-              )
-            });
+            ref.read(updateTimerLogProvider).updateTodoList(
+                  date: DateTime(
+                    DateTime.now().year,
+                    DateTime.now().month,
+                    DateTime.now().day,
+                  ),
+                  workedType: 'workTime',
+                  workedTime: Duration(
+                    seconds: workSeconds + elapsedTime.inSeconds,
+                  ),
+                );
             ref.read(useStopUseStopWatchProvider.notifier).resetTimer();
             NavigatorPushReplacement(context,
                 page: const SakuraSimulationApp(pageIndex: 2));
