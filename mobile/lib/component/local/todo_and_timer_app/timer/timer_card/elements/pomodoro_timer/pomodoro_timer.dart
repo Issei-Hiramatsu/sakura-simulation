@@ -22,11 +22,7 @@ class PomodoroTimer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     void initiateReviewStopWatchWorkflow(int workSeconds) {
       ref.read(useStopUseStopWatchProvider.notifier).startTimer();
-      NavigatorPush(context,
-          page: TimerReviewPage(
-            user: user,
-            workSeconds: workSeconds,
-          ));
+      NavigatorPush(context, page: TimerReviewPage(workSeconds: workSeconds));
     }
 
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
