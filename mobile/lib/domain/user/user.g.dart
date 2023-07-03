@@ -11,10 +11,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       email: json['email'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       userImagePath: json['userImagePath'] as String? ?? '',
-      timerSettings: json['timerSettings'] == null
-          ? null
-          : TimerSettings.fromJson(
-              json['timerSettings'] as Map<String, dynamic>),
+      timerDetail: Timer.fromJson(json['timerDetail'] as Map<String, dynamic>),
       accountLevel:
           $enumDecodeNullable(_$AccountLevelEnumMap, json['accountLevel']) ??
               AccountLevel.guest,
@@ -22,9 +19,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
               ?.map((e) => Todo.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
-      firstTimeUsing: json['firstTimeUsing'] == null
-          ? null
-          : DateTime.parse(json['firstTimeUsing'] as String),
+      firstTimeUsing: DateTime.parse(json['firstTimeUsing'] as String),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -32,10 +27,10 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'email': instance.email,
       'userName': instance.userName,
       'userImagePath': instance.userImagePath,
-      'timerSettings': instance.timerSettings,
+      'timerDetail': instance.timerDetail,
       'accountLevel': _$AccountLevelEnumMap[instance.accountLevel]!,
       'todoList': instance.todoList,
-      'firstTimeUsing': instance.firstTimeUsing?.toIso8601String(),
+      'firstTimeUsing': instance.firstTimeUsing.toIso8601String(),
     };
 
 const _$AccountLevelEnumMap = {

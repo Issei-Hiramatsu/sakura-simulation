@@ -30,13 +30,13 @@ class PomodoroTimer extends ConsumerWidget {
     }
 
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
-    final workSeconds = user.timerSettings!.workTime * 60 - remainSeconds;
+    final workSeconds = user.timerDetail.workTime * 60 - remainSeconds;
     final displayTime =
         Duration(seconds: remainSeconds).toString().substring(2, 7);
     if (remainSeconds == 0) {
       ref
           .read(usePomodoroTimerProvider.notifier)
-          .resetTimer(user.timerSettings!.workTime * 60);
+          .resetTimer(user.timerDetail.workTime * 60);
       initiateReviewStopWatchWorkflow(workSeconds);
     }
     return Column(
@@ -55,7 +55,7 @@ class PomodoroTimer extends ConsumerWidget {
           child: TimerControlButtons(
               startTimer: () => ref
                   .read(usePomodoroTimerProvider.notifier)
-                  .startTimer(user.timerSettings!.workTime * 60),
+                  .startTimer(user.timerDetail.workTime * 60),
               stopTimer: () =>
                   ref.read(usePomodoroTimerProvider.notifier).stopTimer(),
               resumeTimer: () => ref
@@ -64,7 +64,7 @@ class PomodoroTimer extends ConsumerWidget {
               resetTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .resetTimer(user.timerSettings!.workTime * 60);
+                    .resetTimer(user.timerDetail.workTime * 60);
                 initiateReviewStopWatchWorkflow(workSeconds);
               }),
         ),

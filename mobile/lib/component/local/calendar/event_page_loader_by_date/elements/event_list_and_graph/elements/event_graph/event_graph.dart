@@ -34,7 +34,6 @@ class EventGraph extends StatelessWidget {
                   GraphDetailCard(
                     title: '集中時間',
                     timeText:
-                        //FIXME:
                         '${tempTimerLog[DateTime(2023, 4, 1)]!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
                     barColor: primary,
                   ),

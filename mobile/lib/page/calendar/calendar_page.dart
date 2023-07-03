@@ -35,9 +35,9 @@ class CalendarPage extends HookWidget {
     );
     final kToday = DateTime.now();
     final kFirstDay = DateTime(
-      user.firstTimeUsing!.year,
-      user.firstTimeUsing!.month,
-      user.firstTimeUsing!.day,
+      user.firstTimeUsing.year,
+      user.firstTimeUsing.month,
+      user.firstTimeUsing.day,
     );
     final kLastDay = DateTime(
       kToday.year,
