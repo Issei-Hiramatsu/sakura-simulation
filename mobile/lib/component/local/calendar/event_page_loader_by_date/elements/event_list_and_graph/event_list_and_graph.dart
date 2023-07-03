@@ -4,6 +4,7 @@ import 'package:sakura_simulation/component/local/calendar/event_page_loader_by_
 import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_review/hooks/fetch_timer_log.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
 import '../../../../todo_and_timer_app/todo/hooks/fetch_todo_list.dart';
 import 'elements/event_card/event_card.dart';
 
@@ -38,9 +39,7 @@ class EventListView extends ConsumerWidget {
                   );
                 },
                 error: (error, _) => const Icon(Icons.error),
-                loading: () => const Center(
-                  child: CircularProgressIndicator(color: primary),
-                ),
+                loading: () => const SharedCircularProgressIndicator(),
               ),
           ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
                 data: (dataList) {
@@ -64,8 +63,7 @@ class EventListView extends ConsumerWidget {
                   );
                 },
                 error: (error, _) => const Icon(Icons.error),
-                loading: () => const Center(
-                    child: CircularProgressIndicator(color: primary)),
+                loading: () => const SharedCircularProgressIndicator(),
               ),
         ],
       ),
