@@ -37,7 +37,3 @@ class TestTimerLogRepository extends ITimerLogRepository {
     };
   }
 }
-
-  // final timeLogListByDate = testTimerLog[date] ?? {};
-  //   timeLogListByDate[workedType] ?? [].add(workedTime);
-  //   testTimerLog[date] = timeLogListByDate;

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import '../../../../../../../../../shared/token/color/color.dart';
 
 class RotatedBarGraph extends StatelessWidget {
-  const RotatedBarGraph({super.key});
+  const RotatedBarGraph({super.key, required this.focusedMinutes});
 
+  final int focusedMinutes;
   @override
   Widget build(BuildContext context) {
     return RotatedBox(
@@ -26,10 +27,12 @@ class RotatedBarGraph extends StatelessWidget {
                   toY: 100, //ここにトータルの分数
                   width: 40,
                   rodStackItems: [
-                    BarChartRodStackItem(0, 80, primary),
-                    BarChartRodStackItem(80, 90, secondary),
-                    BarChartRodStackItem(90, 95, black),
-                    BarChartRodStackItem(0, 0, secondary),
+                    focusedMinutes == 0
+                        ? BarChartRodStackItem(0, 0, primary)
+                        : BarChartRodStackItem(0, 100, primary)
+                    // BarChartRodStackItem(80, 90, secondary),
+                    // BarChartRodStackItem(90, 95, black),
+                    //BarChartRodStackItem(0, 0, secondary),
                   ],
                 ),
               ],
