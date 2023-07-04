@@ -25,11 +25,19 @@ class TestTimerLogRepository extends ITimerLogRepository {
   }
 
   @override
-  void updateTimerLog(
-    DateTime date,
-    String workedType,
-    Duration workedTime,
-  ) {
-    testTimerLog[date]![workedType]!.add(workedTime);
+  void updateTimerLog(DateTime date, String workedType, Duration workedTime) {
+    final timerLogByDate = testTimerLog[date] ?? {};
+    final timerLogByDateByWorkedType = timerLogByDate[workedType] ?? [];
+    testTimerLog[date] = {
+      ...timerLogByDate,
+      workedType: [
+        ...timerLogByDateByWorkedType,
+        workedTime,
+      ],
+    };
   }
 }
+
+  // final timeLogListByDate = testTimerLog[date] ?? {};
+  //   timeLogListByDate[workedType] ?? [].add(workedTime);
+  //   testTimerLog[date] = timeLogListByDate;

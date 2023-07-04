@@ -27,12 +27,13 @@ class TimerReviewAppBar extends ConsumerWidget {
                     DateTime.now().month,
                     DateTime.now().day,
                   ),
-                  workedType: 'workTime',
+                  workedType: '集中時間',
                   workedTime: Duration(
                     seconds: workSeconds + elapsedTime.inSeconds,
                   ),
                 );
             ref.read(useStopUseStopWatchProvider.notifier).resetTimer();
+
             NavigatorPushReplacement(context,
                 page: const SakuraSimulationApp(pageIndex: 2));
           },

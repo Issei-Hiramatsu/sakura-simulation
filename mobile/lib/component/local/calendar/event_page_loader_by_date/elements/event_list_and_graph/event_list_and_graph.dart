@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/calendar/event_page_loader_by_date/elements/event_list_and_graph/elements/event_graph/event_graph.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_review/hooks/fetch_timer_log.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
-import '../../../../todo_and_timer_app/todo/hooks/fetch_todo_list.dart';
 import 'elements/event_card/event_card.dart';
+import 'elements/event_graph/event_graph.dart';
+import 'hooks/fetch_timer_log.dart';
+import 'hooks/fetch_todo_list.dart';
 
 class EventListView extends ConsumerWidget {
   const EventListView({
