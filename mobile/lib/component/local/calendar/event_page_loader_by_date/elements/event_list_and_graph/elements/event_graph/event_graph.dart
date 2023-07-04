@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
-import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/timer_review_page/hooks/temp_timer_log.dart';
 
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
 class EventGraph extends StatelessWidget {
-  const EventGraph({super.key});
+  const EventGraph({
+    super.key,
+    required this.timerLog,
+  });
 
+  final Map<String, List<Duration>> timerLog;
   @override
   Widget build(BuildContext context) {
+    final focusedMinutes = timerLog['集中時間']!.fold(
+        0,
+        (int previousValue, Duration duration) =>
+            previousValue + duration.inMinutes);
     return Container(
       height: 130.sp,
       decoration: BoxDecoration(
@@ -26,22 +33,23 @@ class EventGraph extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('振り返り', style: caption1Bold(black)),
-            const Expanded(child: RotatedBarGraph()),
+            Expanded(
+                child: RotatedBarGraph(
+              focusedMinutes: focusedMinutes,
+            )),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 children: [
                   GraphDetailCard(
                     title: '集中時間',
-                    timeText:
-                        //FIXME:
-                        '${tempTimerLog[DateTime(2023, 4, 1)]!.fold(0, (int previousValue, Duration duration) => previousValue + duration.inMinutes)}分',
+                    timeText: '$focusedMinutes分',
                     barColor: primary,
                   ),
                   const SpaceBox(width: 8),
                   const GraphDetailCard(
                     title: '休憩時間',
-                    timeText: '5分',
+                    timeText: '0分',
                     barColor: secondary,
                   ),
                 ],

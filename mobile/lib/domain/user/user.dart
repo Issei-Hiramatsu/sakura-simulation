@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'elements/account_level/account_level.dart';
-import 'elements/timer_settings/timer_settings.dart';
+import 'elements/timer/timer.dart';
 import 'elements/todo/todo.dart';
 
 part 'user.freezed.dart';
@@ -14,10 +14,10 @@ class User with _$User {
     @Default('') String email,
     @Default('') String userName,
     @Default('') String userImagePath,
-    TimerSettings? timerSettings,
+    required Timer timerDetail,
     @Default(AccountLevel.guest) AccountLevel accountLevel,
     @Default([]) List<Todo> todoList,
-    DateTime? firstTimeUsing, //カレンダー日程を決めるため
+    required DateTime firstTimeUsing, //カレンダー日程を決めるため
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

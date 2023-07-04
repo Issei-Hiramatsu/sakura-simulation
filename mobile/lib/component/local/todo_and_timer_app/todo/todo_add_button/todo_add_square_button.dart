@@ -3,8 +3,8 @@ import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'elements/add_todo_modal.dart';
 
-class TodoAddButton extends ConsumerWidget {
-  const TodoAddButton({super.key});
+class TodoAddSquareButton extends ConsumerWidget {
+  const TodoAddSquareButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

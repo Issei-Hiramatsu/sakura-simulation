@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../component/local/todo_and_timer_app/todo/hooks/use_todo_list.dart';
-import '../../../../component/local/todo_and_timer_app/todo/todo_add_button.dart/todo_add_button.dart';
+import '../../../../component/local/todo_and_timer_app/todo/todo_add_button/todo_add_square_button.dart';
 import '../../../../component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 
 class TodoAppPage extends ConsumerWidget {
@@ -16,7 +16,7 @@ class TodoAppPage extends ConsumerWidget {
         Expanded(
           child: TodoList(todoList: todoList),
         ),
-        const TodoAddButton(),
+        const TodoAddSquareButton(),
       ],
     );
   }

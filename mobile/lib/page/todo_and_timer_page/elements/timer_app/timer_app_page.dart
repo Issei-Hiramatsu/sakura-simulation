@@ -34,10 +34,10 @@ class TimerAppPage extends ConsumerWidget {
                         TimerState.notStarted;
                     ref
                         .read(usePomodoroTimerProvider.notifier)
-                        .resetTimer(user.timerSettings!.workTime * 60);
+                        .resetTimer(user.timerDetail.workTime * 60);
                   },
                   text: 'ポモドーロタイマーを起動する',
-                  workTime: user.timerSettings!.workTime,
+                  workTime: user.timerDetail.workTime,
                   timerPage: PomodoroTimerPage(user: user),
                 ),
               );
