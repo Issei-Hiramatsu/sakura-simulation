@@ -4,7 +4,7 @@ import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
 import 'elements/event_card/event_card.dart';
-import 'elements/event_graph/event_graph.dart';
+import 'elements/review_graph/review_graph.dart';
 import 'hooks/fetch_timer_log.dart';
 import 'hooks/fetch_todo_list.dart';
 
@@ -30,7 +30,7 @@ class EventListView extends ConsumerWidget {
                 data: (dataList) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: EventGraph(
+                    child: ReviewGraph(
                       timerLog: dataList[focusedDate] ??
                           {
                             '集中時間': [const Duration(seconds: 0)]

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
-class EventGraph extends StatelessWidget {
-  const EventGraph({
+class ReviewGraph extends StatelessWidget {
+  const ReviewGraph({
     super.key,
     required this.timerLog,
   });
@@ -17,6 +18,7 @@ class EventGraph extends StatelessWidget {
         0,
         (int previousValue, Duration duration) =>
             previousValue + duration.inMinutes);
+    final displayFocusedTime = DateFormat.Hm(focusedMinutes);
     return Container(
       height: 130.sp,
       decoration: BoxDecoration(
@@ -43,7 +45,7 @@ class EventGraph extends StatelessWidget {
                 children: [
                   GraphDetailCard(
                     title: '集中時間',
-                    timeText: '$focusedMinutes分',
+                    timeText: '$displayFocusedTime',
                     barColor: primary,
                   ),
                   const SpaceBox(width: 8),
