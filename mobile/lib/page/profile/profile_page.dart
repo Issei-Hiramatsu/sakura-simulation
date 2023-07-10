@@ -3,11 +3,11 @@ import 'package:sakura_simulation/component/shared/token/space_box/space_box.dar
 
 import '../../component/local/profile/active_overview/active_overview.dart';
 
-class SlackProfilePage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   final String name;
   final String photoUrl;
 
-  const SlackProfilePage({
+  const ProfilePage({
     super.key,
     required this.name,
     required this.photoUrl,

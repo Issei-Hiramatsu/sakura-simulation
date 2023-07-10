@@ -24,7 +24,7 @@ class SakuraSimulationApp extends HookWidget {
       const HomePage(),
       TodoAndTimerPage(user: defaultUser),
       CalendarPage(user: defaultUser),
-      const SlackProfilePage(
+      const ProfilePage(
         name: 'Issei',
         photoUrl: '0',
       ),
