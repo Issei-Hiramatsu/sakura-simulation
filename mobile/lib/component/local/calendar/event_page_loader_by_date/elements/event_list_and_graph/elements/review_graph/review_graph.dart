@@ -4,8 +4,8 @@ import 'package:sakura_simulation/importer.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
-class EventGraph extends StatelessWidget {
-  const EventGraph({
+class ReviewGraph extends StatelessWidget {
+  const ReviewGraph({
     super.key,
     required this.timerLog,
   });
