@@ -25,8 +25,8 @@ class SakuraSimulationApp extends HookWidget {
       TodoAndTimerPage(user: defaultUser),
       CalendarPage(user: defaultUser),
       const ProfilePage(
-        name: 'Issei',
-        photoUrl: '0',
+        name: 'Issei-Hiramatsu',
+        photoUrl: 'assets/images/kkrn_user_icons/kkrn_icon_user_3.png',
       ),
     ];
     return SafeArea(
