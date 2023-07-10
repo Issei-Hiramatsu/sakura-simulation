@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '../../component/local/profile/user_profile_card/user_profile_card.dart';
 import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '../../component/local/profile/active_overview/active_overview.dart';
 
 class ProfilePage extends StatelessWidget {
-  final String name;
-  final String photoUrl;
-
   const ProfilePage({
+    //ここはUser引数に置換する予定
+
     super.key,
     required this.name,
     required this.photoUrl,
   });
+  final String name;
+  final String photoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -22,31 +23,8 @@ class ProfilePage extends StatelessWidget {
         child: SharedAppBar(titleText: 'メニュー', textStyle: titleMedium(white)),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          children: [
-            Container(
-              width: 80.sp,
-              height: 80.sp,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(photoUrl),
-                ),
-              ),
-            ),
-            const SpaceBox(width: 16.0),
-            Text(
-              name,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0,
-              ),
-            ),
-          ],
-        ),
-      ),
+          padding: const EdgeInsets.all(16.0),
+          child: UserProfileCard(name: name, photoUrl: photoUrl)),
     );
   }
 }
