@@ -37,7 +37,7 @@ class BottomNavigation extends StatelessWidget {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz, size: 28.sp),
+            icon: Icon(Icons.person, size: 28.sp),
             label: '',
           ),
         ],

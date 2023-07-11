@@ -27,7 +27,7 @@ class SakuraReviewScreen extends ConsumerWidget {
         ),
         Text('経過時間: $displayTime'),
         SpaceBox(height: 8.sp),
-        const IconImage(assets: 'assets/images/sakura_icon.jpg'),
+        const IconImage(assets: 'assets/images/sakura/sakura_icon.jpg'),
       ],
     );
   }
