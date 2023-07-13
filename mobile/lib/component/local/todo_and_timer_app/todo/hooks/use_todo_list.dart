@@ -69,14 +69,12 @@ class TodoListNotifier extends Notifier<List<Todo>> {
             isCompleted: todo.isCompleted,
             isFavorite: !todo.isFavorite,
             createdPeriod: todo.createdPeriod,
+            completedPeriod: todo.completedPeriod,
           )
         else
           todo,
     ];
-    state = [
-      ...state.where((todo) => todo.isFavorite),
-      ...state.where((todo) => !todo.isFavorite),
-    ];
+
     updateTodoList();
   }
 

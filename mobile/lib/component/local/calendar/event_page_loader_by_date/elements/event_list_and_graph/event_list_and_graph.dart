@@ -49,12 +49,16 @@ class EventListView extends ConsumerWidget {
                       itemCount: eventList.length,
                       itemBuilder: (BuildContext context, int index) {
                         final sortedEventList = [
-                          ...eventList.where((todo) => todo.isFavorite),
-                          ...eventList.where((todo) => !todo.isFavorite),
+                          ...eventList.where(
+                              (todo) => todo.isFavorite && todo.isCompleted),
+                          ...eventList.where(
+                              (todo) => todo.isFavorite && !todo.isCompleted),
+                          ...eventList.where(
+                              (todo) => todo.isCompleted && !todo.isFavorite),
                         ];
                         final displayCompletedTime =
                             sortedEventList[index].completedPeriod ??
-                                '00:00:00:00:00:00';
+                                '0000-00-00-00:00:00';
                         return EventCard(
                           isCompleted: sortedEventList[index].isCompleted,
                           isFavorite: sortedEventList[index].isFavorite,
