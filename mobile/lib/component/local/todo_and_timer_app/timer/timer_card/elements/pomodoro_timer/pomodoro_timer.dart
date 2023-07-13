@@ -30,11 +30,14 @@ class PomodoroTimer extends ConsumerWidget {
     final displayTime =
         Duration(seconds: remainSeconds).toString().substring(2, 7);
     if (remainSeconds == 0) {
-      ref
-          .read(usePomodoroTimerProvider.notifier)
-          .resetTimer(user.timerDetail.workTime * 60);
-      initiateReviewStopWatchWorkflow(workSeconds);
+      Future(() {
+        ref
+            .read(usePomodoroTimerProvider.notifier)
+            .resetTimer(user.timerDetail.workTime * 60);
+        initiateReviewStopWatchWorkflow(workSeconds);
+      });
     }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
