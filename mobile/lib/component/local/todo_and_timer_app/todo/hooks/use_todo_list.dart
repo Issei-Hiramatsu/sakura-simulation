@@ -24,6 +24,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       Todo(
         id: newId,
         title: title,
+        createdPeriod: DateTime.now(),
       ),
     ];
     updateTodoList();
@@ -45,6 +46,8 @@ class TodoListNotifier extends Notifier<List<Todo>> {
             title: todo.title,
             isCompleted: !todo.isCompleted,
             isFavorite: todo.isFavorite,
+            createdPeriod: todo.createdPeriod,
+            completedPeriod: DateTime.now(),
           )
         else
           todo,
@@ -65,6 +68,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
             title: todo.title,
             isCompleted: todo.isCompleted,
             isFavorite: !todo.isFavorite,
+            createdPeriod: todo.createdPeriod,
           )
         else
           todo,

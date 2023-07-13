@@ -52,11 +52,16 @@ class EventListView extends ConsumerWidget {
                           ...eventList.where((todo) => todo.isFavorite),
                           ...eventList.where((todo) => !todo.isFavorite),
                         ];
+                        final displayCompletedTime =
+                            sortedEventList[index].completedPeriod ??
+                                '00:00:00:00:00:00';
                         return EventCard(
                           isCompleted: sortedEventList[index].isCompleted,
                           isFavorite: sortedEventList[index].isFavorite,
                           title: sortedEventList[index].title,
-                          eventTime: '09:00',
+                          eventTime: displayCompletedTime
+                              .toString()
+                              .substring(11, 16), //例: 09:00
                         );
                       },
                     ),

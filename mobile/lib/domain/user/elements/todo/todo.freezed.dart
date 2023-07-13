@@ -24,6 +24,8 @@ mixin _$Todo {
   String get title => throw _privateConstructorUsedError;
   bool get isCompleted => throw _privateConstructorUsedError;
   bool get isFavorite => throw _privateConstructorUsedError;
+  DateTime get createdPeriod => throw _privateConstructorUsedError;
+  DateTime? get completedPeriod => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,13 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
-  $Res call({String id, String title, bool isCompleted, bool isFavorite});
+  $Res call(
+      {String id,
+      String title,
+      bool isCompleted,
+      bool isFavorite,
+      DateTime createdPeriod,
+      DateTime? completedPeriod});
 }
 
 /// @nodoc
@@ -55,6 +63,8 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
     Object? title = null,
     Object? isCompleted = null,
     Object? isFavorite = null,
+    Object? createdPeriod = null,
+    Object? completedPeriod = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +83,14 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdPeriod: null == createdPeriod
+          ? _value.createdPeriod
+          : createdPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedPeriod: freezed == completedPeriod
+          ? _value.completedPeriod
+          : completedPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -83,7 +101,13 @@ abstract class _$$_TodoCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$$_TodoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String title, bool isCompleted, bool isFavorite});
+  $Res call(
+      {String id,
+      String title,
+      bool isCompleted,
+      bool isFavorite,
+      DateTime createdPeriod,
+      DateTime? completedPeriod});
 }
 
 /// @nodoc
@@ -99,6 +123,8 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
     Object? title = null,
     Object? isCompleted = null,
     Object? isFavorite = null,
+    Object? createdPeriod = null,
+    Object? completedPeriod = freezed,
   }) {
     return _then(_$_Todo(
       id: null == id
@@ -117,6 +143,14 @@ class __$$_TodoCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_Todo>
           ? _value.isFavorite
           : isFavorite // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdPeriod: null == createdPeriod
+          ? _value.createdPeriod
+          : createdPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      completedPeriod: freezed == completedPeriod
+          ? _value.completedPeriod
+          : completedPeriod // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -128,7 +162,9 @@ class _$_Todo implements _Todo {
       {this.id = '',
       this.title = '',
       this.isCompleted = false,
-      this.isFavorite = false});
+      this.isFavorite = false,
+      required this.createdPeriod,
+      this.completedPeriod});
 
   factory _$_Todo.fromJson(Map<String, dynamic> json) => _$$_TodoFromJson(json);
 
@@ -144,10 +180,14 @@ class _$_Todo implements _Todo {
   @override
   @JsonKey()
   final bool isFavorite;
+  @override
+  final DateTime createdPeriod;
+  @override
+  final DateTime? completedPeriod;
 
   @override
   String toString() {
-    return 'Todo(id: $id, title: $title, isCompleted: $isCompleted, isFavorite: $isFavorite)';
+    return 'Todo(id: $id, title: $title, isCompleted: $isCompleted, isFavorite: $isFavorite, createdPeriod: $createdPeriod, completedPeriod: $completedPeriod)';
   }
 
   @override
@@ -160,13 +200,17 @@ class _$_Todo implements _Todo {
             (identical(other.isCompleted, isCompleted) ||
                 other.isCompleted == isCompleted) &&
             (identical(other.isFavorite, isFavorite) ||
-                other.isFavorite == isFavorite));
+                other.isFavorite == isFavorite) &&
+            (identical(other.createdPeriod, createdPeriod) ||
+                other.createdPeriod == createdPeriod) &&
+            (identical(other.completedPeriod, completedPeriod) ||
+                other.completedPeriod == completedPeriod));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, title, isCompleted, isFavorite);
+  int get hashCode => Object.hash(runtimeType, id, title, isCompleted,
+      isFavorite, createdPeriod, completedPeriod);
 
   @JsonKey(ignore: true)
   @override
@@ -187,7 +231,9 @@ abstract class _Todo implements Todo {
       {final String id,
       final String title,
       final bool isCompleted,
-      final bool isFavorite}) = _$_Todo;
+      final bool isFavorite,
+      required final DateTime createdPeriod,
+      final DateTime? completedPeriod}) = _$_Todo;
 
   factory _Todo.fromJson(Map<String, dynamic> json) = _$_Todo.fromJson;
 
@@ -199,6 +245,10 @@ abstract class _Todo implements Todo {
   bool get isCompleted;
   @override
   bool get isFavorite;
+  @override
+  DateTime get createdPeriod;
+  @override
+  DateTime? get completedPeriod;
   @override
   @JsonKey(ignore: true)
   _$$_TodoCopyWith<_$_Todo> get copyWith => throw _privateConstructorUsedError;

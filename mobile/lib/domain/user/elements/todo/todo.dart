@@ -9,6 +9,8 @@ class Todo with _$Todo {
     @Default('') String title,
     @Default(false) bool isCompleted,
     @Default(false) bool isFavorite,
+    required DateTime createdPeriod,
+    DateTime? completedPeriod,
   }) = _Todo;
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
