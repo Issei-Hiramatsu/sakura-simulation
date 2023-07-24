@@ -17,6 +17,10 @@ class TodoListUseCase {
     return todoListRepository.addTodo(date, todo);
   }
 
+  void updateTodo({required DateTime date, required Todo todo}) {
+    return todoListRepository.updateTodo(date, todo);
+  }
+
   void deleteTodo({required DateTime date, required String todoId}) {
     return todoListRepository.deleteTodo(date, todoId);
   }

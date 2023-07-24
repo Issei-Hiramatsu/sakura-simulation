@@ -21,5 +21,6 @@ abstract class ITodoListRepository {
   Stream<Map<DateTime, List<Todo>>> fetchAllTodoList();
   Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList();
   void addTodo(DateTime date, Todo todo);
+  void updateTodo(DateTime date, Todo todo);
   void deleteTodo(DateTime date, String todoId);
 }

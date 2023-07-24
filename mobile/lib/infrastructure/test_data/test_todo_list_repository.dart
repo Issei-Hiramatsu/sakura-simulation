@@ -78,4 +78,9 @@ class TestTodoListRepository extends ITodoListRepository {
         });
     print(testTodoList[date]);
   }
+
+  @override
+  void updateTodo(DateTime date, Todo todo) {
+    // TODO: implement updateTodo
+  }
 }
