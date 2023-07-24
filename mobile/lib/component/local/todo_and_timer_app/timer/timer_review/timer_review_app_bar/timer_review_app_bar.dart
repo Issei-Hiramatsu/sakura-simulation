@@ -21,7 +21,7 @@ class TimerReviewAppBar extends ConsumerWidget {
     return SharedAppBar(
       leading: IconButton(
           onPressed: () {
-            ref.read(updateTimerLogProvider).updateTodoList(
+            ref.read(updateTimerLogProvider).updateTimerLog(
                   date: DateTime(
                     DateTime.now().year,
                     DateTime.now().month,

@@ -35,14 +35,6 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodo(DateTime date, Todo todo) async {
-    // final collection = users
-    //     .collection('users/POxZc3jYWx1VirZjYOyd/todoList')
-    //     .doc('$date');
-    // await collection.set({'todoList': todoList});
-  }
-
-  @override
   void deleteTodo(DateTime date, String todoId) async {
     final todoByDate = todoListByUser
         .doc('${date.year}')

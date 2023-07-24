@@ -42,11 +42,11 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     state.removeWhere((todo) {
       return todo.id == todoId;
     });
-    state = [...state];
     ref.read(todoProvider).deleteTodo(
           date: now,
           todoId: todoId,
         );
+    updateTodoList();
   }
 
   void toggleIsCompleted(String id) {
@@ -87,7 +87,6 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     ];
   }
 
-//updateTodoの役割を実質的にadd, deleteに分解したため形骸化した関数.
   void updateTodoList() {
     state = [...state];
   }

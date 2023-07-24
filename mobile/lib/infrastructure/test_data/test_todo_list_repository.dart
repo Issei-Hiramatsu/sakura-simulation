@@ -70,11 +70,6 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodoList(DateTime date, List<Todo> todoList) {
-    testTodoList[date] = todoList;
-  }
-
-  @override
   void deleteTodo(DateTime date, String todoId) {
     final List<Todo> emptyTodoList = [];
     testTodoList[date] ??
@@ -82,10 +77,5 @@ class TestTodoListRepository extends ITodoListRepository {
           return todo.id == todoId;
         });
     print(testTodoList[date]);
-  }
-
-  @override
-  void updateTodo(DateTime date, Todo todo) {
-    // TODO: implement updateTodo
   }
 }

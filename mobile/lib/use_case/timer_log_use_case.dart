@@ -9,7 +9,7 @@ class TimerLogUseCase {
     return timerLogRepository.fetchAllTimerLog();
   }
 
-  void updateTodoList({
+  void updateTimerLog({
     required DateTime date,
     required String workedType,
     required Duration workedTime,

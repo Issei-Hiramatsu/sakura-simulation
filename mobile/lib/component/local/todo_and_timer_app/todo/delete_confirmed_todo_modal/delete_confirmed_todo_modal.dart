@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../domain/user/elements/todo/todo.dart';
-import '../../../../../importer.dart';
+import '/domain/user/elements/todo/todo.dart';
+import '/importer.dart';
 import '../../../../shared/token/navigator/navigator.dart';
 import '../hooks/use_todo_list.dart';
 
