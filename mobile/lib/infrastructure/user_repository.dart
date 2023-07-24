@@ -17,7 +17,7 @@ class UserRepository extends IUserRepository {
         'breakTime': user.timerDetail.breakTime,
         'timerLog': user.timerDetail.timerLog,
       },
-      'accountLevel': user.accountLevel.toString(),
+      'accountLevel': '${user.accountLevel}',
       'todoList': user.todoList,
       'firstTimeUsing': user.firstTimeUsing,
     });

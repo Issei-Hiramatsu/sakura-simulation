@@ -29,7 +29,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       ),
     ];
     ref.read(todoProvider).addTodo(
-          date: now,
+          date: DateTime(now.year, now.month, now.day),
           todo: Todo(
             id: newId,
             title: title,
@@ -43,7 +43,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       return todo.id == todoId;
     });
     ref.read(todoProvider).deleteTodo(
-          date: now,
+          date: DateTime(now.year, now.month, now.day),
           todoId: todoId,
         );
     updateTodoList();
