@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../importer.dart';
+import 'package:uuid/uuid.dart';
+import '/importer.dart';
 
-import '../../component/shared/token/navigator/navigator.dart';
+import '/component/shared/token/navigator/navigator.dart';
+import '/infrastructure/user_repository.dart';
 import '/page/sakura_simulation_app.dart';
 import '/domain/user/elements/account_level/account_level.dart';
 import '/domain/user/elements/timer/timer.dart';
 import '/domain/user/user.dart';
-import '/infrastructure/test_data/test_user_repository.dart';
 import '/use_case/user_use_case.dart';
 
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
 
 final registerUserProvider =
-    Provider((ref) => UserUseCase(userRepository: TestUserRepository()));
+    Provider((ref) => UserUseCase(userRepository: UserRepository()));
 
 class UserRegisterPage extends HookConsumerWidget {
   const UserRegisterPage({
@@ -61,6 +62,7 @@ class UserRegisterPage extends HookConsumerWidget {
                     user: User(
                       userName: name.value,
                       email: email.value,
+                      //TODO: 任意のものに変更できるようにする。
                       userImagePath:
                           'assets/images/kkrn_user_icons/kkrn_icon_user_1.png',
                       timerDetail: const Timer(workTime: 25, breakTime: 5),
