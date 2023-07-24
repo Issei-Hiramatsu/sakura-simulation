@@ -15,11 +15,11 @@ final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
 class TodoListNotifier extends Notifier<List<Todo>> {
   @override
   List<Todo> build() => state = [];
+  final now = DateTime.now();
 
   void addTodoList(String title) {
     const uuid = Uuid();
     final newId = uuid.v1();
-    final now = DateTime.now();
     state = [
       ...state,
       Todo(
@@ -38,10 +38,15 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         );
   }
 
-  void deleteTodoList(String id) {
+  void deleteTodoList(String todoId) {
     state.removeWhere((todo) {
-      return todo.id == id;
+      return todo.id == todoId;
     });
+    state = [...state];
+    ref.read(todoProvider).deleteTodo(
+          date: now,
+          todoId: todoId,
+        );
   }
 
   void toggleIsCompleted(String id) {
@@ -82,15 +87,8 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     ];
   }
 
+//updateTodoの役割を実質的にadd, deleteに分解したため形骸化した関数.
   void updateTodoList() {
     state = [...state];
-    ref.read(todoProvider).updateTodo(
-          date: DateTime(
-            DateTime.now().year,
-            DateTime.now().month,
-            DateTime.now().day,
-          ),
-          todo: state.first, //FIXME:
-        );
   }
 }

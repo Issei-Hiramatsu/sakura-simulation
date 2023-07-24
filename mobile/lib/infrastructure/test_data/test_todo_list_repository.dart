@@ -75,8 +75,13 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void deleteTodo(DateTime date, Todo todo) {
-    // TODO: implement deleteTodo
+  void deleteTodo(DateTime date, String todoId) {
+    final List<Todo> emptyTodoList = [];
+    testTodoList[date] ??
+        emptyTodoList.removeWhere((todo) {
+          return todo.id == todoId;
+        });
+    print(testTodoList[date]);
   }
 
   @override
