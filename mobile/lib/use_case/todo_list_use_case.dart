@@ -9,15 +9,19 @@ class TodoListUseCase {
     return todoListRepository.fetchAllTodoList();
   }
 
-  Stream<List<String>> fetchAllTodoIdList() {
-    return todoListRepository.fetchAllTodoIdList();
-  }
-
   Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
     return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
   }
 
-  void updateTodoList({required DateTime date, required List<Todo> todoList}) {
-    return todoListRepository.updateTodoList(date, todoList);
+  void addTodo({required DateTime date, required Todo todo}) {
+    return todoListRepository.addTodo(date, todo);
+  }
+
+  void updateTodo({required DateTime date, required Todo todo}) {
+    return todoListRepository.updateTodo(date, todo);
+  }
+
+  void deleteTodo({required DateTime date, required Todo todo}) {
+    return todoListRepository.deleteTodo(date, todo);
   }
 }

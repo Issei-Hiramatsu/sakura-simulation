@@ -1,12 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../../infrastructure/test_data/test_todo_list_repository.dart';
-import '../../../../../use_case/todo_list_use_case.dart';
-import '../../../../../domain/user/elements/todo/todo.dart';
+import '/infrastructure/todo_list_repository.dart';
+import '/use_case/todo_list_use_case.dart';
+import '/domain/user/elements/todo/todo.dart';
 
-final updateTodoListProvider = Provider(
-    (ref) => TodoListUseCase(todoListRepository: TestTodoListRepository()));
+final todoProvider = Provider(
+    (ref) => TodoListUseCase(todoListRepository: TodoListRepository()));
 
 final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
   () => TodoListNotifier(),
@@ -17,24 +17,31 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   List<Todo> build() => state = [];
 
   void addTodoList(String title) {
-    var uuid = const Uuid();
-    var newId = uuid.v1();
+    const uuid = Uuid();
+    final newId = uuid.v1();
+    final now = DateTime.now();
     state = [
       ...state,
       Todo(
         id: newId,
         title: title,
-        createdPeriod: DateTime.now(),
+        createdPeriod: now,
       ),
     ];
-    updateTodoList();
+    ref.read(todoProvider).addTodo(
+          date: now,
+          todo: Todo(
+            id: newId,
+            title: title,
+            createdPeriod: now,
+          ),
+        );
   }
 
   void deleteTodoList(String id) {
     state.removeWhere((todo) {
       return todo.id == id;
     });
-    updateTodoList();
   }
 
   void toggleIsCompleted(String id) {
@@ -56,7 +63,6 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       ...state.where((todo) => !todo.isCompleted),
       ...state.where((todo) => todo.isCompleted),
     ];
-    updateTodoList();
   }
 
   void toggleIsFavorite(String id) {
@@ -74,19 +80,17 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todo,
     ];
-
-    updateTodoList();
   }
 
   void updateTodoList() {
     state = [...state];
-    ref.read(updateTodoListProvider).updateTodoList(
+    ref.read(todoProvider).updateTodo(
           date: DateTime(
             DateTime.now().year,
             DateTime.now().month,
             DateTime.now().day,
           ),
-          todoList: state,
+          todo: state.first, //FIXME:
         );
   }
 }

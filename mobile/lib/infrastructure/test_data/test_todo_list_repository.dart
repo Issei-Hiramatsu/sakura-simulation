@@ -51,17 +51,6 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  Stream<List<String>> fetchAllTodoIdList() {
-    List<String> todoIdList = [];
-    for (var todoList in testTodoList.values) {
-      for (var todo in todoList) {
-        todoIdList.add(todo.id.toString());
-      }
-    }
-    return Stream.value(todoIdList);
-  }
-
-  @override
   Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
     Map<DateTime, List<Todo>> favoriteAndCompletedTodoList = {};
     testTodoList.forEach((date, todo) {
@@ -75,7 +64,23 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
+  void addTodo(DateTime date, Todo todo) {
+    testTodoList[date] = [...testTodoList[date] ?? [], todo];
+    print(testTodoList[date]);
+  }
+
+  @override
   void updateTodoList(DateTime date, List<Todo> todoList) {
     testTodoList[date] = todoList;
+  }
+
+  @override
+  void deleteTodo(DateTime date, Todo todo) {
+    // TODO: implement deleteTodo
+  }
+
+  @override
+  void updateTodo(DateTime date, Todo todo) {
+    // TODO: implement updateTodo
   }
 }

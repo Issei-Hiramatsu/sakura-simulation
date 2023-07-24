@@ -1,43 +1,60 @@
-// import '../domain/user/elements/todo/todo.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-////データベースを変換している
-// class TodoListRepository extends ITodoListRepository {
-//   final firestore = FirebaseFirestore.instance;
+import '/domain/user/elements/todo/todo.dart';
 
-//   void registerClass(Class classInfo) {
-//     final collection = firestore.doc(
-//       //ここに日付
-//       'all_class/VTA_class/2022/first_semester/all_class/${classInfo.name}',
-//     );
-//     collection.set({
-//       'id': collection.id,
-//       'name': classInfo.name,
-//       'overView': classInfo.overView,
-//       'goalPoint': classInfo.goalPoint,
-//       'selectableBaseClass': 'false',
-//       'frameCount': classInfo.frameCount,
-//       'goalRequirements': classInfo.goalRequirements,
-//       'baseClass': classInfo.baseClass,
-//       'classImgUrl': classInfo.classImgUrl,
-//       'document': classInfo.document,
-//       'studentIdList': classInfo.studentIdList
-//           .map((studentId) => studentId.id.toString())
-//           .toList(),
-//       'teacherIdList': classInfo.teacherIdList
-//           .map((teacherId) => teacherId.id.toString())
-//           .toList(),
-//     });
-//   }
+class TodoListRepository extends ITodoListRepository {
+  final users = FirebaseFirestore.instance.collection('users');
 
-//   Stream<List<Todo>> fetchTodoList() {
-//     final collection = firestore.collection('my_class').snapshots();
-//     return collection.map<List<Class>>(
-//       (QuerySnapshot snapshot) => snapshot.docs
-//           .map(
-//             (DocumentSnapshot doc) =>
-//                 Class.fromJson(doc.data() as Map<String, dynamic>),
-//           )
-//           .toList(),
-//     );
-//   }
-// }
+  @override
+  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
+    // TODO: implement fetchAllFavoriteAndCompletedTodoList
+    throw UnimplementedError();
+  }
+
+  //  final collection = firestore.collection('library/VTA-中目黒図書館/蔵書');
+  //   return collection.snapshots().map(
+  //         (QuerySnapshot snapshot) =>
+  //             snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+  //           final json = documentSnapshot.data() as Map<String, dynamic>;
+  //           return BookDocument.fromJson(json);
+  //         }).toList(),
+  //       );
+
+  @override
+  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
+    // TODO: implement fetchAllTodoList
+    throw UnimplementedError();
+  }
+
+  @override
+  void addTodo(DateTime date, Todo todo) async {
+    final collection = users
+        .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
+        .collection('todoList')
+        .doc('${date.year}')
+        .collection('${DateTime(date.year, date.month, date.day)}');
+    await collection.add({
+      'id': todo.id,
+      'title': todo.title,
+      'isCompleted': todo.isCompleted,
+      'isFavorite': todo.isFavorite,
+      'createdPeriod': todo.createdPeriod,
+    });
+  }
+
+  @override
+  void updateTodo(DateTime date, Todo todo) async {
+    // final collection = users
+    //     .collection('users/POxZc3jYWx1VirZjYOyd/todoList')
+    //     .doc('$date');
+    // await collection.set({'todoList': todoList});
+  }
+
+  @override
+  void deleteTodo(DateTime date, Todo todo) async {
+    // final collection = firestore
+    //     .collection('users/POxZc3jYWx1VirZjYOyd/todoList')
+    //     .doc('$date');
+    //await collection.set({'todoList': todoList});
+  }
+}
