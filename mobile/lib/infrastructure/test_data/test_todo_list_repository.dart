@@ -80,7 +80,11 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodo(DateTime date, Todo todo) {
-    // TODO: implement updateTodo
-  }
+  void updateTodo(DateTime date, Todo todo) {}
+
+  @override
+  void toggleIsCompleted(DateTime date, Todo todo) {}
+
+  @override
+  void toggleIsFavorite(DateTime date, Todo todo) {}
 }

@@ -35,24 +35,53 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodo(DateTime date, Todo todo) async {
-    // final collection = users
-    //     .collection('users/POxZc3jYWx1VirZjYOyd/todoList')
-    //     .doc('$date');
-    // await collection.set({'todoList': todoList});
-  }
+  void updateTodo(DateTime date, Todo todo) async {}
 
   @override
   void deleteTodo(DateTime date, String todoId) async {
-    final todoByDate = todoListByUser
+    final collection = todoListByUser
         .doc('${date.year}')
         .collection('${DateTime(date.year, date.month, date.day)}');
-    todoByDate.where('id', isEqualTo: todoId).get().then(
+    collection.where('id', isEqualTo: todoId).get().then(
       (QuerySnapshot snapshot) {
         for (var element in snapshot.docs) {
-          todoByDate.doc(element.reference.id).delete();
+          collection.doc(element.reference.id).delete();
         }
       },
     );
+  }
+
+  @override
+  void toggleIsCompleted(DateTime date, Todo todo) {
+    final collection = todoListByUser
+        .doc('${date.year}')
+        .collection('${DateTime(date.year, date.month, date.day)}');
+    collection.where('id', isEqualTo: todo.id).get().then(
+      (QuerySnapshot snapshot) {
+        for (var element in snapshot.docs) {
+          collection.doc(element.reference.id).update({
+            'isCompleted': !todo.isCompleted,
+            'completedPeriod': DateTime.now(),
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void toggleIsFavorite(DateTime date, Todo todo) {
+    final collection = todoListByUser
+        .doc('${date.year}')
+        .collection('${DateTime(date.year, date.month, date.day)}');
+    collection
+        .where('id', isEqualTo: todo.id)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      for (var element in snapshot.docs) {
+        collection.doc(element.reference.id).update({
+          'isFavorite': !todo.isFavorite,
+        });
+      }
+    });
   }
 }

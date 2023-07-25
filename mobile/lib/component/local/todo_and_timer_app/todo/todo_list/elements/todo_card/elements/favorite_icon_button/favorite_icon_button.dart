@@ -18,13 +18,13 @@ class FavoriteIconButton extends HookConsumerWidget {
     var iconSize = useState(20.sp);
     return GestureDetector(
       onTap: () {
-        ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
+        ref.read(todoListProvider.notifier).toggleIsFavorite(todo);
       },
       onLongPressStart: ((details) {
         iconSize.value = 16.sp;
       }),
       onLongPressUp: () {
-        ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
+        ref.read(todoListProvider.notifier).toggleIsFavorite(todo);
         iconSize.value = 20.sp;
       },
       behavior: HitTestBehavior.opaque,
@@ -33,7 +33,7 @@ class FavoriteIconButton extends HookConsumerWidget {
         child: IconButton(
           padding: const EdgeInsets.all(0),
           onPressed: () {
-            ref.read(todoListProvider.notifier).toggleIsFavorite(todo.id);
+            ref.read(todoListProvider.notifier).toggleIsFavorite(todo);
           },
           icon: Icon(
             todo.isFavorite ? Icons.star : Icons.star_outline,

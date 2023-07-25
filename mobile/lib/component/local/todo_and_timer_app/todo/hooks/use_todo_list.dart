@@ -49,42 +49,52 @@ class TodoListNotifier extends Notifier<List<Todo>> {
     updateTodoList();
   }
 
-  void toggleIsCompleted(String id) {
+  void toggleIsCompleted(Todo todo) {
     state = [
-      for (final todo in state)
-        if (todo.id == id)
+      for (final Todo todoState in state)
+        if (todoState.id == todo.id)
           Todo(
-            id: todo.id,
-            title: todo.title,
-            isCompleted: !todo.isCompleted,
-            isFavorite: todo.isFavorite,
-            createdPeriod: todo.createdPeriod,
+            id: todoState.id,
+            title: todoState.title,
+            isCompleted: !todoState.isCompleted,
+            isFavorite: todoState.isFavorite,
+            createdPeriod: todoState.createdPeriod,
             completedPeriod: DateTime.now(),
           )
         else
-          todo,
+          todoState,
     ];
+
     state = [
       ...state.where((todo) => !todo.isCompleted),
       ...state.where((todo) => todo.isCompleted),
     ];
+
+    ref.read(todoProvider).toggleIsCompleted(
+          date: DateTime(now.year, now.month, now.day),
+          todo: todo,
+        );
   }
 
-  void toggleIsFavorite(String id) {
+  void toggleIsFavorite(Todo todo) {
     state = [
-      for (final todo in state)
-        if (todo.id == id)
+      for (final Todo todoState in state)
+        if (todoState.id == todo.id)
           Todo(
-            id: todo.id,
-            title: todo.title,
-            isCompleted: todo.isCompleted,
-            isFavorite: !todo.isFavorite,
-            createdPeriod: todo.createdPeriod,
-            completedPeriod: todo.completedPeriod,
+            id: todoState.id,
+            title: todoState.title,
+            isCompleted: todoState.isCompleted,
+            isFavorite: !todoState.isFavorite,
+            createdPeriod: todoState.createdPeriod,
           )
         else
-          todo,
+          todoState
     ];
+
+    ref.read(todoProvider).toggleIsFavorite(
+          date: DateTime(now.year, now.month, now.day),
+          todo: todo,
+        );
   }
 
   void updateTodoList() {

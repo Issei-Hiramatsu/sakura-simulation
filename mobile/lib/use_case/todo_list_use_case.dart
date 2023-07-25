@@ -24,4 +24,12 @@ class TodoListUseCase {
   void deleteTodo({required DateTime date, required String todoId}) {
     return todoListRepository.deleteTodo(date, todoId);
   }
+
+  void toggleIsCompleted({required DateTime date, required Todo todo}) {
+    return todoListRepository.toggleIsCompleted(date, todo);
+  }
+
+  void toggleIsFavorite({required DateTime date, required Todo todo}) {
+    return todoListRepository.toggleIsFavorite(date, todo);
+  }
 }

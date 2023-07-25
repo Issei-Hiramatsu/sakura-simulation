@@ -23,4 +23,6 @@ abstract class ITodoListRepository {
   void addTodo(DateTime date, Todo todo);
   void updateTodo(DateTime date, Todo todo);
   void deleteTodo(DateTime date, String todoId);
+  void toggleIsCompleted(DateTime date, Todo todo);
+  void toggleIsFavorite(DateTime date, Todo todo);
 }
