@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sakura_simulation/component/local/profile/active_overview/hooks/overview_data.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
@@ -41,28 +42,27 @@ class EventListView extends ConsumerWidget {
                 error: (error, _) => const Icon(Icons.error),
                 loading: () => const SharedCircularProgressIndicator(),
               ),
-          ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
+          ref.watch(fetchAllFavoriteAndCompletedTodoList(focusedDate)).when(
                 data: (dataList) {
-                  final eventList = dataList[focusedDate] ?? [];
+                  final sortedDataList = [
+                    ...dataList
+                        .where((todo) => todo.isFavorite && todo.isCompleted),
+                    ...dataList
+                        .where((todo) => todo.isFavorite && !todo.isCompleted),
+                    ...dataList
+                        .where((todo) => todo.isCompleted && !todo.isFavorite),
+                  ];
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: eventList.length,
+                      itemCount: sortedDataList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final sortedEventList = [
-                          ...eventList.where(
-                              (todo) => todo.isFavorite && todo.isCompleted),
-                          ...eventList.where(
-                              (todo) => todo.isFavorite && !todo.isCompleted),
-                          ...eventList.where(
-                              (todo) => todo.isCompleted && !todo.isFavorite),
-                        ];
                         final displayCompletedTime =
-                            sortedEventList[index].completedPeriod ??
+                            sortedDataList[index].completedPeriod ??
                                 '0000-00-00-00:00:00';
                         return EventCard(
-                          isCompleted: sortedEventList[index].isCompleted,
-                          isFavorite: sortedEventList[index].isFavorite,
-                          title: sortedEventList[index].title,
+                          isCompleted: sortedDataList[index].isCompleted,
+                          isFavorite: sortedDataList[index].isFavorite,
+                          title: sortedDataList[index].title,
                           eventTime: displayCompletedTime
                               .toString()
                               .substring(11, 16), //例: 09:00

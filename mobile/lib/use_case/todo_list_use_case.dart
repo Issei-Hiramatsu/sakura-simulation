@@ -5,12 +5,12 @@ class TodoListUseCase {
   TodoListUseCase({required this.todoListRepository});
   final ITodoListRepository todoListRepository;
 
-  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
-    return todoListRepository.fetchAllTodoList();
+  Stream<List<Todo>> fetchAllTodoList(DateTime date) {
+    return todoListRepository.fetchAllTodoList(date);
   }
 
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
-    return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList(DateTime date) {
+    return todoListRepository.fetchAllFavoriteAndCompletedTodoList(date);
   }
 
   void addTodo({required DateTime date, required Todo todo}) {

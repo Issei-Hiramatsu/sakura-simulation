@@ -46,12 +46,12 @@ final testTodoList = {
 
 class TestTodoListRepository extends ITodoListRepository {
   @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
+  Stream<List<Todo>> fetchAllTodoList() {
     return Stream.value(testTodoList);
   }
 
   @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
     Map<DateTime, List<Todo>> favoriteAndCompletedTodoList = {};
     testTodoList.forEach((date, todo) {
       List<Todo> favoriteAndCompletedTodo =
