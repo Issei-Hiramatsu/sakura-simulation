@@ -19,12 +19,14 @@ class TodoListRepository extends ITodoListRepository {
     // TODO: implement fetchAllTodoList
     throw UnimplementedError();
   }
+  // final collection = todoListByUser
+  //     .where('isFavorite', isEqualTo: true)
+  //     .where('isCompleted', isEqualTo: true)
+  //     .snapshots();
 
   @override
   void addTodo(DateTime date, Todo todo) async {
-    final collection = todoListByUser
-        .doc('${date.year}')
-        .collection('${DateTime(date.year, date.month, date.day)}');
+    final collection = todoListByUser;
     await collection.add({
       'id': todo.id,
       'title': todo.title,
@@ -39,9 +41,7 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void deleteTodo(DateTime date, String todoId) async {
-    final collection = todoListByUser
-        .doc('${date.year}')
-        .collection('${DateTime(date.year, date.month, date.day)}');
+    final collection = todoListByUser;
     collection.where('id', isEqualTo: todoId).get().then(
       (QuerySnapshot snapshot) {
         for (var element in snapshot.docs) {
@@ -53,9 +53,7 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void toggleIsCompleted(DateTime date, Todo todo) {
-    final collection = todoListByUser
-        .doc('${date.year}')
-        .collection('${DateTime(date.year, date.month, date.day)}');
+    final collection = todoListByUser;
     collection.where('id', isEqualTo: todo.id).get().then(
       (QuerySnapshot snapshot) {
         for (var element in snapshot.docs) {
@@ -70,9 +68,7 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void toggleIsFavorite(DateTime date, Todo todo) {
-    final collection = todoListByUser
-        .doc('${date.year}')
-        .collection('${DateTime(date.year, date.month, date.day)}');
+    final collection = todoListByUser;
     collection
         .where('id', isEqualTo: todo.id)
         .get()

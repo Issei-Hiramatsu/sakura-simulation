@@ -18,10 +18,7 @@ class TimerLogRepository extends ITimerLogRepository {
   @override
   void updateTimerLog(
       DateTime date, String workedType, Duration workedTime) async {
-    final collection = timerLogByUser
-        .collection('${date.year}')
-        .doc('${DateTime(date.year, date.month, date.day)}')
-        .collection(workedType);
+    final collection = timerLogByUser.collection(workedType);
     await collection.add({'workedTime': '$workedTime'}); //int型で渡せるように変更する
   }
 }
