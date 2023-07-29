@@ -35,12 +35,17 @@ class TodoListRepository extends ITodoListRepository {
       (QuerySnapshot snapshot) =>
           snapshot.docs.map((DocumentSnapshot documentSnapshot) {
         final json = documentSnapshot.data() as Map<String, dynamic>;
+        final timestamp = json['createdPeriod'];
+        DateTime createdPeriod = DateTime.now();
+        if (timestamp is Timestamp) {
+          createdPeriod = timestamp.toDate();
+        }
         return Todo(
             id: json['id'],
             title: json['title'],
             isCompleted: json['isCompleted'],
             isFavorite: json['isFavorite'],
-            createdPeriod: DateTime.now(), //FIXME: ここの問題
+            createdPeriod: createdPeriod,
             completedPeriod: DateTime.now());
       }).toList(),
     );
