@@ -10,32 +10,31 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList(DateTime date) {
-    final collection = todoListByUser
-        .where('createdPeriod', arrayContains: DateTime(date.year, date.month))
-        .where('isFavorite', isEqualTo: true)
-        .where('isCompleted', isEqualTo: true)
-        .snapshots();
+    final collection = todoListByUser.snapshots();
 
     return collection.map(
       (QuerySnapshot snapshot) =>
           snapshot.docs.map((DocumentSnapshot documentSnapshot) {
         final json = documentSnapshot.data() as Map<String, dynamic>;
-        return Todo.fromJson(json);
+        return Todo(
+            id: json['id'],
+            title: json['title'],
+            isCompleted: json['isCompleted'],
+            isFavorite: json['isFavorite'],
+            createdPeriod: DateTime.now(), //FIXME: ここの問題
+            completedPeriod: DateTime.now());
       }).toList(),
     );
   }
 
   @override
   Stream<List<Todo>> fetchAllTodoList(DateTime date) {
-    final collection = todoListByUser
-        // .where('createdPeriod', arrayContains: DateTime(date.year, date.month))
-        .snapshots();
+    final collection = todoListByUser.snapshots();
 
     return collection.map(
       (QuerySnapshot snapshot) =>
           snapshot.docs.map((DocumentSnapshot documentSnapshot) {
         final json = documentSnapshot.data() as Map<String, dynamic>;
-
         return Todo(
             id: json['id'],
             title: json['title'],

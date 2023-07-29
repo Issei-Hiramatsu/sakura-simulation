@@ -54,15 +54,13 @@ class EventListView extends ConsumerWidget {
                   ];
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: sortedDataList.length,
+                      itemCount: dataList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final displayCompletedTime =
-                            sortedDataList[index].completedPeriod ??
-                                '0000-00-00-00:00:00';
+                        const displayCompletedTime = '0000-00-00-00:00:00';
                         return EventCard(
-                          isCompleted: sortedDataList[index].isCompleted,
-                          isFavorite: sortedDataList[index].isFavorite,
-                          title: sortedDataList[index].title,
+                          isCompleted: dataList[index].isCompleted,
+                          isFavorite: dataList[index].isFavorite,
+                          title: dataList[index].title,
                           eventTime: displayCompletedTime
                               .toString()
                               .substring(11, 16), //例: 09:00
@@ -71,7 +69,10 @@ class EventListView extends ConsumerWidget {
                     ),
                   );
                 },
-                error: (error, _) => const Icon(Icons.error),
+                error: (error, _) {
+                  print(error);
+                  return const Icon(Icons.error);
+                },
                 loading: () => const SharedCircularProgressIndicator(),
               ),
         ],
