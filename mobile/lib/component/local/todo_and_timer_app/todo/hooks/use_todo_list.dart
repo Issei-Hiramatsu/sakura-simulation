@@ -29,7 +29,6 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       ),
     ];
     ref.read(todoProvider).addTodo(
-          date: DateTime(now.year, now.month, now.day),
           todo: Todo(
             id: newId,
             title: title,
@@ -43,7 +42,6 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       return todo.id == todoId;
     });
     ref.read(todoProvider).deleteTodo(
-          date: DateTime(now.year, now.month, now.day),
           todoId: todoId,
         );
     updateTodoList();
@@ -70,10 +68,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
       ...state.where((todo) => todo.isCompleted),
     ];
 
-    ref.read(todoProvider).toggleIsCompleted(
-          date: DateTime(now.year, now.month, now.day),
-          todo: todo,
-        );
+    ref.read(todoProvider).toggleIsCompleted(todo: todo);
   }
 
   void toggleIsFavorite(Todo todo) {
@@ -91,10 +86,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
           todoState
     ];
 
-    ref.read(todoProvider).toggleIsFavorite(
-          date: DateTime(now.year, now.month, now.day),
-          todo: todo,
-        );
+    ref.read(todoProvider).toggleIsFavorite(todo: todo);
   }
 
   void updateTodoList() {

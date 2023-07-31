@@ -9,27 +9,12 @@ class TodoListRepository extends ITodoListRepository {
       .collection('todoList');
 
   @override
-  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList(DateTime date) {
-    //fetchAllTodoListがこの役割を担っているため使用停止中
-    return throw UnimplementedError();
-
-    // collection.map(
-    //   (QuerySnapshot snapshot) =>
-    //       snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-    //     final json = documentSnapshot.data() as Map<String, dynamic>;
-    //     return Todo(
-    //         id: json['id'],
-    //         title: json['title'],
-    //         isCompleted: json['isCompleted'],
-    //         isFavorite: json['isFavorite'],
-    //         createdPeriod: DateTime.now(), //FIXME: ここの問題
-    //         completedPeriod: DateTime.now());
-    //   }).toList(),
-    // );
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
+    throw UnimplementedError();
   }
 
   @override
-  Stream<List<Todo>> fetchAllTodoList(DateTime date) {
+  Stream<List<Todo>> fetchAllTodoList() {
     final collection = todoListByUser.snapshots();
 
     return collection.map(
@@ -61,7 +46,7 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void addTodo(DateTime date, Todo todo) async {
+  void addTodo(Todo todo) async {
     final collection = todoListByUser;
     await collection.add({
       'id': todo.id,
@@ -73,10 +58,10 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodo(DateTime date, Todo todo) async {}
+  void updateTodo(Todo todo) async {}
 
   @override
-  void deleteTodo(DateTime date, String todoId) async {
+  void deleteTodo(String todoId) async {
     final collection = todoListByUser;
     collection.where('id', isEqualTo: todoId).get().then(
       (QuerySnapshot snapshot) {
@@ -88,7 +73,7 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void toggleIsCompleted(DateTime date, Todo todo) {
+  void toggleIsCompleted(Todo todo) {
     final collection = todoListByUser;
     collection.where('id', isEqualTo: todo.id).get().then(
       (QuerySnapshot snapshot) {
@@ -103,7 +88,7 @@ class TodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void toggleIsFavorite(DateTime date, Todo todo) {
+  void toggleIsFavorite(Todo todo) {
     final collection = todoListByUser;
     collection
         .where('id', isEqualTo: todo.id)

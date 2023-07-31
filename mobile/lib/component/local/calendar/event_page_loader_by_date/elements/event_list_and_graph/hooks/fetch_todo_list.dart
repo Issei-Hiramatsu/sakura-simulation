@@ -6,6 +6,6 @@ import '/use_case/todo_list_use_case.dart';
 final fetchAllFavoriteAndCompletedTodoList = StreamProvider.family(
   (ref, DateTime date) {
     return TodoListUseCase(todoListRepository: TodoListRepository())
-        .fetchAllTodoList(date);
+        .fetchAllTodoList();
   },
 );

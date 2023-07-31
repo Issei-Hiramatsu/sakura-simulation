@@ -5,31 +5,31 @@ class TodoListUseCase {
   TodoListUseCase({required this.todoListRepository});
   final ITodoListRepository todoListRepository;
 
-  Stream<List<Todo>> fetchAllTodoList(DateTime date) {
-    return todoListRepository.fetchAllTodoList(date);
+  Stream<List<Todo>> fetchAllTodoList() {
+    return todoListRepository.fetchAllTodoList();
   }
 
-  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList(DateTime date) {
-    return todoListRepository.fetchAllFavoriteAndCompletedTodoList(date);
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
+    return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
   }
 
-  void addTodo({required DateTime date, required Todo todo}) {
-    return todoListRepository.addTodo(date, todo);
+  void addTodo({required Todo todo}) {
+    return todoListRepository.addTodo(todo);
   }
 
-  void updateTodo({required DateTime date, required Todo todo}) {
-    return todoListRepository.updateTodo(date, todo);
+  void updateTodo({required Todo todo}) {
+    return todoListRepository.updateTodo(todo);
   }
 
-  void deleteTodo({required DateTime date, required String todoId}) {
-    return todoListRepository.deleteTodo(date, todoId);
+  void deleteTodo({required String todoId}) {
+    return todoListRepository.deleteTodo(todoId);
   }
 
-  void toggleIsCompleted({required DateTime date, required Todo todo}) {
-    return todoListRepository.toggleIsCompleted(date, todo);
+  void toggleIsCompleted({required Todo todo}) {
+    return todoListRepository.toggleIsCompleted(todo);
   }
 
-  void toggleIsFavorite({required DateTime date, required Todo todo}) {
-    return todoListRepository.toggleIsFavorite(date, todo);
+  void toggleIsFavorite({required Todo todo}) {
+    return todoListRepository.toggleIsFavorite(todo);
   }
 }
