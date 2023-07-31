@@ -41,9 +41,9 @@ class EventListView extends ConsumerWidget {
                 error: (error, _) => const Icon(Icons.error),
                 loading: () => const SharedCircularProgressIndicator(),
               ),
-          ref.watch(fetchAllFavoriteAndCompletedTodoList(focusedDate)).when(
+          ref.watch(fetchAllTodoList(focusedDate)).when(
                 data: (dataList) {
-                  final focusedDataList = [
+                  final focusedDateList = [
                     ...dataList.where((todo) {
                       final createdPeriod = DateTime(todo.createdPeriod.year,
                           todo.createdPeriod.month, todo.createdPeriod.day);
@@ -51,11 +51,11 @@ class EventListView extends ConsumerWidget {
                     })
                   ];
                   final sortedDataList = [
-                    ...focusedDataList
+                    ...focusedDateList
                         .where((todo) => todo.isFavorite && todo.isCompleted),
-                    ...focusedDataList
+                    ...focusedDateList
                         .where((todo) => todo.isFavorite && !todo.isCompleted),
-                    ...focusedDataList
+                    ...focusedDateList
                         .where((todo) => todo.isCompleted && !todo.isFavorite),
                   ];
                   return Expanded(

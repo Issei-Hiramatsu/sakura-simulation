@@ -5,6 +5,13 @@ import '/infrastructure/todo_list_repository.dart';
 import '/use_case/todo_list_use_case.dart';
 import '/domain/user/elements/todo/todo.dart';
 
+final fetchAllTodoList = StreamProvider.family(
+  (ref, DateTime date) {
+    return TodoListUseCase(todoListRepository: TodoListRepository())
+        .fetchAllTodoList();
+  },
+);
+
 final todoProvider = Provider(
     (ref) => TodoListUseCase(todoListRepository: TodoListRepository()));
 
@@ -14,7 +21,26 @@ final todoListProvider = NotifierProvider<TodoListNotifier, List<Todo>>(
 
 class TodoListNotifier extends Notifier<List<Todo>> {
   @override
-  List<Todo> build() => state = [];
+  List<Todo> build() {
+    //今日のtodoListをstateに代入する。
+    state = [];
+    ref.watch(fetchAllTodoList(now)).whenData(
+      (dataList) {
+        final todaysList = [
+          ...dataList.where((todo) {
+            final createdPeriod = DateTime(todo.createdPeriod.year,
+                todo.createdPeriod.month, todo.createdPeriod.day);
+            final todaysDate = DateTime(now.year, now.month, now.day);
+            return createdPeriod == todaysDate;
+          })
+        ];
+        state = todaysList;
+      },
+    );
+
+    return state;
+  }
+
   final now = DateTime.now();
 
   void addTodoList(String title) {
@@ -35,6 +61,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
             createdPeriod: now,
           ),
         );
+    updateTodoList();
   }
 
   void deleteTodoList(String todoId) {
@@ -62,12 +89,10 @@ class TodoListNotifier extends Notifier<List<Todo>> {
         else
           todoState,
     ];
-
     state = [
       ...state.where((todo) => !todo.isCompleted),
       ...state.where((todo) => todo.isCompleted),
     ];
-
     ref.read(todoProvider).toggleIsCompleted(todo: todo);
   }
 
