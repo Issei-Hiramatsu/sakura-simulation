@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/profile/active_overview/hooks/overview_data.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
@@ -44,24 +43,31 @@ class EventListView extends ConsumerWidget {
               ),
           ref.watch(fetchAllFavoriteAndCompletedTodoList(focusedDate)).when(
                 data: (dataList) {
+                  final focusedDataList = [
+                    ...dataList.where((todo) {
+                      final createdPeriod = DateTime(todo.createdPeriod.year,
+                          todo.createdPeriod.month, todo.createdPeriod.day);
+                      return createdPeriod == focusedDate;
+                    })
+                  ];
                   final sortedDataList = [
-                    ...dataList
+                    ...focusedDataList
                         .where((todo) => todo.isFavorite && todo.isCompleted),
-                    ...dataList
+                    ...focusedDataList
                         .where((todo) => todo.isFavorite && !todo.isCompleted),
-                    ...dataList
+                    ...focusedDataList
                         .where((todo) => todo.isCompleted && !todo.isFavorite),
                   ];
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: dataList.length,
+                      itemCount: sortedDataList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        const displayCompletedTime = '0000-00-00-00:00:00';
                         return EventCard(
-                          isCompleted: dataList[index].isCompleted,
-                          isFavorite: dataList[index].isFavorite,
-                          title: dataList[index].title,
-                          eventTime: displayCompletedTime
+                          isCompleted: sortedDataList[index].isCompleted,
+                          isFavorite: sortedDataList[index].isFavorite,
+                          title: sortedDataList[index].title,
+                          eventTime: sortedDataList[index]
+                              .completedPeriod
                               .toString()
                               .substring(11, 16), //例: 09:00
                         );

@@ -10,21 +10,22 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList(DateTime date) {
-    final collection = todoListByUser.snapshots();
+    //fetchAllTodoListがこの役割を担っているため使用停止中
+    return throw UnimplementedError();
 
-    return collection.map(
-      (QuerySnapshot snapshot) =>
-          snapshot.docs.map((DocumentSnapshot documentSnapshot) {
-        final json = documentSnapshot.data() as Map<String, dynamic>;
-        return Todo(
-            id: json['id'],
-            title: json['title'],
-            isCompleted: json['isCompleted'],
-            isFavorite: json['isFavorite'],
-            createdPeriod: DateTime.now(), //FIXME: ここの問題
-            completedPeriod: DateTime.now());
-      }).toList(),
-    );
+    // collection.map(
+    //   (QuerySnapshot snapshot) =>
+    //       snapshot.docs.map((DocumentSnapshot documentSnapshot) {
+    //     final json = documentSnapshot.data() as Map<String, dynamic>;
+    //     return Todo(
+    //         id: json['id'],
+    //         title: json['title'],
+    //         isCompleted: json['isCompleted'],
+    //         isFavorite: json['isFavorite'],
+    //         createdPeriod: DateTime.now(), //FIXME: ここの問題
+    //         completedPeriod: DateTime.now());
+    //   }).toList(),
+    // );
   }
 
   @override
@@ -35,18 +36,26 @@ class TodoListRepository extends ITodoListRepository {
       (QuerySnapshot snapshot) =>
           snapshot.docs.map((DocumentSnapshot documentSnapshot) {
         final json = documentSnapshot.data() as Map<String, dynamic>;
-        final timestamp = json['createdPeriod'];
+
+        final createdTimestamp = json['createdPeriod'];
         DateTime createdPeriod = DateTime.now();
-        if (timestamp is Timestamp) {
-          createdPeriod = timestamp.toDate();
+        if (createdTimestamp is Timestamp) {
+          createdPeriod = createdTimestamp.toDate();
+        }
+
+        final completedTimestamp = json['completedPeriod'];
+        DateTime completedPeriod = DateTime(0);
+        if (completedTimestamp is Timestamp) {
+          completedPeriod = completedTimestamp.toDate();
         }
         return Todo(
-            id: json['id'],
-            title: json['title'],
-            isCompleted: json['isCompleted'],
-            isFavorite: json['isFavorite'],
-            createdPeriod: createdPeriod,
-            completedPeriod: DateTime.now());
+          id: json['id'],
+          title: json['title'],
+          isCompleted: json['isCompleted'],
+          isFavorite: json['isFavorite'],
+          createdPeriod: createdPeriod,
+          completedPeriod: completedPeriod,
+        );
       }).toList(),
     );
   }
