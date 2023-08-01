@@ -20,9 +20,12 @@ class PomodoroTimer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    void initiateReviewStopWatchWorkflow(int workSeconds) {
+    DateTime startedAt = DateTime.now();
+    void initiateReviewStopWatchWorkflow(int workSeconds, DateTime startedAt) {
       ref.read(useStopUseStopWatchProvider.notifier).startTimer();
-      NavigatorPush(context, page: TimerReviewPage(workSeconds: workSeconds));
+      NavigatorPush(context,
+          page:
+              TimerReviewPage(workSeconds: workSeconds, startedAt: startedAt));
     }
 
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
@@ -34,7 +37,7 @@ class PomodoroTimer extends ConsumerWidget {
         ref
             .read(usePomodoroTimerProvider.notifier)
             .resetTimer(user.timerDetail.workTime * 60);
-        initiateReviewStopWatchWorkflow(workSeconds);
+        initiateReviewStopWatchWorkflow(workSeconds, startedAt);
       });
     }
 
@@ -52,9 +55,12 @@ class PomodoroTimer extends ConsumerWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.sp),
           child: TimerControlButtons(
-              startTimer: () => ref
-                  .read(usePomodoroTimerProvider.notifier)
-                  .startTimer(user.timerDetail.workTime * 60),
+              startTimer: () {
+                ref
+                    .read(usePomodoroTimerProvider.notifier)
+                    .startTimer(user.timerDetail.workTime * 60);
+                startedAt = DateTime.now();
+              },
               stopTimer: () =>
                   ref.read(usePomodoroTimerProvider.notifier).stopTimer(),
               resumeTimer: () => ref
@@ -64,7 +70,7 @@ class PomodoroTimer extends ConsumerWidget {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
                     .resetTimer(user.timerDetail.workTime * 60);
-                initiateReviewStopWatchWorkflow(workSeconds);
+                initiateReviewStopWatchWorkflow(workSeconds, startedAt);
               }),
         ),
       ],

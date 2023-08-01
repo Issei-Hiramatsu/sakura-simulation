@@ -13,7 +13,9 @@ class TimerLogUseCase {
     required DateTime date,
     required String workedType,
     required Duration workedTime,
+    required DateTime statedAt,
   }) {
-    return timerLogRepository.addTimerLog(date, workedType, workedTime);
+    return timerLogRepository.addTimerLog(
+        date, workedType, workedTime, statedAt);
   }
 }

@@ -12,9 +12,11 @@ class TimerReviewAppBar extends ConsumerWidget {
   const TimerReviewAppBar({
     super.key,
     required this.workSeconds,
+    required this.startedAt,
   });
 
   final int workSeconds;
+  final DateTime startedAt;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final elapsedTime = ref.watch(useStopUseStopWatchProvider);
@@ -22,12 +24,13 @@ class TimerReviewAppBar extends ConsumerWidget {
       leading: IconButton(
           onPressed: () {
             ref.read(addTimerLogProvider).addTimerLog(
+                  statedAt: startedAt,
                   date: DateTime(
                     DateTime.now().year,
                     DateTime.now().month,
                     DateTime.now().day,
                   ),
-                  workedType: '集中',
+                  workedType: '未設定',
                   workedTime: Duration(
                     seconds: workSeconds + elapsedTime.inSeconds,
                   ),

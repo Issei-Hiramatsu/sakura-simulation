@@ -12,9 +12,11 @@ class TimerReviewPage extends ConsumerWidget {
   const TimerReviewPage({
     super.key,
     required this.workSeconds,
+    required this.startedAt,
   });
 
   final int workSeconds;
+  final DateTime startedAt;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +25,10 @@ class TimerReviewPage extends ConsumerWidget {
       backgroundColor: white,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: TimerReviewAppBar(workSeconds: workSeconds),
+        child: TimerReviewAppBar(
+          workSeconds: workSeconds,
+          startedAt: startedAt,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 12),

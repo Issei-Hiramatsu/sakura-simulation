@@ -47,14 +47,15 @@ class TimerLogRepository extends ITimerLogRepository {
   }
 
   @override
-  void addTimerLog(
-      DateTime date, String workedType, Duration workedTime) async {
+  void addTimerLog(DateTime date, String workedType, Duration workedTime,
+      DateTime statedAt) async {
     final collection = timerLogByUser;
     final workedTimestamp =
         Timestamp.fromMillisecondsSinceEpoch(workedTime.inMilliseconds);
     await collection.add(
       {
         'createdAt': Timestamp.now(),
+        'statedAt': statedAt,
         'workedType': workedType,
         'workedTime': workedTimestamp,
       },
