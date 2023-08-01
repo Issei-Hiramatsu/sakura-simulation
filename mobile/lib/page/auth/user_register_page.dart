@@ -8,7 +8,7 @@ import '/component/shared/token/navigator/navigator.dart';
 import '/infrastructure/user_repository.dart';
 import '/page/sakura_simulation_app.dart';
 import '/domain/user/elements/account_level/account_level.dart';
-import '/domain/user/elements/timer/timer.dart';
+import '../../domain/user/elements/timer_log/timer_log.dart';
 import '/domain/user/user.dart';
 import '/use_case/user_use_case.dart';
 
@@ -65,7 +65,6 @@ class UserRegisterPage extends HookConsumerWidget {
                       //TODO: 任意のものに変更できるようにする。
                       userImagePath:
                           'assets/images/kkrn_user_icons/kkrn_icon_user_1.png',
-                      timerDetail: const Timer(workTime: 25, breakTime: 5),
                       accountLevel: AccountLevel.generalUser,
                       firstTimeUsing: DateTime.now(),
                     ),

@@ -29,14 +29,14 @@ class PomodoroTimer extends ConsumerWidget {
     }
 
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
-    final workSeconds = user.timerDetail.workTime * 60 - remainSeconds;
+    final workSeconds = user.workTime * 60 - remainSeconds;
     final displayTime =
         Duration(seconds: remainSeconds).toString().substring(2, 7);
     if (remainSeconds == 0) {
       Future(() {
         ref
             .read(usePomodoroTimerProvider.notifier)
-            .resetTimer(user.timerDetail.workTime * 60);
+            .resetTimer(user.workTime * 60);
         initiateReviewStopWatchWorkflow(workSeconds, startedAt);
       });
     }
@@ -58,7 +58,7 @@ class PomodoroTimer extends ConsumerWidget {
               startTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .startTimer(user.timerDetail.workTime * 60);
+                    .startTimer(user.workTime * 60);
                 startedAt = DateTime.now();
               },
               stopTimer: () =>
@@ -69,7 +69,7 @@ class PomodoroTimer extends ConsumerWidget {
               resetTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .resetTimer(user.timerDetail.workTime * 60);
+                    .resetTimer(user.workTime * 60);
                 initiateReviewStopWatchWorkflow(workSeconds, startedAt);
               }),
         ),

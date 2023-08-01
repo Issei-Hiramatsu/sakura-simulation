@@ -13,12 +13,10 @@ class UserRepository extends IUserRepository {
       'userName': user.userName,
       'userImagePath': user.userImagePath,
       'timerDetail': {
-        'workTime': user.timerDetail.workTime,
-        'breakTime': user.timerDetail.breakTime,
-        'timerLog': user.timerDetail.timerLog,
+        'workTime': user.workTime,
+        'breakTime': user.breakTime,
       },
       'accountLevel': '${user.accountLevel}',
-      'todoList': user.todoList,
       'firstTimeUsing': user.firstTimeUsing,
     });
   }
