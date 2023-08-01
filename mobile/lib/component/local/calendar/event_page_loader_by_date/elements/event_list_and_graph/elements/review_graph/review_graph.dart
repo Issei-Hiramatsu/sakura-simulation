@@ -13,11 +13,7 @@ class ReviewGraph extends StatelessWidget {
   final Map<String, List<Duration>> timerLog;
   @override
   Widget build(BuildContext context) {
-    //それぞれのkeyごとに追加する
-    final focusedMinutes = timerLog['集中']!.fold(
-        0,
-        (int previousValue, Duration duration) =>
-            previousValue + duration.inMinutes);
+    print(timerLog);
     return Container(
       height: 130.sp,
       decoration: BoxDecoration(
@@ -35,23 +31,32 @@ class ReviewGraph extends StatelessWidget {
           children: [
             Text('振り返り', style: caption1Bold(black)),
             Expanded(
-                child: RotatedBarGraph(
-              focusedMinutes: focusedMinutes,
-            )),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: RotatedBarGraph(focusedMinutes: 0)), //timerLogをそのまま渡す
+            Expanded(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GraphDetailCard(
-                    title: '集中時間',
-                    timeText: '$focusedMinutes分',
-                    barColor: primary,
-                  ),
-                  const SpaceBox(width: 8),
-                  const GraphDetailCard(
-                    title: '休憩時間',
-                    timeText: '0分',
-                    barColor: secondary,
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: timerLog.length,
+                      itemBuilder: (context, index) {
+                        String key = timerLog.keys.elementAt(index);
+                        final focusedMinutes = timerLog[key]!.fold(
+                            0,
+                            (int previousValue, Duration duration) =>
+                                previousValue + duration.inMinutes);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: GraphDetailCard(
+                            title: key,
+                            timeText: '$focusedMinutes分',
+                            barColor: primary,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

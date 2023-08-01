@@ -42,7 +42,7 @@ class GraphDetailCard extends StatelessWidget {
             ),
           ),
         ),
-        const SpaceBox(width: 12),
+        const SpaceBox(width: 8.0),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
