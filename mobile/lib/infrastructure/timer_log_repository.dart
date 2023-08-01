@@ -11,21 +11,37 @@ class TimerLogRepository extends ITimerLogRepository {
       .collection('timerLog');
 
   @override
-  Stream<Map<String, List<Duration>>> fetchAllTimerLog() {
+  Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() {
     final collection = timerLogByUser.snapshots();
     return collection.map((querySnapshot) {
-      Map<String, List<Duration>> timerLogs = {};
+      Map<String, List<TimerLog>> timerLogs = {};
 
       for (var doc in querySnapshot.docs) {
         final json = doc.data();
         final workedType = json['workedType'];
         final workedTime = json['workedTime'];
-        List<Duration> workedSecondsList = timerLogs[workedType] ?? [];
+        List<TimerLog> workedSecondsList = timerLogs[workedType] ?? [];
+
+        final startAtTimestamp = json['startAt'];
+        DateTime startedAt = DateTime(0);
+        if (startAtTimestamp is Timestamp) {
+          startedAt = startAtTimestamp.toDate();
+        }
+        final endAtTimestamp = json['endAt'];
+        DateTime endAt = DateTime(0);
+        if (endAtTimestamp is Timestamp) {
+          endAt = endAtTimestamp.toDate();
+        }
 
         Duration workedSeconds = const Duration(seconds: 0);
         if (workedTime is Timestamp) {
           workedSeconds = Duration(seconds: workedTime.seconds);
-          workedSecondsList.add(workedSeconds);
+          workedSecondsList.add(TimerLog(
+            statedAt: startedAt,
+            endAt: endAt,
+            workedTime: workedSeconds,
+            workedType: workedType,
+          ));
         }
 
         timerLogs[workedType] = workedSecondsList;
@@ -33,14 +49,18 @@ class TimerLogRepository extends ITimerLogRepository {
 
       timerLogs = SplayTreeMap.from(timerLogs, (keyA, keyB) {
         final logA = timerLogs[keyA]!.fold(
-            0,
-            (int previousValue, Duration duration) =>
-                previousValue + duration.inMinutes);
-        final logB = timerLogs[keyA]!.fold(
-            0,
-            (int previousValue, Duration duration) =>
-                previousValue + duration.inMinutes);
-        return logA.compareTo(logB);
+          0,
+          (int previousValue, TimerLog timerLog) =>
+              previousValue + timerLog.workedTime.inSeconds,
+        );
+
+        final logB = timerLogs[keyB]!.fold(
+          0,
+          (int previousValue, TimerLog timerLog) =>
+              previousValue + timerLog.workedTime.inSeconds,
+        );
+
+        return logA == logB ? logA.compareTo(logB) : keyA.compareTo(keyB);
       });
       return timerLogs;
     });

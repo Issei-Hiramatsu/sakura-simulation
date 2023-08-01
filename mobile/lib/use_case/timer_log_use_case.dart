@@ -5,7 +5,7 @@ class TimerLogUseCase {
   TimerLogUseCase({required this.timerLogRepository});
   final ITimerLogRepository timerLogRepository;
 
-  Stream<Map<String, List<Duration>>> fetchAllTimerLog() {
+  Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() {
     return timerLogRepository.fetchAllTimerLog();
   }
 

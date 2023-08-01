@@ -17,6 +17,6 @@ class TimerLog with _$TimerLog {
 }
 
 abstract class ITimerLogRepository {
-  Stream<Map<String, List<Duration>>> fetchAllTimerLog();
+  Stream<Map<String, List<TimerLog>>> fetchAllTimerLog();
   void addTimerLog(TimerLog timerLog);
 }
