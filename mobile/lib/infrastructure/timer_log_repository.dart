@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/user/elements/timer/timer.dart';
@@ -28,6 +30,18 @@ class TimerLogRepository extends ITimerLogRepository {
 
         timerLogs[workedType] = workedSecondsList;
       }
+
+      timerLogs = SplayTreeMap.from(timerLogs, (keyA, keyB) {
+        final logA = timerLogs[keyA]!.fold(
+            0,
+            (int previousValue, Duration duration) =>
+                previousValue + duration.inMinutes);
+        final logB = timerLogs[keyA]!.fold(
+            0,
+            (int previousValue, Duration duration) =>
+                previousValue + duration.inMinutes);
+        return logA.compareTo(logB);
+      });
       return timerLogs;
     });
   }

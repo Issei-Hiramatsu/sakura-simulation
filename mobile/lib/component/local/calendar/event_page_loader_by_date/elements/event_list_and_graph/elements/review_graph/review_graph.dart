@@ -13,7 +13,6 @@ class ReviewGraph extends StatelessWidget {
   final Map<String, List<Duration>> timerLog;
   @override
   Widget build(BuildContext context) {
-    print(timerLog);
     return Container(
       height: 130.sp,
       decoration: BoxDecoration(
