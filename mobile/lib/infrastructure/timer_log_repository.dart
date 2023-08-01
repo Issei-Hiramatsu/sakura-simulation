@@ -13,13 +13,13 @@ class TimerLogRepository extends ITimerLogRepository {
     final collection = timerLogByUser.snapshots();
     return collection.map((querySnapshot) {
       Map<String, List<Duration>> timerLogs = {};
-      List<Duration> workedSecondsList = [];
 
       for (var doc in querySnapshot.docs) {
         final json = doc.data();
         final workedType = json['workedType'];
-
         final workedTime = json['workedTime'];
+        List<Duration> workedSecondsList = timerLogs[workedType] ?? [];
+
         Duration workedSeconds = const Duration(seconds: 0);
         if (workedTime is Timestamp) {
           workedSeconds = Duration(seconds: workedTime.seconds);
