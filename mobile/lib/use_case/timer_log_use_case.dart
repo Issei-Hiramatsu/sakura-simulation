@@ -5,15 +5,15 @@ class TimerLogUseCase {
   TimerLogUseCase({required this.timerLogRepository});
   final ITimerLogRepository timerLogRepository;
 
-  Stream<Map<DateTime, Map<String, List<Duration>>>> fetchAllTimerLog() {
+  Stream<Map<String, List<dynamic>>> fetchAllTimerLog() {
     return timerLogRepository.fetchAllTimerLog();
   }
 
-  void updateTimerLog({
+  void addTimerLog({
     required DateTime date,
     required String workedType,
     required Duration workedTime,
   }) {
-    return timerLogRepository.updateTimerLog(date, workedType, workedTime);
+    return timerLogRepository.addTimerLog(date, workedType, workedTime);
   }
 }

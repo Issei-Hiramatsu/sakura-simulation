@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_review/timer_review_app_bar/hooks/use_timer_review.dart';
 
 import '/importer.dart';
 import '/page/sakura_simulation_app.dart';
 import '../../../../../shared/single/shared_app_bar/shared_app_bar.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
 import '../hooks/use_stop_watch.dart';
+import 'hooks/use_timer_review.dart';
 
 class TimerReviewAppBar extends ConsumerWidget {
   const TimerReviewAppBar({
@@ -21,13 +21,13 @@ class TimerReviewAppBar extends ConsumerWidget {
     return SharedAppBar(
       leading: IconButton(
           onPressed: () {
-            ref.read(updateTimerLogProvider).updateTimerLog(
+            ref.read(addTimerLogProvider).addTimerLog(
                   date: DateTime(
                     DateTime.now().year,
                     DateTime.now().month,
                     DateTime.now().day,
                   ),
-                  workedType: '集中時間',
+                  workedType: '集中',
                   workedTime: Duration(
                     seconds: workSeconds + elapsedTime.inSeconds,
                   ),
