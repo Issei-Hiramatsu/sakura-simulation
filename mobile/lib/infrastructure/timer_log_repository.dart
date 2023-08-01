@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../domain/user/elements/timer/timer.dart';
+import '/domain/user/elements/timer_log/timer_log.dart';
 
 class TimerLogRepository extends ITimerLogRepository {
   final timerLogByUser = FirebaseFirestore.instance
@@ -47,16 +47,15 @@ class TimerLogRepository extends ITimerLogRepository {
   }
 
   @override
-  void addTimerLog(DateTime date, String workedType, Duration workedTime,
-      DateTime statedAt) async {
+  void addTimerLog(TimerLog timerLog) async {
     final collection = timerLogByUser;
-    final workedTimestamp =
-        Timestamp.fromMillisecondsSinceEpoch(workedTime.inMilliseconds);
+    final workedTimestamp = Timestamp.fromMillisecondsSinceEpoch(
+        timerLog.workedTime.inMilliseconds);
     await collection.add(
       {
-        'createdAt': Timestamp.now(),
-        'statedAt': statedAt,
-        'workedType': workedType,
+        'statedAt': timerLog.statedAt,
+        'endAt': timerLog.endAt,
+        'workedType': timerLog.workedType,
         'workedTime': workedTimestamp,
       },
     );
