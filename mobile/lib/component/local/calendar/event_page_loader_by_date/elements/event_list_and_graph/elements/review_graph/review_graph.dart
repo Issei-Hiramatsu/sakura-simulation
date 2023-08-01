@@ -13,7 +13,8 @@ class ReviewGraph extends StatelessWidget {
   final Map<String, List<Duration>> timerLog;
   @override
   Widget build(BuildContext context) {
-    final focusedMinutes = timerLog['集中時間']!.fold(
+    //それぞれのkeyごとに追加する
+    final focusedMinutes = timerLog['集中']!.fold(
         0,
         (int previousValue, Duration duration) =>
             previousValue + duration.inMinutes);

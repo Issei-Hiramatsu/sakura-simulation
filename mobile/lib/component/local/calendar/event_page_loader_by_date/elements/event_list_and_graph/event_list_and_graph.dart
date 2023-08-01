@@ -31,14 +31,15 @@ class EventListView extends ConsumerWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ReviewGraph(
-                      timerLog: dataList[focusedDate] ??
-                          {
-                            '集中時間': [const Duration(seconds: 0)]
-                          },
+                      //TODO: 特定の日付のみreviewGraphに渡す
+                      timerLog: dataList,
                     ),
                   );
                 },
-                error: (error, _) => const Icon(Icons.error),
+                error: (error, _) {
+                  print(error);
+                  return const Icon(Icons.error);
+                },
                 loading: () => const SharedCircularProgressIndicator(),
               ),
           ref.watch(fetchAllTodoList(focusedDate)).when(

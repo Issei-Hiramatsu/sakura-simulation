@@ -9,23 +9,27 @@ class TimerLogRepository extends ITimerLogRepository {
       .collection('timerLog');
 
   @override
-  Stream<Map<String, List<dynamic>>> fetchAllTimerLog() {
-    // final collection = timerLogByUser.snapshots();
+  Stream<Map<String, List<Duration>>> fetchAllTimerLog() {
+    final collection = timerLogByUser.snapshots();
+    return collection.map((querySnapshot) {
+      Map<String, List<Duration>> timerLogs = {};
+      List<Duration> workedSecondsList = [];
 
-    // return collection.map((querySnapshot) {
-    //   Map<String, List<dynamic>> timerLogs = {};
+      for (var doc in querySnapshot.docs) {
+        final json = doc.data();
+        final workedType = json['workedType'];
 
-    //   for (var doc in querySnapshot.docs) {
-    //     String workedType = doc.id;
-    //     print(doc.id);
-    //     List<dynamic> logData = doc.get('集中時間');
-    //     print(logData);
+        final workedTime = json['workedTime'];
+        Duration workedSeconds = const Duration(seconds: 0);
+        if (workedTime is Timestamp) {
+          workedSeconds = Duration(seconds: workedTime.seconds);
+          workedSecondsList.add(workedSeconds);
+        }
 
-    //     timerLogs[workedType] = logData;
-    //   }
-
-    //   return timerLogs;
-    // });
+        timerLogs[workedType] = workedSecondsList;
+      }
+      return timerLogs;
+    });
   }
 
   @override
