@@ -1,4 +1,4 @@
-import '../domain/user/elements/timer/timer.dart';
+import '/domain/user/elements/timer_log/timer_log.dart';
 
 //抽象クラスを継承したuseCase domainとUIを接続する
 class TimerLogUseCase {
@@ -10,12 +10,8 @@ class TimerLogUseCase {
   }
 
   void addTimerLog({
-    required DateTime date,
-    required String workedType,
-    required Duration workedTime,
-    required DateTime statedAt,
+    required TimerLog timerLog,
   }) {
-    return timerLogRepository.addTimerLog(
-        date, workedType, workedTime, statedAt);
+    return timerLogRepository.addTimerLog(timerLog);
   }
 }
