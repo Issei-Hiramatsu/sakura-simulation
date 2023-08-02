@@ -59,8 +59,9 @@ class TimerLogRepository extends ITimerLogRepository {
           (int previousValue, TimerLog timerLog) =>
               previousValue + timerLog.workedTime.inSeconds,
         );
-
-        return logA == logB ? logA.compareTo(logB) : keyA.compareTo(keyB);
+        //logBとlogAの値が同じな場合は片方が消滅してしまうので、0にならないように返す
+        int compare = logB.compareTo(logA);
+        return compare == 0 ? 1 : compare;
       });
       return timerLogs;
     });
