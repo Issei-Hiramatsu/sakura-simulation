@@ -30,8 +30,7 @@ class ReviewGraph extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('振り返り', style: caption1Bold(black)),
-            Expanded(
-                child: RotatedBarGraph(focusedMinutes: 0)), //timerLogをそのまま渡す
+            Expanded(child: RotatedBarGraph(timerLog: timerLog)), //TODO: 色をかえる。
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,7 +51,7 @@ class ReviewGraph extends StatelessWidget {
                           child: GraphDetailCard(
                             title: key,
                             timeText: '$focusedMinutes分',
-                            barColor: primary,
+                            barColor: primary, //TODO: 色をかえる。
                           ),
                         );
                       },
