@@ -15,9 +15,11 @@ class PomodoroTimer extends ConsumerWidget {
   const PomodoroTimer({
     super.key,
     required this.user,
+    required this.workedType,
   });
 
   final User user;
+  final String workedType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,6 +37,7 @@ class PomodoroTimer extends ConsumerWidget {
           timerLog: TimerLog(
             statedAt: timerLog.statedAt,
             workedTime: Duration(seconds: workSeconds),
+            workedType: workedType,
           ),
         ),
       );

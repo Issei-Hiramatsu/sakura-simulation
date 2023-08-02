@@ -12,8 +12,10 @@ class PomodoroTimerPage extends ConsumerWidget {
   const PomodoroTimerPage({
     super.key,
     required this.user,
+    required this.workedType,
   });
   final User user;
+  final String workedType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +31,10 @@ class PomodoroTimerPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          PomodoroTimer(user: user),
+          PomodoroTimer(
+            user: user,
+            workedType: workedType,
+          ),
           SpaceBox(height: 12.sp),
           Expanded(
             child: TodoList(

@@ -26,7 +26,7 @@ class TimerReviewAppBar extends ConsumerWidget {
                   timerLog: TimerLog(
                     statedAt: timerLog.statedAt,
                     endAt: DateTime.now(),
-                    workedType: '未設定',
+                    workedType: timerLog.workedType,
                     workedTime: Duration(
                       seconds:
                           timerLog.workedTime.inSeconds + elapsedTime.inSeconds,

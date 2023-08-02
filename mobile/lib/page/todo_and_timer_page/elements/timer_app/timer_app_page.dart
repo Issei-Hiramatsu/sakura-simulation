@@ -29,16 +29,9 @@ class TimerAppPage extends ConsumerWidget {
                 borderColor: backgroundGray,
                 borderWidth: 1,
                 child: TimerCard(
-                    initFunction: () {
-                      ref.read(timerStateProvider.notifier).state =
-                          TimerState.notStarted;
-                      ref
-                          .read(usePomodoroTimerProvider.notifier)
-                          .resetTimer(user.workTime * 60);
-                    },
                     text: 'ポモドーロタイマーを起動する',
                     workTime: user.workTime,
-                    timerPage: TimerSettingPage()),
+                    timerPage: TimerSettingPage(user: user)),
               );
             },
           ),
