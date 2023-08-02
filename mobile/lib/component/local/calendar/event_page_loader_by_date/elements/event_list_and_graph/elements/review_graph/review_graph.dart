@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '/domain/user/elements/timer_log/timer_log.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
@@ -10,7 +11,7 @@ class ReviewGraph extends StatelessWidget {
     required this.timerLog,
   });
 
-  final Map<String, List<Duration>> timerLog;
+  final Map<String, List<TimerLog>> timerLog;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,8 +45,8 @@ class ReviewGraph extends StatelessWidget {
                         String key = timerLog.keys.elementAt(index);
                         final focusedMinutes = timerLog[key]!.fold(
                             0,
-                            (int previousValue, Duration duration) =>
-                                previousValue + duration.inMinutes);
+                            (int previousValue, TimerLog timerLog) =>
+                                previousValue + timerLog.workedTime.inMinutes);
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: GraphDetailCard(

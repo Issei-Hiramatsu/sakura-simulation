@@ -22,10 +22,10 @@ class TimerLogRepository extends ITimerLogRepository {
         final workedTime = json['workedTime'];
         List<TimerLog> workedSecondsList = timerLogs[workedType] ?? [];
 
-        final startAtTimestamp = json['startAt'];
+        final startedAtTimestamp = json['startedAt'];
         DateTime startedAt = DateTime(0);
-        if (startAtTimestamp is Timestamp) {
-          startedAt = startAtTimestamp.toDate();
+        if (startedAtTimestamp is Timestamp) {
+          startedAt = startedAtTimestamp.toDate();
         }
         final endAtTimestamp = json['endAt'];
         DateTime endAt = DateTime(0);
@@ -73,7 +73,7 @@ class TimerLogRepository extends ITimerLogRepository {
         timerLog.workedTime.inMilliseconds);
     await collection.add(
       {
-        'statedAt': timerLog.statedAt,
+        'startedAt': timerLog.statedAt,
         'endAt': timerLog.endAt,
         'workedType': timerLog.workedType,
         'workedTime': workedTimestamp,
