@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../../../shared/single/button/circle_button/circle_button.dart';
+import '../../../../../../shared/single/button/circle_button/circle_button.dart';
 import 'hook/use_timer_state.dart';
 
 class TimerControlButtons extends ConsumerWidget {

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/pomodoro_timer_page/pomodoro_timer_page.dart';
 
-import '/component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/elements/timer_control_buttons/hook/use_timer_state.dart';
-import '/component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/hooks/use_pomodoro_timer.dart';
+import '/component/local/todo_and_timer_app/timer/timer_setting_card/timer_setting_card.dart';
+import '../pomodoro_timer_page/pomodoro_timer_page.dart';
+import '/component/shared/single/button/floating_circle_button/floating_circle_button.dart';
+import '/component/local/todo_and_timer_app/timer/pomodoro_timer/elements/timer_control_buttons/hook/use_timer_state.dart';
+import '/component/local/todo_and_timer_app/timer/pomodoro_timer/hooks/use_pomodoro_timer.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
 import '/component/shared/token/navigator/navigator.dart';
 import '/domain/user/user.dart';
 import '/importer.dart';
 import 'hooks/fetch_timer_worked_type.dart';
-import '/component/local/todo_and_timer_app/timer/timer_setting_card/timer_setting_card.dart';
 
 class TimerSettingPage extends ConsumerWidget {
   const TimerSettingPage({
@@ -68,6 +69,10 @@ class TimerSettingPage extends ConsumerWidget {
                 ),
               ),
         ],
+      ),
+      floatingActionButton: FloatingCircleButton(
+        icon: const Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }

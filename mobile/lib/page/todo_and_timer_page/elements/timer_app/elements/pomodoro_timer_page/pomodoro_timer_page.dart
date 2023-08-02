@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '/component/local/todo_and_timer_app/timer/timer_card/elements/pomodoro_timer/pomodoro_timer.dart';
-import '../../../../../../component/local/todo_and_timer_app/todo/hooks/use_todo_list.dart';
+import '/component/local/todo_and_timer_app/timer/pomodoro_timer/pomodoro_timer.dart';
+import '/component/local/todo_and_timer_app/todo/hooks/use_todo_list.dart';
 import '/component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
 import '/domain/user/user.dart';

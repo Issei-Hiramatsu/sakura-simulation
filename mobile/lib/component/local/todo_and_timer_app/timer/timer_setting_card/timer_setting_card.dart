@@ -14,7 +14,7 @@ class TimerSettingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 80,
       color: backgroundLightBlack,
       child: Center(
         child: ListTile(
