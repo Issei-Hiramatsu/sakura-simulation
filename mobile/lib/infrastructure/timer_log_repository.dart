@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -80,5 +81,20 @@ class TimerLogRepository extends ITimerLogRepository {
         'workedTime': workedTimestamp,
       },
     );
+  }
+
+  @override
+  Stream<List<String>> fetchAllTimerWorkedType() {
+    final collection = timerLogByUser.snapshots();
+    return collection.map((querySnapshot) {
+      List<String> workedTypeList = [];
+      for (var doc in querySnapshot.docs) {
+        final json = doc.data();
+        final workedType = json['workedType'];
+        workedTypeList.add(workedType);
+      }
+      workedTypeList = workedTypeList.toSet().toList();
+      return workedTypeList;
+    });
   }
 }
