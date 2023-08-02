@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '/domain/user/elements/timer_log/timer_log.dart';
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
 import 'elements/event_card/event_card.dart';
 import 'elements/review_graph/review_graph.dart';
@@ -27,12 +28,28 @@ class EventListView extends ConsumerWidget {
       child: Column(
         children: [
           ref.watch(fetchAllTimerLog(context)).when(
-                data: (dataList) {
+                data: (dataMap) {
+                  final Map<String, List<TimerLog>> focusedDateTimerLog = {};
+                  dataMap.forEach((key, value) {
+                    for (var timerLog in value) {
+                      final List<TimerLog> focusedDateTimerLogList =
+                          focusedDateTimerLog[key] ?? [];
+
+                      if (DateTime(
+                            timerLog.statedAt.year,
+                            timerLog.statedAt.month,
+                            timerLog.statedAt.day,
+                          ) ==
+                          focusedDate) {
+                        focusedDateTimerLogList.add(timerLog);
+                        focusedDateTimerLog[key] = focusedDateTimerLogList;
+                      }
+                    }
+                  });
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ReviewGraph(
-                      //TODO: 特定の日付のみreviewGraphに渡す
-                      timerLog: dataList,
+                      timerLog: focusedDateTimerLog,
                     ),
                   );
                 },
