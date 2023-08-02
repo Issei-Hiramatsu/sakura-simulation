@@ -5,19 +5,31 @@ class TodoListUseCase {
   TodoListUseCase({required this.todoListRepository});
   final ITodoListRepository todoListRepository;
 
-  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
+  Stream<List<Todo>> fetchAllTodoList() {
     return todoListRepository.fetchAllTodoList();
   }
 
-  Stream<List<String>> fetchAllTodoIdList() {
-    return todoListRepository.fetchAllTodoIdList();
-  }
-
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
     return todoListRepository.fetchAllFavoriteAndCompletedTodoList();
   }
 
-  void updateTodoList({required DateTime date, required List<Todo> todoList}) {
-    return todoListRepository.updateTodoList(date, todoList);
+  void addTodo({required Todo todo}) {
+    return todoListRepository.addTodo(todo);
+  }
+
+  void updateTodo({required Todo todo}) {
+    return todoListRepository.updateTodo(todo);
+  }
+
+  void deleteTodo({required String todoId}) {
+    return todoListRepository.deleteTodo(todoId);
+  }
+
+  void toggleIsCompleted({required Todo todo}) {
+    return todoListRepository.toggleIsCompleted(todo);
+  }
+
+  void toggleIsFavorite({required Todo todo}) {
+    return todoListRepository.toggleIsFavorite(todo);
   }
 }

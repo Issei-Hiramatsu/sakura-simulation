@@ -36,7 +36,7 @@ class EventCard extends StatelessWidget {
           ),
           child: isCompleted
               ? Icon(Icons.check, color: isFavorite ? yellow : gray)
-              : const Icon(Icons.check, color: tertiary),
+              : Icon(Icons.check, color: isFavorite ? tertiary : primary5),
         ),
         title: Text(title, style: labelLargeLineThrough(black)),
         trailing: Text(eventTime),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '/domain/user/elements/timer_log/timer_log.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 
@@ -10,13 +11,9 @@ class ReviewGraph extends StatelessWidget {
     required this.timerLog,
   });
 
-  final Map<String, List<Duration>> timerLog;
+  final Map<String, List<TimerLog>> timerLog;
   @override
   Widget build(BuildContext context) {
-    final focusedMinutes = timerLog['集中時間']!.fold(
-        0,
-        (int previousValue, Duration duration) =>
-            previousValue + duration.inMinutes);
     return Container(
       height: 130.sp,
       decoration: BoxDecoration(
@@ -33,24 +30,32 @@ class ReviewGraph extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('振り返り', style: caption1Bold(black)),
+            Expanded(child: RotatedBarGraph(timerLog: timerLog)), //TODO: 色をかえる。
             Expanded(
-                child: RotatedBarGraph(
-              focusedMinutes: focusedMinutes,
-            )),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  GraphDetailCard(
-                    title: '集中時間',
-                    timeText: '$focusedMinutes分',
-                    barColor: primary,
-                  ),
-                  const SpaceBox(width: 8),
-                  const GraphDetailCard(
-                    title: '休憩時間',
-                    timeText: '0分',
-                    barColor: secondary,
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: timerLog.length,
+                      itemBuilder: (context, index) {
+                        String key = timerLog.keys.elementAt(index);
+                        final focusedMinutes = timerLog[key]!.fold(
+                            0,
+                            (int previousValue, TimerLog timerLog) =>
+                                previousValue + timerLog.workedTime.inMinutes);
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: GraphDetailCard(
+                            title: key,
+                            timeText: '$focusedMinutes分',
+                            barColor: primary, //TODO: 色をかえる。
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

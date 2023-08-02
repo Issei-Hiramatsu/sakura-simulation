@@ -46,23 +46,12 @@ final testTodoList = {
 
 class TestTodoListRepository extends ITodoListRepository {
   @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllTodoList() {
+  Stream<List<Todo>> fetchAllTodoList() {
     return Stream.value(testTodoList);
   }
 
   @override
-  Stream<List<String>> fetchAllTodoIdList() {
-    List<String> todoIdList = [];
-    for (var todoList in testTodoList.values) {
-      for (var todo in todoList) {
-        todoIdList.add(todo.id.toString());
-      }
-    }
-    return Stream.value(todoIdList);
-  }
-
-  @override
-  Stream<Map<DateTime, List<Todo>>> fetchAllFavoriteAndCompletedTodoList() {
+  Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
     Map<DateTime, List<Todo>> favoriteAndCompletedTodoList = {};
     testTodoList.forEach((date, todo) {
       List<Todo> favoriteAndCompletedTodo =
@@ -75,7 +64,27 @@ class TestTodoListRepository extends ITodoListRepository {
   }
 
   @override
-  void updateTodoList(DateTime date, List<Todo> todoList) {
-    testTodoList[date] = todoList;
+  void addTodo(DateTime date, Todo todo) {
+    testTodoList[date] = [...testTodoList[date] ?? [], todo];
+    print(testTodoList[date]);
   }
+
+  @override
+  void deleteTodo(DateTime date, String todoId) {
+    final List<Todo> emptyTodoList = [];
+    testTodoList[date] ??
+        emptyTodoList.removeWhere((todo) {
+          return todo.id == todoId;
+        });
+    print(testTodoList[date]);
+  }
+
+  @override
+  void updateTodo(DateTime date, Todo todo) {}
+
+  @override
+  void toggleIsCompleted(DateTime date, Todo todo) {}
+
+  @override
+  void toggleIsFavorite(DateTime date, Todo todo) {}
 }

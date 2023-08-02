@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1004994470673",
+    "project_id": "sakura-simulation",
+    "storage_bucket": "sakura-simulation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004994470673:android:9dc558074edac01242a2b0",
+        "android_client_info": {
+          "package_name": "com.example.sakura_simulation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004994470673-tkbakgo24jer999i6ak0i0hgpr0hffid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfkQiuc-vK6gCx4ZqEnDvx2407TjB-U1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004994470673-tkbakgo24jer999i6ak0i0hgpr0hffid.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1004994470673-7t75ejl944pu32p8rojuumtl9rlhb7c0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sakuraSimulation"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

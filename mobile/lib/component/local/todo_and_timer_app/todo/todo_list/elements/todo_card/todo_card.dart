@@ -28,7 +28,7 @@ class TodoCard extends ConsumerWidget {
         leading: TodoRadioButton(
           isSelected: todo.isCompleted,
           onPressed: () {
-            ref.read(todoListProvider.notifier).toggleIsCompleted(todo.id);
+            ref.read(todoListProvider.notifier).toggleIsCompleted(todo);
           },
         ),
         title: Text(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '/domain/user/elements/timer_log/timer_log.dart';
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
 import 'elements/event_card/event_card.dart';
 import 'elements/review_graph/review_graph.dart';
@@ -27,43 +28,64 @@ class EventListView extends ConsumerWidget {
       child: Column(
         children: [
           ref.watch(fetchAllTimerLog(context)).when(
-                data: (dataList) {
+                data: (dataMap) {
+                  final Map<String, List<TimerLog>> focusedDateTimerLog = {};
+                  dataMap.forEach((key, value) {
+                    for (var timerLog in value) {
+                      final List<TimerLog> focusedDateTimerLogList =
+                          focusedDateTimerLog[key] ?? [];
+
+                      if (DateTime(
+                            timerLog.statedAt.year,
+                            timerLog.statedAt.month,
+                            timerLog.statedAt.day,
+                          ) ==
+                          focusedDate) {
+                        focusedDateTimerLogList.add(timerLog);
+                        focusedDateTimerLog[key] = focusedDateTimerLogList;
+                      }
+                    }
+                  });
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ReviewGraph(
-                      timerLog: dataList[focusedDate] ??
-                          {
-                            '集中時間': [const Duration(seconds: 0)]
-                          },
+                      timerLog: focusedDateTimerLog,
                     ),
                   );
                 },
-                error: (error, _) => const Icon(Icons.error),
+                error: (error, _) {
+                  print(error);
+                  return const Icon(Icons.error);
+                },
                 loading: () => const SharedCircularProgressIndicator(),
               ),
-          ref.watch(fetchAllFavoriteAndCompletedTodoList(context)).when(
+          ref.watch(fetchAllTodoList(focusedDate)).when(
                 data: (dataList) {
-                  final eventList = dataList[focusedDate] ?? [];
+                  final focusedDateList = [
+                    ...dataList.where((todo) {
+                      final createdPeriod = DateTime(todo.createdPeriod.year,
+                          todo.createdPeriod.month, todo.createdPeriod.day);
+                      return createdPeriod == focusedDate;
+                    })
+                  ];
+                  final sortedDataList = [
+                    ...focusedDateList
+                        .where((todo) => todo.isFavorite && todo.isCompleted),
+                    ...focusedDateList
+                        .where((todo) => todo.isFavorite && !todo.isCompleted),
+                    ...focusedDateList
+                        .where((todo) => todo.isCompleted && !todo.isFavorite),
+                  ];
                   return Expanded(
                     child: ListView.builder(
-                      itemCount: eventList.length,
+                      itemCount: sortedDataList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        final sortedEventList = [
-                          ...eventList.where(
-                              (todo) => todo.isFavorite && todo.isCompleted),
-                          ...eventList.where(
-                              (todo) => todo.isFavorite && !todo.isCompleted),
-                          ...eventList.where(
-                              (todo) => todo.isCompleted && !todo.isFavorite),
-                        ];
-                        final displayCompletedTime =
-                            sortedEventList[index].completedPeriod ??
-                                '0000-00-00-00:00:00';
                         return EventCard(
-                          isCompleted: sortedEventList[index].isCompleted,
-                          isFavorite: sortedEventList[index].isFavorite,
-                          title: sortedEventList[index].title,
-                          eventTime: displayCompletedTime
+                          isCompleted: sortedDataList[index].isCompleted,
+                          isFavorite: sortedDataList[index].isFavorite,
+                          title: sortedDataList[index].title,
+                          eventTime: sortedDataList[index]
+                              .completedPeriod
                               .toString()
                               .substring(11, 16), //例: 09:00
                         );
@@ -71,7 +93,10 @@ class EventListView extends ConsumerWidget {
                     ),
                   );
                 },
-                error: (error, _) => const Icon(Icons.error),
+                error: (error, _) {
+                  print(error);
+                  return const Icon(Icons.error);
+                },
                 loading: () => const SharedCircularProgressIndicator(),
               ),
         ],
