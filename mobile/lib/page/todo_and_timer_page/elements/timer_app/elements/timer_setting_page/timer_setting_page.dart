@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_setting/add_worked_type_modal/add_worked_type_modal.dart';
 
-import '/component/local/todo_and_timer_app/timer/timer_setting_card/timer_setting_card.dart';
+import '../../../../../../component/local/todo_and_timer_app/timer/timer_setting/timer_setting_card/timer_setting_card.dart';
 import '../pomodoro_timer_page/pomodoro_timer_page.dart';
 import '/component/shared/single/button/floating_circle_button/floating_circle_button.dart';
 import '/component/local/todo_and_timer_app/timer/pomodoro_timer/elements/timer_control_buttons/hook/use_timer_state.dart';
@@ -72,7 +73,9 @@ class TimerSettingPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingCircleButton(
         icon: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          addWorkedTypeModal(context, ref);
+        },
       ),
     );
   }
