@@ -5,8 +5,8 @@ import '/infrastructure/todo_list_repository.dart';
 import '/use_case/todo_list_use_case.dart';
 import '/domain/user/elements/todo/todo.dart';
 
-final fetchAllTodoList = StreamProvider.family(
-  (ref, DateTime date) {
+final fetchAllTodoList = StreamProvider(
+  (ref) {
     return TodoListUseCase(todoListRepository: TodoListRepository())
         .fetchAllTodoList();
   },
@@ -24,7 +24,7 @@ class TodoListNotifier extends Notifier<List<Todo>> {
   List<Todo> build() {
     //今日のtodoListをstateに代入する。
     state = [];
-    ref.watch(fetchAllTodoList(now)).whenData(
+    ref.watch(fetchAllTodoList).whenData(
       (dataList) {
         final todaysList = [
           ...dataList.where((todo) {

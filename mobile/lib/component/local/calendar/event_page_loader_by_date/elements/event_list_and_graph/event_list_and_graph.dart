@@ -27,7 +27,7 @@ class EventListView extends ConsumerWidget {
       ),
       child: Column(
         children: [
-          ref.watch(fetchAllTimerLog(context)).when(
+          ref.watch(fetchAllTimerLog).when(
                 data: (dataMap) {
                   final Map<String, List<TimerLog>> focusedDateTimerLog = {};
                   dataMap.forEach((key, value) {
@@ -59,7 +59,7 @@ class EventListView extends ConsumerWidget {
                 },
                 loading: () => const SharedCircularProgressIndicator(),
               ),
-          ref.watch(fetchAllTodoList(focusedDate)).when(
+          ref.watch(fetchAllTodoList).when(
                 data: (dataList) {
                   final focusedDateList = [
                     ...dataList.where((todo) {
