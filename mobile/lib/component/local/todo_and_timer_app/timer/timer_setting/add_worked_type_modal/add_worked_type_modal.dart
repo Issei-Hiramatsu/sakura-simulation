@@ -43,9 +43,7 @@ Future addWorkedTypeModal(BuildContext context, WidgetRef ref) {
                   onSubmitted: (value) {
                     NavigatorPop(context);
                     if (controller.text.isEmpty == false) {
-                      // ref
-                      //     .read(todoListProvider.notifier)
-                      //     .addTodoList(controller.text);
+                      [].add(controller.text); //ここのリストを置換する
                     }
                     controller.clear();
                   },
