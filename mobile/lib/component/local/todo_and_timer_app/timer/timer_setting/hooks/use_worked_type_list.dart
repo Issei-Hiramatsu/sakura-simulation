@@ -15,6 +15,8 @@ final workedTypeListProvider =
     NotifierProvider<WorkedTypeListNotifier, List<String>>(
   () => WorkedTypeListNotifier(),
 );
+final workedTypeProvider = Provider(
+    (ref) => TimerLogUseCase(timerLogRepository: TimerLogRepository()));
 
 class WorkedTypeListNotifier extends Notifier<List<String>> {
   @override
@@ -28,5 +30,6 @@ class WorkedTypeListNotifier extends Notifier<List<String>> {
 
   void addWorkedType(String workedType) {
     state = [...state, workedType];
+    ref.read(workedTypeProvider).addWorkedType(workedType: workedType);
   }
 }

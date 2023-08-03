@@ -20,4 +20,5 @@ abstract class ITimerLogRepository {
   Stream<Map<String, List<TimerLog>>> fetchAllTimerLog();
   Stream<List<String>> fetchAllTimerWorkedType();
   void addTimerLog(TimerLog timerLog);
+  void addWorkedType(String workedType);
 }

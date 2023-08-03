@@ -1,11 +1,15 @@
 import 'dart:collection';
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/domain/user/elements/timer_log/timer_log.dart';
 
 class TimerLogRepository extends ITimerLogRepository {
+  final workedTypeListByUser = FirebaseFirestore.instance
+      .collection('users')
+      .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
+      .collection('workedTypeList');
+
   final timerLogByUser = FirebaseFirestore.instance
       .collection('users')
       .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
@@ -70,22 +74,45 @@ class TimerLogRepository extends ITimerLogRepository {
 
   @override
   void addTimerLog(TimerLog timerLog) async {
-    final collection = timerLogByUser;
+    //workedTypeのドキュメントIDを取得して参照型を作成する(参照型には対象のドキュメントIDが必要)
+    final String workedTypeDocumentId = await workedTypeListByUser
+        .where('workedType', isEqualTo: timerLog.workedType)
+        .get()
+        .then((value) {
+      return value.docs.first.reference.id;
+    });
+
+    final workedType = workedTypeListByUser.doc(workedTypeDocumentId);
+
     final workedTimestamp = Timestamp.fromMillisecondsSinceEpoch(
         timerLog.workedTime.inMilliseconds);
-    await collection.add(
+    await timerLogByUser.add(
       {
         'startedAt': timerLog.statedAt,
         'endAt': timerLog.endAt,
-        'workedType': timerLog.workedType,
+        'workedType': workedType,
         'workedTime': workedTimestamp,
       },
     );
   }
 
   @override
+  void addWorkedType(String workedType) async {
+    final collection = workedTypeListByUser;
+    QuerySnapshot snapshot =
+        await collection.where('workedType', isEqualTo: workedType).get();
+
+    if (snapshot.docs.isEmpty) {
+      // 同じworkedTypeが存在しない場合のみデータを登録
+      await collection.add({
+        'workedType': workedType,
+      });
+    }
+  }
+
+  @override
   Stream<List<String>> fetchAllTimerWorkedType() {
-    final collection = timerLogByUser.snapshots();
+    final collection = workedTypeListByUser.snapshots();
     return collection.map((querySnapshot) {
       List<String> workedTypeList = [];
       for (var doc in querySnapshot.docs) {
