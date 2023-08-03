@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sakura_simulation/component/local/todo_and_timer_app/timer/timer_setting/hooks/user_worked_type_list.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -43,7 +44,9 @@ Future addWorkedTypeModal(BuildContext context, WidgetRef ref) {
                   onSubmitted: (value) {
                     NavigatorPop(context);
                     if (controller.text.isEmpty == false) {
-                      [].add(controller.text); //ここのリストを置換する
+                      ref
+                          .read(workedTypeListProvider.notifier)
+                          .addWorkedType(controller.text);
                     }
                     controller.clear();
                   },

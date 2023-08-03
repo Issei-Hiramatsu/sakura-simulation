@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '/importer.dart';
 
 import '/component/local/todo_and_timer_app/timer/timer_setting/add_worked_type_modal/add_worked_type_modal.dart';
-import '/component/local/todo_and_timer_app/timer/timer_setting/timer_setting_list_view/timer_setting_list_view.dart';
+import '../../../../../../component/local/todo_and_timer_app/timer/timer_setting/worked_type_list_view/worked_type_list_view.dart';
 import '/domain/user/user.dart';
 import '/component/shared/single/button/floating_circle_button/floating_circle_button.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
