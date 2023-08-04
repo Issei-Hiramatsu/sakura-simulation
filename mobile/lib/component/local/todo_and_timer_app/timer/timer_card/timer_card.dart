@@ -2,20 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
 import 'package:sakura_simulation/component/shared/token/navigator/navigator.dart';
-import 'elements/pomodoro_timer/elements/timer_progress_indicator/elements/work_and_break_pie_chart/work_and_break_pie_chart.dart';
+import '../pomodoro_timer/elements/timer_progress_indicator/elements/work_and_break_pie_chart/work_and_break_pie_chart.dart';
 
 class TimerCard extends StatelessWidget {
   const TimerCard({
     super.key,
     required this.text,
     required this.workTime,
-    this.initFunction,
     required this.timerPage,
   });
 
   final String text;
   final int workTime;
-  final VoidCallback? initFunction;
   final Widget timerPage;
 
   @override
@@ -25,10 +23,7 @@ class TimerCard extends StatelessWidget {
       color: backgroundLightBlack,
       child: Center(
         child: ListTile(
-          onTap: () {
-            initFunction!();
-            NavigatorPush(context, page: timerPage);
-          },
+          onTap: () => NavigatorPush(context, page: timerPage),
           contentPadding: const EdgeInsets.all(10),
           leading: Stack(
             alignment: AlignmentDirectional.center,

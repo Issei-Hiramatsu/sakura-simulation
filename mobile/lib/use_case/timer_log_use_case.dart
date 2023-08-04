@@ -9,9 +9,19 @@ class TimerLogUseCase {
     return timerLogRepository.fetchAllTimerLog();
   }
 
+  Stream<List<String>> fetchAllTimerWorkedType() {
+    return timerLogRepository.fetchAllTimerWorkedType();
+  }
+
   void addTimerLog({
     required TimerLog timerLog,
   }) {
     return timerLogRepository.addTimerLog(timerLog);
+  }
+
+  void addWorkedType({
+    required String workedType,
+  }) {
+    return timerLogRepository.addWorkedType(workedType);
   }
 }
