@@ -25,7 +25,6 @@ class RotatedBarGraph extends StatelessWidget {
               (int previousValue, TimerLog timerLog) =>
                   previousValue + timerLog.workedTime.inMinutes)
           .toDouble();
-
       rodStackItems.add(
         BarChartRodStackItem(previousTotalValue, workedMinutes, primary),
       );
@@ -41,13 +40,21 @@ class RotatedBarGraph extends StatelessWidget {
           titlesData: FlTitlesData(show: false),
           barGroups: [
             BarChartGroupData(groupVertically: true, x: 0, barRods: [
-              BarChartRodData(
-                borderRadius: BorderRadius.circular(8),
-                color: gray,
-                toY: previousTotalValue,
-                width: 40,
-                rodStackItems: rodStackItems,
-              )
+              previousTotalValue == 0.0
+                  ? BarChartRodData(
+                      borderRadius: BorderRadius.circular(8),
+                      color: gray,
+                      toY: 100, //0の時はグレーのグラフを表示させる
+                      width: 40,
+                      rodStackItems: [BarChartRodStackItem(0, 100, gray)],
+                    )
+                  : BarChartRodData(
+                      borderRadius: BorderRadius.circular(8),
+                      color: primary,
+                      toY: previousTotalValue,
+                      width: 40,
+                      rodStackItems: rodStackItems,
+                    )
             ]),
           ],
         ),
