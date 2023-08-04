@@ -18,13 +18,21 @@ class TimerLogRepository extends ITimerLogRepository {
   @override
   Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() {
     final collection = timerLogByUser.snapshots();
-    return collection.map((querySnapshot) {
+    return collection.asyncMap((querySnapshot) async {
       Map<String, List<TimerLog>> timerLogs = {};
-
       for (var doc in querySnapshot.docs) {
         final json = doc.data();
-        final workedType = json['workedType'];
         final workedTime = json['workedTime'];
+
+        //参照型であるworkedTypeを取得する
+        final DocumentReference workedTypeRef = json['workedType'];
+        final DocumentSnapshot workedTypeSnapshot =
+            await FirebaseFirestore.instance.doc(workedTypeRef.path).get();
+        //与えられたデータを変換する
+        final workedTypeJson =
+            workedTypeSnapshot.data() as Map<String, dynamic>;
+        final workedType = workedTypeJson['workedType'];
+
         List<TimerLog> workedSecondsList = timerLogs[workedType] ?? [];
 
         final startedAtTimestamp = json['startedAt'];
@@ -49,7 +57,7 @@ class TimerLogRepository extends ITimerLogRepository {
           ));
         }
 
-        timerLogs[workedType] = workedSecondsList;
+        timerLogs[workedType.toString()] = workedSecondsList;
       }
 
       timerLogs = SplayTreeMap.from(timerLogs, (keyA, keyB) {
