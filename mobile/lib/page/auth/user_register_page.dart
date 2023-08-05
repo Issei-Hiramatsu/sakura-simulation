@@ -28,7 +28,11 @@ class UserRegisterPage extends HookConsumerWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: SharedAppBar(titleText: '新規登録', textStyle: titleMedium(white)),
+        child: SharedAppBar(
+          titleText: '新規登録',
+          automaticallyImplyLeading: true,
+          textStyle: titleMedium(white),
+        ),
       ),
       body: Column(
         children: [
@@ -80,7 +84,7 @@ class UserRegisterPage extends HookConsumerWidget {
             //       page: const SakuraSimulationApp());
             // },
             child: const Text('登録'),
-          )
+          ),
         ],
       ),
     );

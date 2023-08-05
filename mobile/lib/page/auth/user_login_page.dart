@@ -23,7 +23,10 @@ class UserLoginPage extends HookConsumerWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: SharedAppBar(titleText: 'ログイン', textStyle: titleMedium(white)),
+        child: SharedAppBar(
+          titleText: 'ログイン',
+          textStyle: titleMedium(white),
+        ),
       ),
       body: Column(
         children: [
@@ -41,15 +44,17 @@ class UserLoginPage extends HookConsumerWidget {
             },
           ),
           ElevatedButton(
-            child: const Text('ログイン'),
+            style: ElevatedButton.styleFrom(backgroundColor: primary),
             onPressed: () async {
               try {
                 await auth.signInWithEmailAndPassword(
                   email: email.value,
                   password: password.value,
                 );
-                NavigatorPushReplacement(context,
-                    page: const SakuraSimulationApp());
+                NavigatorPushReplacement(
+                  context,
+                  page: const SakuraSimulationApp(),
+                );
               } on FirebaseAuthException catch (error) {
                 final String errorMessage = handleFirebaseAuthError(error);
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -57,57 +62,17 @@ class UserLoginPage extends HookConsumerWidget {
                 );
               }
             },
+            child: const Text('ログイン'),
           ),
           TextButton(
-              onPressed: () =>
-                  NavigatorPush(context, page: const UserRegisterPage()),
-              child: const Text('新規登録はこちらから'))
-        ],
-      ),
-    );
-  }
-}
-
-class MainContent extends StatefulWidget {
-  const MainContent({Key? key}) : super(key: key);
-
-  @override
-  _MainContentState createState() => _MainContentState();
-}
-
-class _MainContentState extends State<MainContent> {
-  //ステップ１
-  final _auth = FirebaseAuth.instance;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('成功'),
-        actions: [
-          IconButton(
-            //ステップ２
-            onPressed: () async {
-              await _auth.signOut();
-              if (_auth.currentUser == null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('ログアウトしました'),
-                  ),
-                );
-                print('ログアウトしました！');
-              }
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const UserLoginPage()));
-            },
-            icon: const Icon(Icons.close),
+            onPressed: () =>
+                NavigatorPush(context, page: const UserRegisterPage()),
+            child: const Text(
+              '新規登録はこちらから',
+              style: TextStyle(color: primary),
+            ),
           ),
         ],
-      ),
-      body: const Center(
-        child: Text('ログイン成功！'),
       ),
     );
   }
