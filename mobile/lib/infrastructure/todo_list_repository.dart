@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '/domain/user_info/elements/todo/todo.dart';
+import '../domain/todo/todo.dart';
 
 class TodoListRepository extends ITodoListRepository {
   final todoListByUser = FirebaseFirestore.instance

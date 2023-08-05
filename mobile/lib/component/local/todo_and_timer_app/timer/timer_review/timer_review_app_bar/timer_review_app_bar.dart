@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../../domain/user_info/elements/timer_log/timer_log.dart';
+import '../../../../../../domain/timer_log/timer_log.dart';
 import '/importer.dart';
 
 import '/page/sakura_simulation_app.dart';

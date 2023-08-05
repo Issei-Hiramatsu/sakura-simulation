@@ -1,13 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'elements/account_level/account_level.dart';
+import '../account_level/account_level.dart';
 
-part 'user_info.freezed.dart';
-part 'user_info.g.dart';
+part 'user_settings.freezed.dart';
+part 'user_settings.g.dart';
 
 @freezed
-class UserInfo with _$UserInfo {
-  const factory UserInfo({
+class UserSettings with _$UserSettings {
+  const factory UserSettings({
     @Default(0) int id,
     @Default('') String email,
     @Default('') String userName,
@@ -16,12 +16,12 @@ class UserInfo with _$UserInfo {
     @Default(5) int breakTime,
     @Default(AccountLevel.guest) AccountLevel accountLevel,
     required DateTime firstTimeUsing, //カレンダー日程を決めるため
-  }) = _UserInfo;
+  }) = _UserSettings;
 
-  factory UserInfo.fromJson(Map<String, dynamic> json) =>
-      _$UserInfoFromJson(json);
+  factory UserSettings.fromJson(Map<String, dynamic> json) =>
+      _$UserSettingsFromJson(json);
 }
 
-abstract class IUserInfoRepository {
-  void registerUserInfo(UserInfo userInfo);
+abstract class IUserSettingsRepository {
+  void registerUserSettings(UserSettings userSettings);
 }

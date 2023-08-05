@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_info.dart';
+part of 'user_settings.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserInfo _$$_UserInfoFromJson(Map<String, dynamic> json) => _$_UserInfo(
+_$_UserSettings _$$_UserSettingsFromJson(Map<String, dynamic> json) =>
+    _$_UserSettings(
       id: json['id'] as int? ?? 0,
       email: json['email'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
@@ -19,7 +20,7 @@ _$_UserInfo _$$_UserInfoFromJson(Map<String, dynamic> json) => _$_UserInfo(
       firstTimeUsing: DateTime.parse(json['firstTimeUsing'] as String),
     );
 
-Map<String, dynamic> _$$_UserInfoToJson(_$_UserInfo instance) =>
+Map<String, dynamic> _$$_UserSettingsToJson(_$_UserSettings instance) =>
     <String, dynamic>{
       'id': instance.id,
       'email': instance.email,

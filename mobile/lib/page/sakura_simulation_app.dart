@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sakura_simulation/infrastructure/test_data/test_user_repository.dart';
 
 import '../component/shared/single/bottom_navigation/bottom_navigation.dart';
 import '/page/home/home_page.dart';
@@ -19,12 +18,12 @@ class SakuraSimulationApp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedIndex = useState(pageIndex);
-    final user = newUser ?? testUser;
+    // final userSettings = newUserSuserSettings ?? testUserSuserSettings;
     List pageList = [
       const HomePage(),
-      TodoAndTimerPage(user: user),
-      CalendarPage(user: user),
-      ProfilePage(user: user),
+      TodoAndTimerPage(userSettings: userSettings),
+      CalendarPage(userSettings: userSettings),
+      ProfilePage(userSettings: userSettings),
     ];
     return SafeArea(
       child: Scaffold(
