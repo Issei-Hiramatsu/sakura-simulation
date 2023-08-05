@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../domain/user/elements/todo/todo.dart';
+import '../../../../../domain/user_info/elements/todo/todo.dart';
 import '../delete_confirmed_todo_modal/delete_confirmed_todo_modal.dart';
 import 'elements/todo_card/todo_card.dart';
 import 'elements/todo_slidable_action/todo_slidable_action.dart';

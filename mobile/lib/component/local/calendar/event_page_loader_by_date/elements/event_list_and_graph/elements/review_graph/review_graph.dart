@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '/domain/user_info/elements/timer_log/timer_log.dart';
 import 'elements/graph_detail_card/graph_detail_card.dart';
 import 'elements/rotated_bar_graph/rotated_bar_graph.dart';
 

@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '/domain/user_info/elements/timer_log/timer_log.dart';
 
 class TimerLogRepository extends ITimerLogRepository {
   final workedTypeListByUser = FirebaseFirestore.instance

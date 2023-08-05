@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '/domain/user_info/user_info.dart';
 import '/component/local/profile/user_profile_card/user_profile_card.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '/domain/user/user.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({
@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
     required this.user,
   });
 
-  final User user;
+  final UserInfo user;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

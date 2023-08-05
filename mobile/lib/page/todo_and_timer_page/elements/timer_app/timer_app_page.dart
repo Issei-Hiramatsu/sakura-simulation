@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '/domain/user_info/user_info.dart';
 import '/component/local/todo_and_timer_app/timer/timer_card/timer_card.dart';
 import '/component/shared/single/border_box/border_box.dart';
 import '/component/shared/token/color/color.dart';
-import '/domain/user/user.dart';
 import 'elements/timer_setting_page/timer_setting_page.dart';
 
 class TimerAppPage extends ConsumerWidget {
@@ -13,7 +13,7 @@ class TimerAppPage extends ConsumerWidget {
     required this.user,
   });
 
-  final User user;
+  final UserInfo user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

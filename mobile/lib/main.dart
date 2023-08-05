@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
-import 'package:firebase_core/firebase_core.dart';
+import 'package:sakura_simulation/page/auth/user_login_page.dart';
+import 'package:sakura_simulation/page/auth/user_register_page.dart';
 import 'package:sakura_simulation/page/sakura_simulation_app.dart';
+
 import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +33,38 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const SakuraSimulationApp(),
+            home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // TODO: スプラッシュ画面などに書き換えても良い
+                  return const SizedBox();
+                }
+                if (snapshot.hasData) {
+                  print(snapshot);
+                  // User が null でなない、つまりサインイン済みのホーム画面へ
+                  return const SakuraSimulationApp();
+                }
+                // User が null である、つまり未サインインのサインイン画面へ
+                return const UserLoginPage();
+              },
+            ),
+
+            // const SakuraSimulationApp(),
           );
         });
   }
 }
+//Timerのmodalを完成させる リストを追加する用の簡易providerを作る
+//TODO: 一元管理できていないデータ構造をなんとかする 別でworkedTypeをFirebaseに作って、そこの参照オブジェクトにする。
+//振り返りのやつが表示されない問題を解決する and デフォルト表示を考える
+//完了
+//ユーザー関係, ユーザ登録とログインの実装 <-　ここが大変
+
+
+//各ユーザーのidを一時的なidから変更する 
+//User関係の達成
+//バグ報告 googleフォームを設置する
+//改めてモバイルだけの対応とする <-　専用のプルリク
+
+//テストリリースへ　一斉リニューアル

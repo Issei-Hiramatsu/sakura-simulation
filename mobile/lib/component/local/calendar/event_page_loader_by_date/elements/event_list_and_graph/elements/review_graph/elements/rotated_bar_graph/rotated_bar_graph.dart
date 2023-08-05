@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '/domain/user_info/elements/timer_log/timer_log.dart';
 import '../../../../../../../../../shared/token/color/color.dart';
 
 class RotatedBarGraph extends StatelessWidget {

@@ -1,23 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sakura_simulation/domain/user/user.dart';
 
-class UserRepository extends IUserRepository {
+import '../domain/user_info/user_info.dart';
+
+class UserInfoRepository extends IUserInfoRepository {
   final firestore = FirebaseFirestore.instance;
 
   @override
-  void registerUser(User user) async {
+  void registerUserInfo(UserInfo userInfo) async {
     CollectionReference users = firestore.collection('users');
     await users.add({
-      'id': user.id,
-      'email': user.email,
-      'userName': user.userName,
-      'userImagePath': user.userImagePath,
+      'id': userInfo.id,
+      'email': userInfo.email,
+      'userName': userInfo.userName,
+      'userImagePath': userInfo.userImagePath,
       'timerDetail': {
-        'workTime': user.workTime,
-        'breakTime': user.breakTime,
+        'workTime': userInfo.workTime,
+        'breakTime': userInfo.breakTime,
       },
-      'accountLevel': '${user.accountLevel}',
-      'firstTimeUsing': user.firstTimeUsing,
+      'accountLevel': '${userInfo.accountLevel}',
+      'firstTimeUsing': userInfo.firstTimeUsing,
     });
   }
 }

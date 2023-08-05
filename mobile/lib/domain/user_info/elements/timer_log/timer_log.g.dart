@@ -11,7 +11,7 @@ _$_TimerLog _$$_TimerLogFromJson(Map<String, dynamic> json) => _$_TimerLog(
       endAt: json['endAt'] == null
           ? null
           : DateTime.parse(json['endAt'] as String),
-      workedType: json['workedType'] ?? '未設定',
+      workedType: json['workedType'] ?? '集中',
       workedTime: json['workedTime'] == null
           ? const Duration(seconds: 0)
           : Duration(microseconds: json['workedTime'] as int),

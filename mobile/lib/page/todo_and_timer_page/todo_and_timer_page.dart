@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '../../component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
-import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '/domain/user/user.dart';
+import '/component/local/todo_and_timer_app/custom_tab_bar/custom_tab_bar.dart';
+import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
+import '/domain/user_info/user_info.dart';
 import 'elements/timer_app/timer_app_page.dart';
 import 'elements/todo_app/todo_app_page.dart';
 
 class TodoAndTimerPage extends StatelessWidget {
   const TodoAndTimerPage({super.key, required this.user});
 
-  final User user;
+  final UserInfo user;
   @override
   Widget build(BuildContext context) {
     //ここでデータベースからデータを取得する予定

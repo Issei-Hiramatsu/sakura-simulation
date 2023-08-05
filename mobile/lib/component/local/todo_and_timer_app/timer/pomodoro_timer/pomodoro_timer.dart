@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../domain/user_info/elements/timer_log/timer_log.dart';
+import '../../../../../domain/user_info/user_info.dart';
 import 'elements/timer_control_buttons/timer_control_buttons.dart';
-import '/domain/user/elements/timer_log/timer_log.dart';
 import 'elements/timer_progress_indicator/timer_progress_indicator.dart';
-import '/domain/user/user.dart';
 import '/page/todo_and_timer_page/elements/timer_app/elements/timer_review_page/timer_review_page.dart';
 import '../../../../shared/token/navigator/navigator.dart';
 import '../timer_review/hooks/use_stop_watch.dart';
@@ -14,11 +14,11 @@ import 'hooks/use_pomodoro_timer.dart';
 class PomodoroTimer extends ConsumerWidget {
   const PomodoroTimer({
     super.key,
-    required this.user,
+    required this.userInfo,
     required this.workedType,
   });
 
-  final User user;
+  final UserInfo userInfo;
   final String workedType;
 
   @override
@@ -27,7 +27,7 @@ class PomodoroTimer extends ConsumerWidget {
       statedAt: DateTime.now(),
     );
     final remainSeconds = ref.watch(usePomodoroTimerProvider);
-    final workSeconds = user.workTime * 60 - remainSeconds;
+    final workSeconds = userInfo.workTime * 60 - remainSeconds;
 
     void initiateReviewStopWatchWorkflow() {
       ref.read(useStopUseStopWatchProvider.notifier).startTimer();
@@ -47,7 +47,7 @@ class PomodoroTimer extends ConsumerWidget {
       Future(() {
         ref
             .read(usePomodoroTimerProvider.notifier)
-            .resetTimer(user.workTime * 60);
+            .resetTimer(userInfo.workTime * 60);
         initiateReviewStopWatchWorkflow();
       });
     }
@@ -72,7 +72,7 @@ class PomodoroTimer extends ConsumerWidget {
               startTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .startTimer(user.workTime * 60);
+                    .startTimer(userInfo.workTime * 60);
               },
               stopTimer: () =>
                   ref.read(usePomodoroTimerProvider.notifier).stopTimer(),
@@ -82,7 +82,7 @@ class PomodoroTimer extends ConsumerWidget {
               resetTimer: () {
                 ref
                     .read(usePomodoroTimerProvider.notifier)
-                    .resetTimer(user.workTime * 60);
+                    .resetTimer(userInfo.workTime * 60);
                 initiateReviewStopWatchWorkflow();
               }),
         ),

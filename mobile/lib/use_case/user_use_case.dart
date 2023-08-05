@@ -1,11 +1,11 @@
-import '../domain/user/user.dart';
+import '/domain/user_info/user_info.dart';
 
 //抽象クラスを継承したuseCase domainとUIを接続する
-class UserUseCase {
-  UserUseCase({required this.userRepository});
-  final IUserRepository userRepository;
+class UserInfoUseCase {
+  UserInfoUseCase({required this.userRepository});
+  final IUserInfoRepository userRepository;
 
-  void registerUser({required User user}) {
-    return userRepository.registerUser(user);
+  void registerUser({required UserInfo userInfo}) {
+    return userRepository.registerUserInfo(userInfo);
   }
 }

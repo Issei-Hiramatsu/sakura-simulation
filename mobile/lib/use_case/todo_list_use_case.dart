@@ -1,4 +1,4 @@
-import '../domain/user/elements/todo/todo.dart';
+import '/domain/user_info/elements/todo/todo.dart';
 
 //抽象クラスを継承したuseCase domainとUIを接続する
 class TodoListUseCase {

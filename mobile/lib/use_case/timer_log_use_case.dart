@@ -1,4 +1,4 @@
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '/domain/user_info/elements/timer_log/timer_log.dart';
 
 //抽象クラスを継承したuseCase domainとUIを接続する
 class TimerLogUseCase {

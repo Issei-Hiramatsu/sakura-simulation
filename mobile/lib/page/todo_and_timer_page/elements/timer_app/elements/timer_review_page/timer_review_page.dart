@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '/domain/user_info/elements/timer_log/timer_log.dart';
 import '/component/local/todo_and_timer_app/todo/todo_add_button/todo_add_circular_button.dart';
 import '/component/local/todo_and_timer_app/timer/timer_review/sakura_review_screen/sakura_review_screen.dart';
 import '/component/local/todo_and_timer_app/timer/timer_review/timer_review_app_bar/timer_review_app_bar.dart';

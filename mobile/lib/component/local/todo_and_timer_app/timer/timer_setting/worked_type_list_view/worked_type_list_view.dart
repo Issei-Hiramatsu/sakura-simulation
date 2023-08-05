@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../../../domain/user_info/user_info.dart';
 import '../hooks/use_worked_type_list.dart';
-import '/domain/user/user.dart';
 import '/page/todo_and_timer_page/elements/timer_app/elements/pomodoro_timer_page/pomodoro_timer_page.dart';
 import 'elements/timer_setting_card/timer_setting_card.dart';
 import '../../pomodoro_timer/elements/timer_control_buttons/hook/use_timer_state.dart';
@@ -12,7 +12,7 @@ import '../../../../../shared/token/navigator/navigator.dart';
 class TimerSettingListView extends ConsumerWidget {
   const TimerSettingListView({super.key, required this.user});
 
-  final User user;
+  final UserInfo user;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> workedTypeList = ref.watch(workedTypeListProvider);

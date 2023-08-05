@@ -3,17 +3,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sakura_simulation/importer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../component/local/calendar/event_page_loader_by_date/event_page_loader_by_date.dart';
-import '../../component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '../../component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
-import '/domain/user/user.dart';
+import '/component/local/calendar/event_page_loader_by_date/event_page_loader_by_date.dart';
+import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
+import '/component/local/calendar/custom_table_calendar/custom_table_calendar.dart';
+import '/domain/user_info/user_info.dart';
 
 class CalendarPage extends HookWidget {
   CalendarPage({
     super.key,
     required this.user,
   });
-  final User user;
+  final UserInfo user;
   final _selectedDay = useState(DateTime.now());
   final _focusedDay = useState(DateTime.now());
   final calendarFormat = useState(CalendarFormat.month);
