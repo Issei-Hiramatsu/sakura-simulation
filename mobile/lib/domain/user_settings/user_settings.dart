@@ -8,7 +8,7 @@ part 'user_settings.g.dart';
 @freezed
 class UserSettings with _$UserSettings {
   const factory UserSettings({
-    @Default(0) int id,
+    @Default('') String id,
     @Default('') String email,
     @Default('') String userName,
     @Default('') String userImagePath,
@@ -23,5 +23,5 @@ class UserSettings with _$UserSettings {
 }
 
 abstract class IUserSettingsRepository {
-  void registerUserSettings(UserSettings userSettings);
+  void createUserSettings(UserSettings userSettings);
 }

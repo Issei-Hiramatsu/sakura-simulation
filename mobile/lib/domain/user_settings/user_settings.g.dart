@@ -8,7 +8,7 @@ part of 'user_settings.dart';
 
 _$_UserSettings _$$_UserSettingsFromJson(Map<String, dynamic> json) =>
     _$_UserSettings(
-      id: json['id'] as int? ?? 0,
+      id: json['id'] as String? ?? '',
       email: json['email'] as String? ?? '',
       userName: json['userName'] as String? ?? '',
       userImagePath: json['userImagePath'] as String? ?? '',

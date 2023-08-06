@@ -6,19 +6,19 @@ class UserSettingsRepository extends IUserSettingsRepository {
   final firestore = FirebaseFirestore.instance;
 
   @override
-  void registerUserSettings(UserSettings UserSettings) async {
+  void createUserSettings(UserSettings userSettings) async {
     CollectionReference users = firestore.collection('users');
     await users.add({
-      'id': UserSettings.id,
-      'email': UserSettings.email,
-      'userName': UserSettings.userName,
-      'userImagePath': UserSettings.userImagePath,
+      'id': userSettings.id,
+      'email': userSettings.email,
+      'userName': userSettings.userName,
+      'userImagePath': userSettings.userImagePath,
       'timerDetail': {
-        'workTime': UserSettings.workTime,
-        'breakTime': UserSettings.breakTime,
+        'workTime': userSettings.workTime,
+        'breakTime': userSettings.breakTime,
       },
-      'accountLevel': '${UserSettings.accountLevel}',
-      'firstTimeUsing': UserSettings.firstTimeUsing,
+      'accountLevel': '${userSettings.accountLevel}',
+      'firstTimeUsing': userSettings.firstTimeUsing,
     });
   }
 }

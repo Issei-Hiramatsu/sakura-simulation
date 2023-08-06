@@ -5,7 +5,7 @@ class UserSettingsUseCase {
   UserSettingsUseCase({required this.userRepository});
   final IUserSettingsRepository userRepository;
 
-  void registerUserSettings({required UserSettings userSettings}) {
-    return userRepository.registerUserSettings(userSettings);
+  void createUserSettings({required UserSettings userSettings}) {
+    return userRepository.createUserSettings(userSettings);
   }
 }

@@ -20,7 +20,7 @@ UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserSettings {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImagePath => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $UserSettingsCopyWith<$Res> {
       _$UserSettingsCopyWithImpl<$Res, UserSettings>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String userName,
       String userImagePath,
@@ -78,7 +78,7 @@ class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -120,7 +120,7 @@ abstract class _$$_UserSettingsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String userName,
       String userImagePath,
@@ -154,7 +154,7 @@ class __$$_UserSettingsCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -191,7 +191,7 @@ class __$$_UserSettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserSettings implements _UserSettings {
   const _$_UserSettings(
-      {this.id = 0,
+      {this.id = '',
       this.email = '',
       this.userName = '',
       this.userImagePath = '',
@@ -205,7 +205,7 @@ class _$_UserSettings implements _UserSettings {
 
   @override
   @JsonKey()
-  final int id;
+  final String id;
   @override
   @JsonKey()
   final String email;
@@ -274,7 +274,7 @@ class _$_UserSettings implements _UserSettings {
 
 abstract class _UserSettings implements UserSettings {
   const factory _UserSettings(
-      {final int id,
+      {final String id,
       final String email,
       final String userName,
       final String userImagePath,
@@ -287,7 +287,7 @@ abstract class _UserSettings implements UserSettings {
       _$_UserSettings.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get email;
   @override
