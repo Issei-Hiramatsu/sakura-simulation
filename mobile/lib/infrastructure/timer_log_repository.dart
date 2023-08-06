@@ -16,30 +16,6 @@ class TimerLogRepository extends ITimerLogRepository {
       .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
       .collection('timerLog');
 
-  getTimerLogCollection() {
-    final userUid = FirebaseAuth.instance.currentUser?.uid;
-    if (userUid != null) {
-      return FirebaseFirestore.instance
-          .collection('users')
-          .where('id', isEqualTo: userUid)
-          .get()
-          .then(
-        (QuerySnapshot snapshot) {
-          for (var element in snapshot.docs) {
-            FirebaseFirestore.instance
-                .collection('users')
-                .doc(element.reference.id);
-          }
-        },
-      );
-      // .doc(userUid)
-      // .collection('timerLog');
-    } else {
-      //ここをテストモードにしてもいいかもね
-      throw Exception('ユーザがログインしていません。');
-    }
-  }
-
   @override
   Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() {
     final collection = timerLogByUser.snapshots();
