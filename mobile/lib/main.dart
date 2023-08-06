@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
                   return const SizedBox();
                 }
                 if (snapshot.hasData) {
-                  print(snapshot);
+                  //   print(snapshot);
                   // User が null でなない、つまりサインイン済みのホーム画面へ
                   return const SakuraSimulationApp();
                 }
@@ -55,15 +55,8 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-//Timerのmodalを完成させる リストを追加する用の簡易providerを作る
-//TODO: 一元管理できていないデータ構造をなんとかする 別でworkedTypeをFirebaseに作って、そこの参照オブジェクトにする。
-//振り返りのやつが表示されない問題を解決する and デフォルト表示を考える
-//完了
-//ユーザー関係, ユーザ登録とログインの実装 <-　ここが大変
 
 
-//各ユーザーのidを一時的なidから変更する 
-//User関係の達成
 //バグ報告 googleフォームを設置する
 //改めてモバイルだけの対応とする <-　専用のプルリク
 
