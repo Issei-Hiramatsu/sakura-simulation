@@ -3,17 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/user_settings/user_settings.dart';
 
-//UIDに合致するのユーザのドキュメントIDを取得する
-Future<String> getUserDocId() async {
+//それぞれのUidのDocumentReferenceを取得する
+Future<DocumentReference> getUserCollection() async {
   final userUid = FirebaseAuth.instance.currentUser?.uid;
+  final userDocId = await FirebaseFirestore.instance
+      .collection('users')
+      .where('id', isEqualTo: userUid)
+      .get()
+      .then((QuerySnapshot snapshot) {
+    return snapshot.docs.first.reference.id;
+  });
   if (userUid != null) {
-    return await FirebaseFirestore.instance
-        .collection('users')
-        .where('id', isEqualTo: userUid)
-        .get()
-        .then((QuerySnapshot snapshot) {
-      return snapshot.docs.first.reference.id;
-    });
+    return FirebaseFirestore.instance.collection('users').doc(
+          userDocId,
+        );
   } else {
     //ここをテストモードにしてもいいかも
     throw Exception('ユーザがログインしていません。');
@@ -23,12 +26,8 @@ Future<String> getUserDocId() async {
 class UserSettingsRepository extends IUserSettingsRepository {
   @override
   Stream<UserSettings> fetchUserSettings() async* {
-    final String userDocID = await getUserDocId();
-    yield* FirebaseFirestore.instance
-        .collection('users')
-        .doc(userDocID)
-        .snapshots()
-        .map((DocumentSnapshot snapshot) {
+    final collection = await getUserCollection();
+    yield* collection.snapshots().map((DocumentSnapshot snapshot) {
       final json = snapshot.data() as Map<String, dynamic>;
 
       final createdTimestamp = json['firstTimeUsing'];

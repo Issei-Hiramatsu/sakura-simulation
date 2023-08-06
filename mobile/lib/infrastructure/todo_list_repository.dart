@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sakura_simulation/infrastructure/user_repository.dart';
 
 import '../domain/todo/todo.dart';
@@ -12,10 +11,8 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   Stream<List<Todo>> fetchAllTodoList() async* {
-    final collection = await getUserDocId().then(
-      (userDocId) => FirebaseFirestore.instance
-          .collection('users')
-          .doc(userDocId)
+    final collection = await getUserCollection().then(
+      (userCollection) => userCollection
           .collection('todoList')
           .orderBy('createdPeriod', descending: true)
           .snapshots(),
@@ -51,12 +48,8 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void addTodo(Todo todo) async {
-    final collection = await getUserDocId().then(
-      (userDocId) => FirebaseFirestore.instance
-          .collection('users')
-          .doc(userDocId)
-          .collection('todoList'),
-    );
+    final collection = await getUserCollection()
+        .then((userCollection) => userCollection.collection('todoList'));
     await collection.add({
       'id': todo.id,
       'title': todo.title,
@@ -71,12 +64,8 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void deleteTodo(String todoId) async {
-    final collection = await getUserDocId().then(
-      (userDocId) => FirebaseFirestore.instance
-          .collection('users')
-          .doc(userDocId)
-          .collection('todoList'),
-    );
+    final collection = await getUserCollection()
+        .then((userCollection) => userCollection.collection('todoList'));
     collection.where('id', isEqualTo: todoId).get().then(
       (QuerySnapshot snapshot) {
         for (var element in snapshot.docs) {
@@ -88,12 +77,8 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void toggleIsCompleted(Todo todo) async {
-    final collection = await getUserDocId().then(
-      (userDocId) => FirebaseFirestore.instance
-          .collection('users')
-          .doc(userDocId)
-          .collection('todoList'),
-    );
+    final collection = await getUserCollection()
+        .then((userCollection) => userCollection.collection('todoList'));
     collection.where('id', isEqualTo: todo.id).get().then(
       (QuerySnapshot snapshot) {
         for (var element in snapshot.docs) {
@@ -108,12 +93,8 @@ class TodoListRepository extends ITodoListRepository {
 
   @override
   void toggleIsFavorite(Todo todo) async {
-    final collection = await getUserDocId().then(
-      (userDocId) => FirebaseFirestore.instance
-          .collection('users')
-          .doc(userDocId)
-          .collection('todoList'),
-    );
+    final collection = await getUserCollection()
+        .then((userCollection) => userCollection.collection('todoList'));
     collection
         .where('id', isEqualTo: todo.id)
         .get()

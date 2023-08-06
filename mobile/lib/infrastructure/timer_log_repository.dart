@@ -1,25 +1,18 @@
 import 'dart:collection';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/timer_log/timer_log.dart';
+import 'user_repository.dart';
 
 class TimerLogRepository extends ITimerLogRepository {
-  final workedTypeListByUser = FirebaseFirestore.instance
-      .collection('users')
-      .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
-      .collection('workedTypeList');
-
-  final timerLogByUser = FirebaseFirestore.instance
-      .collection('users')
-      .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
-      .collection('timerLog');
-
   @override
-  Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() {
-    final collection = timerLogByUser.snapshots();
-    return collection.asyncMap((querySnapshot) async {
+  Stream<Map<String, List<TimerLog>>> fetchAllTimerLog() async* {
+    final collection = await getUserCollection().then(
+      (userCollection) => userCollection.collection('timerLog').snapshots(),
+    );
+
+    yield* collection.asyncMap((querySnapshot) async {
       Map<String, List<TimerLog>> timerLogs = {};
       for (var doc in querySnapshot.docs) {
         final json = doc.data();
@@ -83,19 +76,25 @@ class TimerLogRepository extends ITimerLogRepository {
 
   @override
   void addTimerLog(TimerLog timerLog) async {
+    final timerLogCollection = await getUserCollection().then(
+      (userCollection) => userCollection.collection('timerLog'),
+    );
+    final workedTypeListCollection = await getUserCollection().then(
+      (userCollection) => userCollection.collection('workedTypeList'),
+    );
     //workedTypeのドキュメントIDを取得して参照型を作成する(参照型には対象のドキュメントIDが必要)
-    final String workedTypeDocumentId = await workedTypeListByUser
+    final String workedTypeDocumentId = await workedTypeListCollection
         .where('workedType', isEqualTo: timerLog.workedType)
         .get()
         .then((value) {
       return value.docs.first.reference.id;
     });
 
-    final workedType = workedTypeListByUser.doc(workedTypeDocumentId);
+    final workedType = workedTypeListCollection.doc(workedTypeDocumentId);
 
     final workedTimestamp = Timestamp.fromMillisecondsSinceEpoch(
         timerLog.workedTime.inMilliseconds);
-    await timerLogByUser.add(
+    await timerLogCollection.add(
       {
         'startedAt': timerLog.statedAt,
         'endAt': timerLog.endAt,
@@ -107,7 +106,9 @@ class TimerLogRepository extends ITimerLogRepository {
 
   @override
   void addWorkedType(String workedType) async {
-    final collection = workedTypeListByUser;
+    final collection = await getUserCollection().then(
+      (userCollection) => userCollection.collection('workedTypeList'),
+    );
     QuerySnapshot snapshot =
         await collection.where('workedType', isEqualTo: workedType).get();
 
@@ -120,9 +121,12 @@ class TimerLogRepository extends ITimerLogRepository {
   }
 
   @override
-  Stream<List<String>> fetchAllTimerWorkedType() {
-    final collection = workedTypeListByUser.snapshots();
-    return collection.map((querySnapshot) {
+  Stream<List<String>> fetchAllTimerWorkedType() async* {
+    final collection = await getUserCollection().then(
+      (userCollection) =>
+          userCollection.collection('workedTypeList').snapshots(),
+    );
+    yield* collection.map((querySnapshot) {
       List<String> workedTypeList = [];
       for (var doc in querySnapshot.docs) {
         final json = doc.data();
