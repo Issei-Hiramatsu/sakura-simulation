@@ -47,14 +47,17 @@ class UserLoginPage extends HookConsumerWidget {
             style: ElevatedButton.styleFrom(backgroundColor: primary),
             onPressed: () async {
               try {
-                await auth.signInWithEmailAndPassword(
-                  email: email.value,
-                  password: password.value,
-                );
-                NavigatorPushReplacement(
-                  context,
-                  page: const SakuraSimulationApp(),
-                );
+                await auth
+                    .signInWithEmailAndPassword(
+                      email: email.value,
+                      password: password.value,
+                    )
+                    .then(
+                      (value) => NavigatorPushReplacement(
+                        context,
+                        page: const SakuraSimulationApp(),
+                      ),
+                    );
               } on FirebaseAuthException catch (error) {
                 final String errorMessage = handleFirebaseAuthError(error);
                 ScaffoldMessenger.of(context).showSnackBar(

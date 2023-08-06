@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sakura_simulation/domain/account_level/account_level.dart';
 import '/importer.dart';
 
+import '/domain/user_settings/user_settings.dart';
 import '/infrastructure/user_repository.dart';
 import '../../use_case/user_settings_use_case.dart';
 import '/page/sakura_simulation_app.dart';
@@ -13,7 +15,7 @@ import '/component/shared/token/navigator/navigator.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-final registerUserInfoProvider = Provider(
+final createUserSettingsProvider = Provider(
     (ref) => UserSettingsUseCase(userRepository: UserSettingsRepository()));
 
 class UserRegisterPage extends HookConsumerWidget {
@@ -24,6 +26,7 @@ class UserRegisterPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final auth = FirebaseAuth.instance;
+    final name = useState('');
     final email = useState('');
     final password = useState('');
 
@@ -38,6 +41,12 @@ class UserRegisterPage extends HookConsumerWidget {
       ),
       body: Column(
         children: [
+          SharedTextField(
+            hintText: 'ニックネームを入力',
+            onChanged: (value) {
+              name.value = value;
+            },
+          ),
           SharedTextField(
             hintText: 'メールアドレスを入力',
             onChanged: (value) {
@@ -55,11 +64,29 @@ class UserRegisterPage extends HookConsumerWidget {
             style: ElevatedButton.styleFrom(backgroundColor: primary),
             onPressed: () async {
               try {
-                await auth.createUserWithEmailAndPassword(
+                await auth
+                    .createUserWithEmailAndPassword(
                   email: email.value,
                   password: password.value,
+                )
+                    .then(
+                  (value) {
+                    ref.read(createUserSettingsProvider).createUserSettings(
+                          userSettings: UserSettings(
+                            id: auth.currentUser!.uid,
+                            email: email.value,
+                            userName: name.value,
+                            userImagePath: 'assets/images/kkrn_icon_user_3.png',
+                            accountLevel: AccountLevel.generalUser,
+                            firstTimeUsing: DateTime.now(),
+                          ),
+                        );
+                    NavigatorPushReplacement(
+                      context,
+                      page: const SakuraSimulationApp(),
+                    );
+                  },
                 );
-                NavigatorPushReplacement(context, page: SakuraSimulationApp());
               } on FirebaseAuthException catch (error) {
                 final String errorMessage = handleFirebaseAuthError(error);
                 ScaffoldMessenger.of(context).showSnackBar(
