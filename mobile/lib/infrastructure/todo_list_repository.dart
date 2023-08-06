@@ -1,12 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/todo/todo.dart';
 
 class TodoListRepository extends ITodoListRepository {
-  final todoListByUser = FirebaseFirestore.instance
-      .collection('users')
-      .doc('awi2JjH0SPh5vbORfNxU') //TODO: のちに変更予定
-      .collection('todoList');
+  late final todoListByUser = getTodoListCollection();
+
+  CollectionReference getTodoListCollection() {
+    final userUid = FirebaseAuth.instance.currentUser?.uid;
+    if (userUid != null) {
+      return FirebaseFirestore.instance
+          .collection('users')
+          .doc(userUid)
+          .collection('todoList');
+    } else {
+      //ここをテストモードにしてもいいかもね
+      throw Exception('ユーザがログインしていません。');
+    }
+  }
 
   @override
   Stream<List<Todo>> fetchAllFavoriteAndCompletedTodoList() {
