@@ -136,7 +136,7 @@ class _$_TimerLog implements _TimerLog {
   const _$_TimerLog(
       {required this.statedAt,
       this.endAt,
-      this.workedType = '未設定',
+      this.workedType = '集中',
       this.workedTime = const Duration(seconds: 0)});
 
   factory _$_TimerLog.fromJson(Map<String, dynamic> json) =>

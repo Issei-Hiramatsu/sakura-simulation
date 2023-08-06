@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:uuid/uuid.dart';
+import 'package:sakura_simulation/domain/account_level/account_level.dart';
 import '/importer.dart';
 
-import '/component/shared/token/navigator/navigator.dart';
+import '/domain/user_settings/user_settings.dart';
 import '/infrastructure/user_repository.dart';
+import '../../use_case/user_settings_use_case.dart';
 import '/page/sakura_simulation_app.dart';
-import '/domain/user/elements/account_level/account_level.dart';
-import '../../domain/user/elements/timer_log/timer_log.dart';
-import '/domain/user/user.dart';
-import '/use_case/user_use_case.dart';
-
+import '/component/local/auth/hooks/handle_firebase_auth_error.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
+import '/component/shared/single/shared_text_field/shared_text_field.dart';
+import '/component/shared/token/navigator/navigator.dart';
 
-final registerUserProvider =
-    Provider((ref) => UserUseCase(userRepository: UserRepository()));
+import 'package:firebase_auth/firebase_auth.dart';
+
+final createUserSettingsProvider = Provider((ref) =>
+    UserSettingsUseCase(userSettingsRepository: UserSettingsRepository()));
 
 class UserRegisterPage extends HookConsumerWidget {
   const UserRegisterPage({
@@ -24,56 +25,77 @@ class UserRegisterPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final email = useState('');
+    final auth = FirebaseAuth.instance;
     final name = useState('');
+    final email = useState('');
+    final password = useState('');
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: SharedAppBar(titleText: '新規登録', textStyle: titleMedium(white)),
+        child: SharedAppBar(
+          titleText: '新規登録',
+          automaticallyImplyLeading: true,
+          textStyle: titleMedium(white),
+        ),
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              onChanged: (value) {
-                email.value = value;
-              },
-              decoration: const InputDecoration(
-                hintText: 'ニックネーム',
-              ),
-            ),
+          SharedTextField(
+            hintText: 'ニックネームを入力',
+            onChanged: (value) {
+              name.value = value;
+            },
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              onChanged: (value) {
-                name.value = value;
-              },
-              decoration: const InputDecoration(
-                hintText: 'メールアドレスを入力',
-              ),
-            ),
+          SharedTextField(
+            hintText: 'メールアドレスを入力',
+            onChanged: (value) {
+              email.value = value;
+            },
+          ),
+          SharedTextField(
+            hintText: 'パスワードを入力',
+            obscureText: true,
+            onChanged: (value) {
+              password.value = value;
+            },
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: primary),
-            onPressed: () {
-              ref.read(registerUserProvider).registerUser(
-                    user: User(
-                      userName: name.value,
-                      email: email.value,
-                      //TODO: 任意のものに変更できるようにする。
-                      userImagePath:
-                          'assets/images/kkrn_user_icons/kkrn_icon_user_1.png',
-                      accountLevel: AccountLevel.generalUser,
-                      firstTimeUsing: DateTime.now(),
-                    ),
-                  );
-              NavigatorPushReplacement(context,
-                  page: const SakuraSimulationApp());
+            onPressed: () async {
+              try {
+                await auth
+                    .createUserWithEmailAndPassword(
+                  email: email.value,
+                  password: password.value,
+                )
+                    .then(
+                  (value) {
+                    ref.read(createUserSettingsProvider).createUserSettings(
+                          userSettings: UserSettings(
+                            id: auth.currentUser!.uid,
+                            email: email.value,
+                            userName: name.value,
+                            userImagePath: 'assets/images/kkrn_icon_user_3.png',
+                            accountLevel: AccountLevel.generalUser,
+                            firstTimeUsing: DateTime.now(),
+                          ),
+                        );
+                    NavigatorPushReplacement(
+                      context,
+                      page: const SakuraSimulationApp(),
+                    );
+                  },
+                );
+              } on FirebaseAuthException catch (error) {
+                final String errorMessage = handleFirebaseAuthError(error);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(errorMessage)),
+                );
+              }
             },
             child: const Text('登録'),
-          )
+          ),
         ],
       ),
     );

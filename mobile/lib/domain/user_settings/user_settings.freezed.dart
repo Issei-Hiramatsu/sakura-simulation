@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user.dart';
+part of 'user_settings.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,13 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
+UserSettings _$UserSettingsFromJson(Map<String, dynamic> json) {
+  return _UserSettings.fromJson(json);
 }
 
 /// @nodoc
-mixin _$User {
-  int get id => throw _privateConstructorUsedError;
+mixin _$UserSettings {
+  String get id => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImagePath => throw _privateConstructorUsedError;
@@ -31,16 +31,18 @@ mixin _$User {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
+  $UserSettingsCopyWith<UserSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserCopyWith<$Res> {
-  factory $UserCopyWith(User value, $Res Function(User) then) =
-      _$UserCopyWithImpl<$Res, User>;
+abstract class $UserSettingsCopyWith<$Res> {
+  factory $UserSettingsCopyWith(
+          UserSettings value, $Res Function(UserSettings) then) =
+      _$UserSettingsCopyWithImpl<$Res, UserSettings>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String userName,
       String userImagePath,
@@ -51,9 +53,9 @@ abstract class $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserCopyWithImpl<$Res, $Val extends User>
-    implements $UserCopyWith<$Res> {
-  _$UserCopyWithImpl(this._value, this._then);
+class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
+    implements $UserSettingsCopyWith<$Res> {
+  _$UserSettingsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,7 +78,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -110,13 +112,15 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
 }
 
 /// @nodoc
-abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
-  factory _$$_UserCopyWith(_$_User value, $Res Function(_$_User) then) =
-      __$$_UserCopyWithImpl<$Res>;
+abstract class _$$_UserSettingsCopyWith<$Res>
+    implements $UserSettingsCopyWith<$Res> {
+  factory _$$_UserSettingsCopyWith(
+          _$_UserSettings value, $Res Function(_$_UserSettings) then) =
+      __$$_UserSettingsCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String email,
       String userName,
       String userImagePath,
@@ -127,9 +131,11 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
-    implements _$$_UserCopyWith<$Res> {
-  __$$_UserCopyWithImpl(_$_User _value, $Res Function(_$_User) _then)
+class __$$_UserSettingsCopyWithImpl<$Res>
+    extends _$UserSettingsCopyWithImpl<$Res, _$_UserSettings>
+    implements _$$_UserSettingsCopyWith<$Res> {
+  __$$_UserSettingsCopyWithImpl(
+      _$_UserSettings _value, $Res Function(_$_UserSettings) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -144,11 +150,11 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
     Object? accountLevel = null,
     Object? firstTimeUsing = null,
   }) {
-    return _then(_$_User(
+    return _then(_$_UserSettings(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
@@ -183,9 +189,9 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 
 /// @nodoc
 @JsonSerializable()
-class _$_User implements _User {
-  const _$_User(
-      {this.id = 0,
+class _$_UserSettings implements _UserSettings {
+  const _$_UserSettings(
+      {this.id = '',
       this.email = '',
       this.userName = '',
       this.userImagePath = '',
@@ -194,11 +200,12 @@ class _$_User implements _User {
       this.accountLevel = AccountLevel.guest,
       required this.firstTimeUsing});
 
-  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
+  factory _$_UserSettings.fromJson(Map<String, dynamic> json) =>
+      _$$_UserSettingsFromJson(json);
 
   @override
   @JsonKey()
-  final int id;
+  final String id;
   @override
   @JsonKey()
   final String email;
@@ -222,14 +229,14 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, workTime: $workTime, breakTime: $breakTime, accountLevel: $accountLevel, firstTimeUsing: $firstTimeUsing)';
+    return 'UserSettings(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, workTime: $workTime, breakTime: $breakTime, accountLevel: $accountLevel, firstTimeUsing: $firstTimeUsing)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_User &&
+            other is _$_UserSettings &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.userName, userName) ||
@@ -254,32 +261,33 @@ class _$_User implements _User {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserCopyWith<_$_User> get copyWith =>
-      __$$_UserCopyWithImpl<_$_User>(this, _$identity);
+  _$$_UserSettingsCopyWith<_$_UserSettings> get copyWith =>
+      __$$_UserSettingsCopyWithImpl<_$_UserSettings>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(
+    return _$$_UserSettingsToJson(
       this,
     );
   }
 }
 
-abstract class _User implements User {
-  const factory _User(
-      {final int id,
+abstract class _UserSettings implements UserSettings {
+  const factory _UserSettings(
+      {final String id,
       final String email,
       final String userName,
       final String userImagePath,
       final int workTime,
       final int breakTime,
       final AccountLevel accountLevel,
-      required final DateTime firstTimeUsing}) = _$_User;
+      required final DateTime firstTimeUsing}) = _$_UserSettings;
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
+  factory _UserSettings.fromJson(Map<String, dynamic> json) =
+      _$_UserSettings.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get email;
   @override
@@ -296,5 +304,6 @@ abstract class _User implements User {
   DateTime get firstTimeUsing;
   @override
   @JsonKey(ignore: true)
-  _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
+  _$$_UserSettingsCopyWith<_$_UserSettings> get copyWith =>
+      throw _privateConstructorUsedError;
 }

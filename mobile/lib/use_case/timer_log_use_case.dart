@@ -1,6 +1,6 @@
-import '/domain/user/elements/timer_log/timer_log.dart';
-
 //抽象クラスを継承したuseCase domainとUIを接続する
+import '../domain/timer_log/timer_log.dart';
+
 class TimerLogUseCase {
   TimerLogUseCase({required this.timerLogRepository});
   final ITimerLogRepository timerLogRepository;

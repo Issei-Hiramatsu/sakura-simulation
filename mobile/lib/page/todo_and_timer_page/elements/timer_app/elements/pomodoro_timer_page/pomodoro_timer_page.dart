@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
+import '../../../../../../domain/user_settings/user_settings.dart';
 import '/component/local/todo_and_timer_app/timer/pomodoro_timer/pomodoro_timer.dart';
 import '/component/local/todo_and_timer_app/todo/hooks/use_todo_list.dart';
 import '/component/local/todo_and_timer_app/todo/todo_list/todo_list.dart';
 import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
-import '/domain/user/user.dart';
 
 class PomodoroTimerPage extends ConsumerWidget {
   const PomodoroTimerPage({
     super.key,
-    required this.user,
+    required this.userSettings,
     required this.workedType,
   });
-  final User user;
+  final UserSettings userSettings;
   final String workedType;
 
   @override
@@ -32,7 +32,7 @@ class PomodoroTimerPage extends ConsumerWidget {
       body: Column(
         children: [
           PomodoroTimer(
-            user: user,
+            userSettings: userSettings,
             workedType: workedType,
           ),
           SpaceBox(height: 12.sp),

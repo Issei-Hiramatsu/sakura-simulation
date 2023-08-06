@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sakura_simulation/importer.dart';
 
-import '/domain/user/elements/timer_log/timer_log.dart';
+import '../../../../../../domain/timer_log/timer_log.dart';
 import '../../../../../shared/single/shared_circular_progress_indicator/shared_circular_progress_indicator.dart';
 import 'elements/event_card/event_card.dart';
 import 'elements/review_graph/review_graph.dart';
