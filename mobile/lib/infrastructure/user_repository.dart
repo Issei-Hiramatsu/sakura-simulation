@@ -1,14 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../domain/user_settings/user_settings.dart';
 
-class UserSettingsRepository extends IUserSettingsRepository {
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+//UIDに合致するのユーザのドキュメントIDを取得する
+Future<String> getUserDocId() async {
+  final userUid = FirebaseAuth.instance.currentUser?.uid;
+  if (userUid != null) {
+    return await FirebaseFirestore.instance
+        .collection('users')
+        .where('id', isEqualTo: userUid)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      return snapshot.docs.first.reference.id;
+    });
+  } else {
+    //ここをテストモードにしてもいいかも
+    throw Exception('ユーザがログインしていません。');
+  }
+}
 
+class UserSettingsRepository extends IUserSettingsRepository {
   @override
-  Stream<UserSettings> fetchUserSettings() {
-    return users
-        .doc('7IxRZtkdvvUMxizsycJx')
+  Stream<UserSettings> fetchUserSettings() async* {
+    final String userDocID = await getUserDocId();
+    yield* FirebaseFirestore.instance
+        .collection('users')
+        .doc(userDocID)
         .snapshots()
         .map((DocumentSnapshot snapshot) {
       final json = snapshot.data() as Map<String, dynamic>;
@@ -34,7 +52,7 @@ class UserSettingsRepository extends IUserSettingsRepository {
 
   @override
   void createUserSettings(UserSettings userSettings) async {
-    await users.add({
+    await FirebaseFirestore.instance.collection('users').add({
       'id': userSettings.id,
       'email': userSettings.email,
       'userName': userSettings.userName,
