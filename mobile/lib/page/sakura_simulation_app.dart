@@ -48,7 +48,8 @@ class SakuraSimulationApp extends HookConsumerWidget {
             );
           },
           error: (error, stackTrace) {
-            return Scaffold(body: Center(child: Text('$error 開発者が対応いたします')));
+            return const Scaffold(
+                body: Center(child: Text('予期せぬエラーが発生いたしました。開発者が対応いたします')));
           },
           loading: () => const Scaffold(
             body: SharedCircularProgressIndicator(),
