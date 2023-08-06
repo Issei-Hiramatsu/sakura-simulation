@@ -15,8 +15,8 @@ import '/component/shared/token/navigator/navigator.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-final createUserSettingsProvider = Provider(
-    (ref) => UserSettingsUseCase(userRepository: UserSettingsRepository()));
+final createUserSettingsProvider = Provider((ref) =>
+    UserSettingsUseCase(userSettingsRepository: UserSettingsRepository()));
 
 class UserRegisterPage extends HookConsumerWidget {
   const UserRegisterPage({

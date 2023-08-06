@@ -23,5 +23,6 @@ class UserSettings with _$UserSettings {
 }
 
 abstract class IUserSettingsRepository {
+  Stream<UserSettings> fetchUserSettings();
   void createUserSettings(UserSettings userSettings);
 }
