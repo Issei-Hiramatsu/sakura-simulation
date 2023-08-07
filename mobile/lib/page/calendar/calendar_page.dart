@@ -49,7 +49,7 @@ class CalendarPage extends HookWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
         child: SharedAppBar(
-          titleText: 'タスクをマネジメントする',
+          titleText: 'マネジメント',
           textStyle: titleMedium(white),
         ),
       ),
