@@ -3,7 +3,6 @@ import 'package:sakura_simulation/use_case/timer_log_use_case.dart';
 
 import '/infrastructure/timer_log_repository.dart';
 
-//いるときといらない時の区別をつける
 final fetchAllTimerWorkedType = StreamProvider(
   (ref) {
     return TimerLogUseCase(timerLogRepository: TimerLogRepository())

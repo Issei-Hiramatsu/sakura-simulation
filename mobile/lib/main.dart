@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:sakura_simulation/page/auth/user_login_page.dart';
-import 'package:sakura_simulation/page/auth/user_register_page.dart';
-import 'package:sakura_simulation/page/sakura_simulation_app.dart';
+
+import '/page/auth/user_login_page.dart';
+import '/page/sakura_simulation_app.dart';
 
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                 if (snapshot.hasData) {
                   //   print(snapshot);
                   // User が null でなない、つまりサインイン済みのホーム画面へ
-                  return const SakuraSimulationApp();
+                  return const SakuraSimulationApp(pageIndex: 1);
                 }
                 // User が null である、つまり未サインインのサインイン画面へ
                 return const UserLoginPage();
@@ -57,7 +57,5 @@ class MyApp extends StatelessWidget {
 }
 
 
-//バグ報告 googleフォームを設置する
 //改めてモバイルだけの対応とする <-　専用のプルリク
-
 //テストリリースへ　一斉リニューアル

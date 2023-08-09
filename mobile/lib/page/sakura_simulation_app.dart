@@ -33,7 +33,7 @@ class SakuraSimulationApp extends HookConsumerWidget {
           data: (userSettings) {
             final pageList = [
               const HomePage(),
-              TodoAndTimerPage(userSettings: userSettings),
+              const TodoAndTimerPage(),
               CalendarPage(userSettings: userSettings),
               ProfilePage(userSettings: userSettings),
             ];
