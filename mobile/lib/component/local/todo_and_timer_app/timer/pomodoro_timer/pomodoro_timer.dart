@@ -50,9 +50,12 @@ class PomodoroTimer extends ConsumerWidget {
         initiateReviewStopWatchWorkflow();
       });
     }
-
-    final displayTime =
-        Duration(seconds: remainSeconds).toString().substring(2, 7);
+    String displayTime;
+    if (workedSeconds >= 60) {
+      displayTime = Duration(seconds: remainSeconds).toString().substring(0, 7);
+    } else {
+      displayTime = Duration(seconds: remainSeconds).toString().substring(2, 7);
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
