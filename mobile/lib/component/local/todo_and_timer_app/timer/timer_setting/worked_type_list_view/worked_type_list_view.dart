@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../../../domain/user_settings/user_settings.dart';
 import '../hooks/use_worked_type_list.dart';
 import '/page/todo_and_timer_page/elements/timer_app/elements/pomodoro_timer_page/pomodoro_timer_page.dart';
 import 'elements/timer_setting_card/timer_setting_card.dart';
@@ -10,9 +9,9 @@ import '../../pomodoro_timer/hooks/use_pomodoro_timer.dart';
 import '../../../../../shared/token/navigator/navigator.dart';
 
 class TimerSettingListView extends ConsumerWidget {
-  const TimerSettingListView({super.key, required this.userSettings});
+  const TimerSettingListView({super.key, required this.workedSeconds});
 
-  final UserSettings userSettings;
+  final int workedSeconds;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<String> workedTypeList = ref.watch(workedTypeListProvider);
@@ -30,11 +29,11 @@ class TimerSettingListView extends ConsumerWidget {
                       TimerState.notStarted;
                   ref
                       .read(usePomodoroTimerProvider.notifier)
-                      .resetTimer(userSettings.workTime * 60);
+                      .resetTimer(workedSeconds * 60);
                   NavigatorPush(
                     context,
                     page: PomodoroTimerPage(
-                      userSettings: userSettings,
+                      workedSeconds: workedSeconds,
                       workedType: workedType,
                     ),
                   );
