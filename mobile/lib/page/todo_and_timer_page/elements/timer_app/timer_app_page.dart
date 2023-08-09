@@ -1,38 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sakura_simulation/page/todo_and_timer_page/elements/timer_app/elements/add_worked_seconds_page.dart/add_worked_seconds_page.dart';
+import 'package:sakura_simulation/component/shared/token/navigator/navigator.dart';
 
-import '../../../../domain/user_settings/user_settings.dart';
-import '/component/local/todo_and_timer_app/timer/timer_card/timer_card.dart';
-import '/component/shared/single/border_box/border_box.dart';
-import '/component/shared/token/color/color.dart';
-import 'elements/timer_setting_page/timer_setting_page.dart';
+import '../../../../component/local/todo_and_timer_app/timer/worked_seconds_list_view/worked_seconds_list_view.dart';
+import '../../../../component/shared/single/button/floating_circle_button/floating_circle_button.dart';
 
 class TimerAppPage extends ConsumerWidget {
   const TimerAppPage({
     super.key,
-    required this.userSettings,
   });
-
-  final UserSettings userSettings;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (BuildContext context, int index) {
-              return HorizontalBorderBox(
-                borderColor: backgroundGray,
-                borderWidth: 1,
-                child: TimerCard(
-                    text: 'ポモドーロタイマーを起動する',
-                    workTime: userSettings.workTime,
-                    timerPage: TimerSettingPage(userSettings: userSettings)),
-              );
-            },
-          ),
+        const Expanded(child: WorkedSecondsListView()),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: FloatingCircleButton(
+              icon: const Icon(Icons.add),
+              onPressed: () =>
+                  NavigatorPush(context, page: const AddWorkedSecondsPage())),
         ),
       ],
     );

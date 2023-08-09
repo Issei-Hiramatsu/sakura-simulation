@@ -5,11 +5,13 @@ class SharedTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.onChanged,
+    required this.keyboardType,
     this.obscureText = false,
   });
   final void Function(String)? onChanged;
   final bool obscureText;
   final String hintText;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class SharedTextField extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: TextField(
         onChanged: onChanged,
+        keyboardType: keyboardType,
         obscureText: obscureText,
         decoration: InputDecoration(hintText: hintText),
       ),

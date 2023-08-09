@@ -32,7 +32,7 @@ Future addWorkedTypeModal(BuildContext context, WidgetRef ref) {
                     child: TextField(
                   style: labelLarge(white),
                   controller: controller,
-                  keyboardType: TextInputType.multiline,
+                  keyboardType: TextInputType.text,
                   autofocus: true,
                   decoration: InputDecoration(
                     hintText: '集中すること',

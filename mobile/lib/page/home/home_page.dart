@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(46.sp),
-        child: SharedAppBar(titleText: '', textStyle: titleMedium(white)),
+        child: SharedAppBar(titleText: 'ホーム', textStyle: titleMedium(white)),
       ),
       body: Column(
         children: const [

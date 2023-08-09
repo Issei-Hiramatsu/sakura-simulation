@@ -32,12 +32,14 @@ class UserLoginPage extends HookConsumerWidget {
         children: [
           SharedTextField(
             hintText: 'メールアドレスを入力',
+            keyboardType: TextInputType.emailAddress,
             onChanged: (value) {
               email.value = value;
             },
           ),
           SharedTextField(
             hintText: 'パスワードを入力',
+            keyboardType: TextInputType.visiblePassword,
             obscureText: true,
             onChanged: (value) {
               password.value = value;

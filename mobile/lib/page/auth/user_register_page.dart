@@ -42,18 +42,21 @@ class UserRegisterPage extends HookConsumerWidget {
       body: Column(
         children: [
           SharedTextField(
+            keyboardType: TextInputType.name,
             hintText: 'ニックネームを入力',
             onChanged: (value) {
               name.value = value;
             },
           ),
           SharedTextField(
+            keyboardType: TextInputType.emailAddress,
             hintText: 'メールアドレスを入力',
             onChanged: (value) {
               email.value = value;
             },
           ),
           SharedTextField(
+            keyboardType: TextInputType.visiblePassword,
             hintText: 'パスワードを入力',
             obscureText: true,
             onChanged: (value) {
@@ -76,7 +79,8 @@ class UserRegisterPage extends HookConsumerWidget {
                             id: auth.currentUser!.uid,
                             email: email.value,
                             userName: name.value,
-                            userImagePath: 'assets/images/kkrn_icon_user_3.png',
+                            userImagePath:
+                                'assets/images/kkrn_user_icons/kkrn_icon_user_3.png',
                             accountLevel: AccountLevel.generalUser,
                             firstTimeUsing: DateTime.now(),
                           ),

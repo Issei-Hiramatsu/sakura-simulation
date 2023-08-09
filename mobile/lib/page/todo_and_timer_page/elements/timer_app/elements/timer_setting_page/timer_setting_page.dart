@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../../../../../../domain/user_settings/user_settings.dart';
 import '/importer.dart';
 
 import '/component/local/todo_and_timer_app/timer/timer_setting/add_worked_type_modal/add_worked_type_modal.dart';
@@ -11,10 +10,10 @@ import '/component/shared/single/shared_app_bar/shared_app_bar.dart';
 class TimerSettingPage extends ConsumerWidget {
   const TimerSettingPage({
     super.key,
-    required this.userSettings,
+    required this.workedSeconds,
   });
 
-  final UserSettings userSettings;
+  final int workedSeconds;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,7 +26,7 @@ class TimerSettingPage extends ConsumerWidget {
           textStyle: titleMedium(white),
         ),
       ),
-      body: TimerSettingListView(userSettings: userSettings),
+      body: TimerSettingListView(workedSeconds: workedSeconds),
       floatingActionButton: FloatingCircleButton(
         icon: const Icon(Icons.add),
         onPressed: () {
