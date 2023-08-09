@@ -12,8 +12,6 @@ class UserSettings with _$UserSettings {
     @Default('') String email,
     @Default('') String userName,
     @Default('') String userImagePath,
-    @Default(25) int workTime,
-    @Default(5) int breakTime,
     @Default(AccountLevel.guest) AccountLevel accountLevel,
     required DateTime firstTimeUsing, //カレンダー日程を決めるため
   }) = _UserSettings;
