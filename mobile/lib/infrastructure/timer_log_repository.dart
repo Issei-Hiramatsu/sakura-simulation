@@ -137,4 +137,37 @@ class TimerLogRepository extends ITimerLogRepository {
       return workedTypeList;
     });
   }
+
+  @override
+  void addWorkedSeconds(int workedSeconds) async {
+    final collection = await getUserCollection().then(
+      (userCollection) => userCollection.collection('workedSecondsList'),
+    );
+    QuerySnapshot snapshot =
+        await collection.where('workedSeconds', isEqualTo: workedSeconds).get();
+
+    if (snapshot.docs.isEmpty) {
+      await collection.add({
+        'workedSeconds': workedSeconds,
+      });
+    }
+  }
+
+  @override
+  Stream<List<int>> fetchAllWorkedSeconds() async* {
+    final collection = await getUserCollection().then(
+      (userCollection) =>
+          userCollection.collection('workedSecondsList').snapshots(),
+    );
+    yield* collection.map((querySnapshot) {
+      List<int> workedSecondsList = [];
+      for (var doc in querySnapshot.docs) {
+        final json = doc.data();
+        final workedSeconds = json['workedSeconds'];
+        workedSecondsList.add(workedSeconds);
+      }
+      workedSecondsList = workedSecondsList.toSet().toList();
+      return workedSecondsList;
+    });
+  }
 }

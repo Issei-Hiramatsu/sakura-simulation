@@ -21,4 +21,6 @@ abstract class ITimerLogRepository {
   Stream<List<String>> fetchAllTimerWorkedType();
   void addTimerLog(TimerLog timerLog);
   void addWorkedType(String workedType);
+  void addWorkedSeconds(int workedSeconds);
+  Stream<List<int>> fetchAllWorkedSeconds();
 }
