@@ -24,8 +24,6 @@ mixin _$UserSettings {
   String get email => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImagePath => throw _privateConstructorUsedError;
-  int get workTime => throw _privateConstructorUsedError;
-  int get breakTime => throw _privateConstructorUsedError;
   AccountLevel get accountLevel => throw _privateConstructorUsedError;
   DateTime get firstTimeUsing => throw _privateConstructorUsedError;
 
@@ -46,8 +44,6 @@ abstract class $UserSettingsCopyWith<$Res> {
       String email,
       String userName,
       String userImagePath,
-      int workTime,
-      int breakTime,
       AccountLevel accountLevel,
       DateTime firstTimeUsing});
 }
@@ -69,8 +65,6 @@ class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
     Object? email = null,
     Object? userName = null,
     Object? userImagePath = null,
-    Object? workTime = null,
-    Object? breakTime = null,
     Object? accountLevel = null,
     Object? firstTimeUsing = null,
   }) {
@@ -91,14 +85,6 @@ class _$UserSettingsCopyWithImpl<$Res, $Val extends UserSettings>
           ? _value.userImagePath
           : userImagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      workTime: null == workTime
-          ? _value.workTime
-          : workTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      breakTime: null == breakTime
-          ? _value.breakTime
-          : breakTime // ignore: cast_nullable_to_non_nullable
-              as int,
       accountLevel: null == accountLevel
           ? _value.accountLevel
           : accountLevel // ignore: cast_nullable_to_non_nullable
@@ -124,8 +110,6 @@ abstract class _$$_UserSettingsCopyWith<$Res>
       String email,
       String userName,
       String userImagePath,
-      int workTime,
-      int breakTime,
       AccountLevel accountLevel,
       DateTime firstTimeUsing});
 }
@@ -145,8 +129,6 @@ class __$$_UserSettingsCopyWithImpl<$Res>
     Object? email = null,
     Object? userName = null,
     Object? userImagePath = null,
-    Object? workTime = null,
-    Object? breakTime = null,
     Object? accountLevel = null,
     Object? firstTimeUsing = null,
   }) {
@@ -167,14 +149,6 @@ class __$$_UserSettingsCopyWithImpl<$Res>
           ? _value.userImagePath
           : userImagePath // ignore: cast_nullable_to_non_nullable
               as String,
-      workTime: null == workTime
-          ? _value.workTime
-          : workTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      breakTime: null == breakTime
-          ? _value.breakTime
-          : breakTime // ignore: cast_nullable_to_non_nullable
-              as int,
       accountLevel: null == accountLevel
           ? _value.accountLevel
           : accountLevel // ignore: cast_nullable_to_non_nullable
@@ -195,8 +169,6 @@ class _$_UserSettings implements _UserSettings {
       this.email = '',
       this.userName = '',
       this.userImagePath = '',
-      this.workTime = 25,
-      this.breakTime = 5,
       this.accountLevel = AccountLevel.guest,
       required this.firstTimeUsing});
 
@@ -217,19 +189,13 @@ class _$_UserSettings implements _UserSettings {
   final String userImagePath;
   @override
   @JsonKey()
-  final int workTime;
-  @override
-  @JsonKey()
-  final int breakTime;
-  @override
-  @JsonKey()
   final AccountLevel accountLevel;
   @override
   final DateTime firstTimeUsing;
 
   @override
   String toString() {
-    return 'UserSettings(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, workTime: $workTime, breakTime: $breakTime, accountLevel: $accountLevel, firstTimeUsing: $firstTimeUsing)';
+    return 'UserSettings(id: $id, email: $email, userName: $userName, userImagePath: $userImagePath, accountLevel: $accountLevel, firstTimeUsing: $firstTimeUsing)';
   }
 
   @override
@@ -243,10 +209,6 @@ class _$_UserSettings implements _UserSettings {
                 other.userName == userName) &&
             (identical(other.userImagePath, userImagePath) ||
                 other.userImagePath == userImagePath) &&
-            (identical(other.workTime, workTime) ||
-                other.workTime == workTime) &&
-            (identical(other.breakTime, breakTime) ||
-                other.breakTime == breakTime) &&
             (identical(other.accountLevel, accountLevel) ||
                 other.accountLevel == accountLevel) &&
             (identical(other.firstTimeUsing, firstTimeUsing) ||
@@ -256,7 +218,7 @@ class _$_UserSettings implements _UserSettings {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, userName,
-      userImagePath, workTime, breakTime, accountLevel, firstTimeUsing);
+      userImagePath, accountLevel, firstTimeUsing);
 
   @JsonKey(ignore: true)
   @override
@@ -278,8 +240,6 @@ abstract class _UserSettings implements UserSettings {
       final String email,
       final String userName,
       final String userImagePath,
-      final int workTime,
-      final int breakTime,
       final AccountLevel accountLevel,
       required final DateTime firstTimeUsing}) = _$_UserSettings;
 
@@ -294,10 +254,6 @@ abstract class _UserSettings implements UserSettings {
   String get userName;
   @override
   String get userImagePath;
-  @override
-  int get workTime;
-  @override
-  int get breakTime;
   @override
   AccountLevel get accountLevel;
   @override

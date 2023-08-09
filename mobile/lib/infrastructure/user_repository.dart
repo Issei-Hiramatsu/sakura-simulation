@@ -41,8 +41,6 @@ class UserSettingsRepository extends IUserSettingsRepository {
         email: json['email'],
         userName: json['userName'],
         userImagePath: json['userImagePath'],
-        workTime: json['timerDetail']['workTime'],
-        breakTime: json['timerDetail']['breakTime'],
         //accountLevel: json['accountLevel'],
         firstTimeUsing: firstTimeUsing,
       );
@@ -56,10 +54,6 @@ class UserSettingsRepository extends IUserSettingsRepository {
       'email': userSettings.email,
       'userName': userSettings.userName,
       'userImagePath': userSettings.userImagePath,
-      'timerDetail': {
-        'workTime': userSettings.workTime,
-        'breakTime': userSettings.breakTime,
-      },
       'accountLevel': '${userSettings.accountLevel}',
       'firstTimeUsing': userSettings.firstTimeUsing,
     });
