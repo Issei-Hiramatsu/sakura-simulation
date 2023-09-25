@@ -1,16 +1,30 @@
 # sakura_simulation
+メンタルヘルス不調と勉強の生産能力の低下を解決するシステムの開発のためTodo✖️集中タイマー✖️カレンダー記録✖️モチベ管理のアプリを個人開発中
 
-A new Flutter project.
+## 目次 <!-- omit in toc -->
+- [初期構想案](#初期構想案)
+- [現アプリ](#現アプリ)
+- [未来構想案](#未来構想案)
 
-## Getting Started
+## 初期構想案
+3分だけでいいから(後付け仮名）
+ミッション：物事を始めるハードルを極限まで下げたい、
+構想:3分だけ手法を取り入れた、アプリを作成する。
+背景：取り組んでいたプロジェクトが終了して、ルーティンが崩れ、新しい物事に挑戦したいが、ハードルが高く(当時）取り組めていなかった。その時に友人に3分だけ手法(資料1)を勧められ、実践してみたところ実際はハードルは低いことに気づき、さまざまなことに挑戦できた。この経験からこれらの思想を取り入れたアプリを作成したいと考える。
 
-This project is a starting point for a Flutter application.
+## 現アプリ
+SakuraSimulation
+ミッション：
 
-A few resources to get you started if this is your first Flutter project:
+背景：以前は自由時間を丸々開発に当てられていたが、英語学習。地理歴史の知識の収集が趣味になり、自由時間が少なくなった。同じ課題を延々と取り組んでしまったり、引き際を失ったり、効率化をしなくてはというのが課題になった。課題を明確化, タイマーでオンオフを切り替える。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+桜が咲いて散るまでの短い間に、たくさんの挑戦ができるアプリを作りたいと思い、3分だけでいいから(後付け仮名）と集中タイマーを組み合わせたアプリを作成。ハードルを低くしたい元々考えたことも合わさり、桜が咲いて散るまでの短い間しかないと意識できれば、難しいことを考えずに、取り組めるなと思いサクラをテーマにしたアプリ。
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+適切な目標設定ができなかった際、たとえ80%目標に届いたとしても届かなかった20%を気にしてしまい、モチベにつながらないと考えてたので結果ではなく、過程を評価できるアプリへ
+
+## 未来構想案
+JIBUNSHI
+日々無限に繰り返す、タイマーとTodoを利用した、アプリを作成する。日々の日常の繰り返し、これがそのまま自分の歴史になる。
+
+背景：ふと自分を振り返った時に、自分が何をしてきたのかがわかるようなアプリ。
+日記や日々の気持ちを数値化して記録するアプリから着想を得て、日々行なっているTodoや集中タイマーの歴史を記録するアプリを開発中 
